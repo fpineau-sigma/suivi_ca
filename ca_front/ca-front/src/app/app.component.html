@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class='center'>
+Suivi du CA
+</mat-toolbar>
+
+<mat-menu  #appMenu="matMenu" >
+  <button mat-menu-item>Commissions</button>
+  <button mat-menu-item>Negociateurs</button>
+</mat-menu>
+
+<button mat-icon-button [matMenuTriggerFor]="appMenu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+
+<app-commission></app-commission>
+<app-negociateur></app-negociateur>
+
+<router-outlet></router-outlet>
