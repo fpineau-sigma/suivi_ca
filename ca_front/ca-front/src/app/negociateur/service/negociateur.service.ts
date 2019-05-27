@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Negociateur } from './negociateur';
+import { Negociateur } from '../../dto/negociateur';
 
 @Injectable({providedIn: 'root'})
 export class NegociateurService {

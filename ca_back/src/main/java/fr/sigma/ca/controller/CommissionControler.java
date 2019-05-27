@@ -43,9 +43,4 @@ public class CommissionControler {
     public ResponseEntity<Long> countCommissions(){
         return ResponseEntity.ok(commissionService.countAll());
     }
-
-    @GetMapping(value = "/adresses")
-    public ResponseEntity<List<Object>> getCommissionsAdresses(){
-        return ResponseEntity.ok(commissionService.findCommissionWithAdresse());
-    }
 }

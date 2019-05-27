@@ -1,4 +1,4 @@
-import { Negociateur } from '../../negociateur/service/negociateur';
+import { Negociateur } from './negociateur';
 
 export interface Commission {
 

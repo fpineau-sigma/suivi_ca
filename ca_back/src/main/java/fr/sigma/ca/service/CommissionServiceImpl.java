@@ -37,16 +37,6 @@ public class CommissionServiceImpl implements CommissionService{
     }
 
     @Override
-    public List<Object> findCommissionWithAdresse() {
-        List<Object> findAll = new ArrayList<>();
-        Iterable<Object> findEntree = commissionRepository.findCommissionEntreeWithAdresse();
-        Iterable<Object> findSortie = commissionRepository.findCommissionSortieWithAdresse();
-        findEntree.forEach( commission->{ findAll.add(commission); });
-        findSortie.forEach( commission->{ findAll.add(commission); });
-        return findAll;
-    }
-
-    @Override
     public long countAll() {
         return commissionRepository.count();
     }

@@ -55,9 +55,5 @@ public interface CommissionService {
      */
     List<CommissionDTO> find(String nomCourt, Date date);
 
-    /**
-     * Retourne la liste de toutes les commissions + adresse + negociateur
-     * @return
-     */
-    List<Object> findCommissionWithAdresse();
+
 }

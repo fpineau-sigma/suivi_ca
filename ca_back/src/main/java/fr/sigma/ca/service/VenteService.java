@@ -31,4 +31,10 @@ public interface VenteService {
      * @return
      */
     long countAll();
+
+    /**
+     * Retourne la liste de toutes les commissions + adresse + negociateur
+     * @return
+     */
+    List<VenteDTO> findAllByAdresses();
 }

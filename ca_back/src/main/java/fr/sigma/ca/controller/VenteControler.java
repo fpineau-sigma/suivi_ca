@@ -29,4 +29,9 @@ public class VenteControler {
     public ResponseEntity<Long> countVentes(){
         return ResponseEntity.ok(venteService.countAll());
     }
+
+    @GetMapping(value = "/adresses")
+    public ResponseEntity<List<Object>> getCommissionsAdresses(){
+        return ResponseEntity.ok(venteService.findCommissionAndAdresse());
+    }
 }

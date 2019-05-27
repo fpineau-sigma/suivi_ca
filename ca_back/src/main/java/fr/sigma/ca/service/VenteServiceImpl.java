@@ -41,4 +41,16 @@ public class VenteServiceImpl implements VenteService{
     public long countAll() {
         return venteRepository.count();
     }
+
+    @Override
+    public List<VenteDTO> findAllByAdresses() {
+        List<VenteDTO> venteDTOS = new ArrayList<>();
+        Iterable<Vente> VentesEntities = venteRepository.findAll();
+        VentesEntities.forEach(vente ->{
+            VenteDTO venteDTO = VenteMapper.MAPPER.venteToDTO(vente);
+            venteDTOS.add(venteDTO);
+        });
+        return venteDTOS;
+    }
+
 }

@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NegociateurComponent } from './negociateur/negociateur.component';
 import { NegociateurService } from './negociateur/service/negociateur.service';
 import { VentesComponent } from './ventes/ventes.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 
 
@@ -21,7 +22,8 @@ import { VentesComponent } from './ventes/ventes.component';
     AppComponent,
     CommissionComponent,
     NegociateurComponent,
-    VentesComponent
+    VentesComponent,
+    AccueilComponent
   ],
   imports: [
     BrowserModule,
