@@ -1,27 +1,32 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { NegociateurService } from './service/negociateur.service';
+import { CommissionsService } from './commissions.service';
+
 
 @Component({
-  selector: 'app-negociateur',
-  templateUrl: './negociateur.component.html',
-  styleUrls: ['./negociateur.component.css']
+  selector: 'app-commissions',
+  templateUrl: './commissions.component.html',
+  styleUrls: ['./commissions.component.scss']
 })
+export class CommissionsComponent implements OnInit{
 
-export class NegociateurComponent implements OnInit {
-
-  displayedColumns = ['nomCourt'];
+  displayedColumns = ['adresse', 'nom', 'montant'];
   dataSource: MatTableDataSource<any>;
+
+  resultsLength = 0;
+  isLoadingResults = false;
+  isRateLimitReached = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private negociateurService: NegociateurService) { }
+  constructor(private commissionsService: CommissionsService) { }
 
   ngOnInit() {
-    this.negociateurService.getAll().subscribe(p => {
+    this.commissionsService.getAll().subscribe( p => {
       this.dataSource = new MatTableDataSource(p);
     });
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

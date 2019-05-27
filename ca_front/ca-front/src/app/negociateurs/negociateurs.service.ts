@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Negociateur } from '../../dto/negociateur';
 
 @Injectable({providedIn: 'root'})
-export class NegociateurService {
+export class NegociateursService {
 
   constructor(private http: HttpClient) { }
 

@@ -4,24 +4,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CommissionComponent } from './commission/commission.component';
-import { CommissionService } from './commission/service/commission.service';
-import { HttpClientModule } from '@angular/common/http';
-import { NegociateurComponent } from './negociateur/negociateur.component';
-import { NegociateurService } from './negociateur/service/negociateur.service';
 import { VentesComponent } from './ventes/ventes.component';
+import { CommissionsComponent } from './commissions/commissions.component';
+import { NegociateursComponent } from './negociateurs/negociateurs.component';
 import { AccueilComponent } from './accueil/accueil.component';
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { NegociateursService } from './negociateurs/negociateurs.service';
+import { CommissionsService } from './commissions/commissions.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CommissionComponent,
-    NegociateurComponent,
+    CommissionsComponent,
+    NegociateursComponent,
     VentesComponent,
     AccueilComponent
   ],
@@ -40,8 +37,7 @@ import { AccueilComponent } from './accueil/accueil.component';
     MatPaginatorModule,
     AppRoutingModule
   ],
-  providers: [CommissionService, NegociateurService],
+  providers: [CommissionsService, NegociateursService],
   bootstrap: [AppComponent]
- })
- export class AppModule { }
-
+})
+export class AppModule { }

@@ -3,13 +3,13 @@ import { VentesComponent } from './ventes/ventes.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { NegociateurComponent } from './negociateur/negociateur.component';
-import { CommissionComponent } from './commission/commission.component';
+import { NegociateursComponent } from './negociateurs/negociateurs.component';
+import { CommissionsComponent } from './commissions/commissions.component';
 
 
 const routes: Routes = [
-  { path: 'negociateurs', component: NegociateurComponent },
-  { path: 'commissions', component: CommissionComponent },
+  { path: 'negociateurs', component: NegociateursComponent },
+  { path: 'commissions', component: CommissionsComponent },
   { path: 'ventes', component: VentesComponent },
   { path: 'accueil', component: AccueilComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }

@@ -13,5 +13,3 @@ export class VentesService {
     return this.http.get('//localhost:8090/ventes');
   }
 }
-
-

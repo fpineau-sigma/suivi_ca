@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NegociateurComponent } from './negociateur.component';
+import { NegociateursComponent } from './negociateurs.component';
 
-describe('NegociateurComponent', () => {
-  let component: NegociateurComponent;
-  let fixture: ComponentFixture<NegociateurComponent>;
+describe('NegociateursComponent', () => {
+  let component: NegociateursComponent;
+  let fixture: ComponentFixture<NegociateursComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NegociateurComponent ]
+      declarations: [ NegociateursComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NegociateurComponent);
+    fixture = TestBed.createComponent(NegociateursComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

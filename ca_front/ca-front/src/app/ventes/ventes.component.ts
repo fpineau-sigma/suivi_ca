@@ -1,11 +1,11 @@
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { VentesService } from './service/ventes.service';
+import { VentesService } from './ventes.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-ventes',
   templateUrl: './ventes.component.html',
-  styleUrls: ['./ventes.component.css']
+  styleUrls: ['./ventes.component.scss']
 })
 export class VentesComponent implements OnInit {
 
