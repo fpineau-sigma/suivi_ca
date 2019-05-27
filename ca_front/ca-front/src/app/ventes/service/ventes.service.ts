@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +7,11 @@ import { Injectable } from '@angular/core';
 })
 export class VentesService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getAll(): Observable<any> {
+    return this.http.get('//localhost:8090/ventes');
+  }
 }
+
+

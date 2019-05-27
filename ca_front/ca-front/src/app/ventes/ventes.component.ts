@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { VentesService } from './service/ventes.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-ventes',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VentesComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns = ['dateVente'];
+  dataSource: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private ventesService: VentesService) { }
 
   ngOnInit() {
+    this.ventesService.getAll().subscribe(p => {
+      this.dataSource = new MatTableDataSource(p);
+    });
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 }

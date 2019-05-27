@@ -7,10 +7,10 @@ import { CommissionComponent } from './commission/commission.component';
 
 
 const routes: Routes = [
-  { path: 'negociateur', component: NegociateurComponent },
-  { path: 'commission', component: CommissionComponent },
+  { path: 'negociateurs', component: NegociateurComponent },
+  { path: 'commissions', component: CommissionComponent },
   { path: 'ventes', component: VentesComponent },
-  { path: '', redirectTo: '/commission', pathMatch: 'full' }
+  { path: '', redirectTo: '/ventes', pathMatch: 'full' }
 ];
 
 
