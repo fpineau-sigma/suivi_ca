@@ -1,3 +1,4 @@
+import { AccueilComponent } from './accueil/accueil.component';
 import { VentesComponent } from './ventes/ventes.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: 'negociateurs', component: NegociateurComponent },
   { path: 'commissions', component: CommissionComponent },
   { path: 'ventes', component: VentesComponent },
-  { path: '', redirectTo: '/ventes', pathMatch: 'full' }
+  { path: 'accueil', component: AccueilComponent },
+  { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];
 
 
