@@ -1,4 +1,5 @@
-import { MatButtonModule, MatCardModule, MatTableModule, MatInputModule, MatListModule, MatToolbarModule, MatMenuModule, MatIconModule, MatPaginatorModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatTableModule, MatInputModule,
+  MatListModule, MatToolbarModule, MatMenuModule, MatIconModule, MatPaginatorModule, } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ import { CommissionService } from './commission/service/commission.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NegociateurComponent } from './negociateur/negociateur.component';
 import { NegociateurService } from './negociateur/service/negociateur.service';
+import { VentesComponent } from './ventes/ventes.component';
 
 
 
@@ -18,7 +20,8 @@ import { NegociateurService } from './negociateur/service/negociateur.service';
   declarations: [
     AppComponent,
     CommissionComponent,
-    NegociateurComponent
+    NegociateurComponent,
+    VentesComponent
   ],
   imports: [
     BrowserModule,
