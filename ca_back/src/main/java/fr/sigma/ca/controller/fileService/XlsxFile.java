@@ -1,7 +1,6 @@
 package fr.sigma.ca.controller.fileService;
 
 import com.google.common.collect.Lists;
-import fr.sigma.ca.domain.Adresse;
 import fr.sigma.ca.dto.*;
 import fr.sigma.ca.service.*;
 
@@ -24,7 +23,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 

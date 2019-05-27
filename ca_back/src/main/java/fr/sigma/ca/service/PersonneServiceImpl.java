@@ -1,6 +1,6 @@
 package fr.sigma.ca.service;
 
-import fr.sigma.ca.domain.Personne;
+import fr.sigma.ca.entities.Personne;
 import fr.sigma.ca.dto.PersonneDTO;
 import fr.sigma.ca.repository.PersonneRepository;
 import fr.sigma.ca.service.mapper.PersonneMapper;

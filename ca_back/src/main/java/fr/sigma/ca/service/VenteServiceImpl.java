@@ -1,6 +1,6 @@
 package fr.sigma.ca.service;
 
-import fr.sigma.ca.domain.Vente;
+import fr.sigma.ca.entities.Vente;
 import fr.sigma.ca.dto.VenteDTO;
 import fr.sigma.ca.repository.VenteRepository;
 import fr.sigma.ca.service.mapper.VenteMapper;

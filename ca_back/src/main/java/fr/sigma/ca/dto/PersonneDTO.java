@@ -12,8 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of= {"nomColonne","valeur", "index"})
-@ToString(of= {"nomColonne","valeur","index"})
+@ToString(of= {"nom","prenom"})
 public class PersonneDTO {
 
     private UUID id;

@@ -1,6 +1,6 @@
 package fr.sigma.ca.repository;
 
-import fr.sigma.ca.domain.Adresse;
+import fr.sigma.ca.entities.Adresse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

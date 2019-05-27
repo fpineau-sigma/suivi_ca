@@ -1,4 +1,4 @@
-package fr.sigma.ca.domain;
+package fr.sigma.ca.entities;
 
 import lombok.Data;
 
@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,11 +20,11 @@ public class Vente {
 
     private Timestamp dateVente;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Collection<Commission> commissionsEntree;
+    @OneToMany
+    private List<Commission> commissionsEntree;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Collection<Commission> commissionsSortie;
+    @OneToMany
+    private List<Commission> commissionsSortie;
 
     @OneToOne
     private Origine origine;
@@ -36,9 +37,9 @@ public class Vente {
     private Adresse adresse;
 
     @ManyToMany
-    private Collection<Personne> vendeurs;
+    private List<Personne> vendeurs;
 
     @ManyToMany
-    private Collection<Personne> acquereurs;
+    private List<Personne> acquereurs;
 
 }

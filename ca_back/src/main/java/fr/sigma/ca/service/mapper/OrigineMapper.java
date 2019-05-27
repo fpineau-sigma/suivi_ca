@@ -1,6 +1,6 @@
 package fr.sigma.ca.service.mapper;
 
-        import fr.sigma.ca.domain.Origine;
+        import fr.sigma.ca.entities.Origine;
         import fr.sigma.ca.dto.OrigineDTO;
         import org.mapstruct.Mapper;
         import org.mapstruct.factory.Mappers;

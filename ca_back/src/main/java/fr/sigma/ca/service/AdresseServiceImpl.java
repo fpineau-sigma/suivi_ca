@@ -1,6 +1,6 @@
 package fr.sigma.ca.service;
 
-import fr.sigma.ca.domain.Adresse;
+import fr.sigma.ca.entities.Adresse;
 import fr.sigma.ca.dto.AdresseDTO;
 import fr.sigma.ca.repository.AdresseRepository;
 import fr.sigma.ca.service.mapper.AdresseMapper;

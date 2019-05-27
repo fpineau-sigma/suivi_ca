@@ -1,6 +1,6 @@
 package fr.sigma.ca.service.mapper;
 
-import fr.sigma.ca.domain.Negociateur;
+import fr.sigma.ca.entities.Negociateur;
 import fr.sigma.ca.dto.NegociateurDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

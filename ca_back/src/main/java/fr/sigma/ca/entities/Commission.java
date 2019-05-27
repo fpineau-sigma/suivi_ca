@@ -1,4 +1,4 @@
-package fr.sigma.ca.domain;
+package fr.sigma.ca.entities;
 
 import lombok.Data;
 
@@ -24,4 +24,8 @@ public class Commission {
         private BigDecimal montantHT;
 
         private Timestamp dateVente;
+
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name="VENTE_ID")
+        private Vente vente;
 }

@@ -1,3 +1,4 @@
+<!--
 <h1 class='center'>Liste des Negociateurs</h1>
 <div class='container'>
   <div class="row">
@@ -5,4 +6,29 @@
       <p>{{ negociateur.nomCourt }}</p>
     </div>
   </div>
+</div>
+-->
+
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+    
+    <!-- Progress Column -->
+    <ng-container matColumnDef="nomCourt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom Court </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.nomCourt}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

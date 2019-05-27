@@ -1,7 +1,7 @@
 package fr.sigma.ca.service.mapper;
 
-import fr.sigma.ca.domain.Commission;
-import fr.sigma.ca.domain.Negociateur;
+import fr.sigma.ca.entities.Commission;
+import fr.sigma.ca.entities.Negociateur;
 import fr.sigma.ca.dto.CommissionDTO;
 import fr.sigma.ca.dto.NegociateurDTO;
 import org.mapstruct.Mapper;

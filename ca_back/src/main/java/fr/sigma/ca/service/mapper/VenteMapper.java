@@ -1,6 +1,6 @@
 package fr.sigma.ca.service.mapper;
 
-import fr.sigma.ca.domain.Vente;
+import fr.sigma.ca.entities.Vente;
 import fr.sigma.ca.dto.VenteDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

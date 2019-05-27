@@ -1,6 +1,6 @@
 package fr.sigma.ca.service;
 
-import fr.sigma.ca.domain.Negociateur;
+import fr.sigma.ca.entities.Negociateur;
 import fr.sigma.ca.dto.NegociateurDTO;
 import fr.sigma.ca.repository.NegociateurRepository;
 import fr.sigma.ca.service.mapper.NegociateurMapper;

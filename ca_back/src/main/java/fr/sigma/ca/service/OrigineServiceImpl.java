@@ -1,6 +1,6 @@
 package fr.sigma.ca.service;
 
-import fr.sigma.ca.domain.Origine;
+import fr.sigma.ca.entities.Origine;
 import fr.sigma.ca.dto.OrigineDTO;
 import fr.sigma.ca.repository.OrigineRepository;
 import fr.sigma.ca.service.mapper.OrigineMapper;

@@ -1,9 +1,8 @@
-package fr.sigma.ca.domain;
+package fr.sigma.ca.entities;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity

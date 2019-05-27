@@ -1,6 +1,6 @@
 package fr.sigma.ca.service;
 
-import fr.sigma.ca.domain.Commission;
+import fr.sigma.ca.entities.Commission;
 import fr.sigma.ca.dto.CommissionDTO;
 import fr.sigma.ca.repository.CommissionRepository;
 import fr.sigma.ca.service.mapper.CommissionMapper;
@@ -38,10 +38,12 @@ public class CommissionServiceImpl implements CommissionService{
 
     @Override
     public List<Object> findCommissionWithAdresse() {
-        List<Object> finds = commissionRepository.findCommissionEntreeWithAdresse();
-        finds.addAll(commissionRepository.findCommissionSortieWithAdresse());
-
-        return finds;
+        List<Object> findAll = new ArrayList<>();
+        Iterable<Object> findEntree = commissionRepository.findCommissionEntreeWithAdresse();
+        Iterable<Object> findSortie = commissionRepository.findCommissionSortieWithAdresse();
+        findEntree.forEach( commission->{ findAll.add(commission); });
+        findSortie.forEach( commission->{ findAll.add(commission); });
+        return findAll;
     }
 
     @Override
