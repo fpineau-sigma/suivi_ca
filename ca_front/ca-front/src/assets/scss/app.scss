@@ -1,0 +1,718 @@
+@import './bootstrap-variables';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+ul.nav {
+  border-right: 1px solid #D2D2D2;
+}
+
+ul.nav li a {
+  border-left: 1px solid #D2D2D2;
+}
+
+@mixin card-footer {
+  background: $secondary;
+  padding: 0.7rem 2.5rem;
+  .btn {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    text-transform: uppercase;
+    padding: .5rem 3.5rem;
+  }
+}
+
+@mixin w-0 {
+  width: 0;
+}
+
+@mixin list {
+  padding: 0;
+  list-style: none;
+}
+
+strong {
+  font-weight: 700;
+}
+
+h3 {
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+
+.overflow-visible {
+  overflow: visible !important;
+}
+
+a {
+  color: $secondary !important;
+  cursor: pointer;
+
+  &.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: grey !important;
+  }
+
+  &:hover {
+    color: $primary !important;
+    text-decoration: none !important;
+  }
+
+  &.link-2 {
+    color: $primary !important;
+  }
+}
+
+.form-control {
+  font-size: inherit;
+
+  .placeholder {
+    font-style: italic;
+  }
+
+  .has-search {
+    .form-control {
+      padding-left: 2.375rem;
+    }
+
+    .form-control-feedback {
+      position: absolute;
+      z-index: 2;
+      display: block;
+      width: 2.375rem;
+      height: 2.375rem;
+      line-height: 2.375rem;
+      text-align: center;
+      pointer-events: none;
+      color: #aaa;
+    }
+  }
+}
+
+.modal-header {
+  h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+.modal-open > .dropdown {
+  z-index: 1070 !important;
+}
+
+.dropdown-menu {
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+  margin: 0;
+}
+
+
+/* Buttons */
+.btn {
+  font-size: inherit;
+
+  &.primary {
+    &:hover {
+      background: white;
+      color: $primary !important;
+    }
+  }
+
+  &:hover {
+    background: white;
+    color: $secondary;
+  }
+
+  &.btn-outline-secondary {
+    color: $secondary;
+    border: 1px solid $secondary;
+
+    &:hover {
+      background: $secondary;
+      color: white;
+    }
+
+    &:disabled {
+      color: #d2d2d2;
+      background: white;
+      border-color: #d2d2d2;
+    }
+  }
+
+  &.btn-danger {
+    background: $alert;
+    border: 1px solid $alert;
+
+    &:hover {
+      color: white;
+      opacity: .8;
+    }
+  }
+
+  &.btn-success {
+    background: $success;
+    border: 1px solid $success;
+    color: white;
+
+    &:hover {
+      color: white;
+      opacity: .8;
+    }
+  }
+}
+
+
+html {
+  height: inherit;
+}
+
+body {
+  background-color: $light-bg;
+  color: #000 !important;
+
+  font-weight: normal;
+  height: inherit;
+  font-size: 15px;
+}
+
+/* Header */
+header {
+  .bg-primary {
+    background: $primary !important;
+  }
+
+  .PSP-nav {
+    background: white !important;
+    padding: 0;
+
+    li {
+      border-right: 1px solid $light-border;
+      padding: .2rem 1.2rem;
+      @media (max-width: 1280px) {
+        padding: .2rem .7rem;
+      }
+
+      &.active, &:hover {
+        border-bottom: 4px solid $primary;
+      }
+
+      a.nav-link {
+        color: black !important;
+      }
+    }
+  }
+
+  .sub-header-client {
+    border-top: 1px solid $light-border;
+    border-bottom: 1px solid $light-border;
+    padding: .4rem;
+    background: $light-bg;
+
+    .logo-client {
+      margin-right: 2rem;
+    }
+
+    label:after {
+      margin-right: .5rem;
+      margin-left: .5rem;
+      content: ":";
+    }
+
+    .ng-select-container {
+      min-width: 150px;
+    }
+
+    .gestionnaire {
+      .fas {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+/* Homepage > Liens externes */
+.liens-externes .lien {
+  margin: 1rem 2rem 1rem 0;
+  display: inline-block;
+}
+
+.liens-externes .lien img {
+  max-height: 36px;
+  margin-right: .5rem;
+}
+
+.breadcrumb {
+  background: transparent;
+  padding: 1.2rem 0 .2rem;
+  font-size: .85rem;
+}
+
+main {
+  h1 {
+    color: inherit;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 100;
+  }
+
+  /* Forms */
+  .form-group {
+    label {
+      font-weight: 700;
+      font-size: inherit;
+    }
+  }
+
+
+  .card {
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
+
+    table {
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    h3 {
+      font-size: inherit;
+      font-weight: 700;
+    }
+
+    &.calendrier {
+      background: transparent;
+      box-shadow: none;
+
+      .timeline {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .li {
+          transition: all 200ms ease-in;
+
+          .timestamp {
+            margin-bottom: 20px;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 100;
+          }
+
+          .status {
+            padding: 0 40px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #D6DCE0;
+            position: relative;
+            transition: all 200ms ease-in;
+          }
+        }
+      }
+    }
+  }
+
+  .badge {
+    background-color: #F2F2F2;
+    font-size: 85%;
+    font-weight: normal;
+    border-radius: 1rem;
+    padding: .3rem .8rem;
+    margin: 0 .5rem 0;
+  }
+
+  /* Tables */
+  .table {
+    .alert {
+      border-left: 5px solid $alert;
+      color: $alert;
+    }
+
+    .disabled {
+      background: $disabled;
+      color: rgba(0, 0, 0, 0.50)
+    }
+
+    .btn-dropdown {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      color: $secondary;
+    }
+  }
+
+  /* --- */
+  &.collab-form {
+    margin-bottom: 4rem;
+
+    .card-body {
+      padding: 2rem;
+    }
+
+    .collab {
+      margin-left: auto !important;
+      padding: .5rem 1rem 40rem 3rem;
+
+      h3 {
+        .num {
+          width: 25px;
+          height: 25px;
+          line-height: 25px;
+          text-align: center;
+          display: inline-block;
+          border-radius: 50%;
+          border: 1px solid #263499;
+          background: #263499;
+          color: white;
+          font-size: 1rem;
+          margin-right: .5rem;
+        }
+      }
+
+      h4, .h4 {
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+
+/* Form recherche coolabs + barre action*/
+.btn-menu {
+  background: transparent;
+  border: 0;
+  position: absolute;
+  right: .2rem;
+  top: .4rem;
+  z-index: 8;
+  cursor: pointer;
+}
+
+/* Affichage icônes multi-menu */
+.btn-multi-menu {
+  position: absolute;
+  right: .2rem;
+  top: .4rem;
+
+  * {
+    background: transparent;
+    border: 0;
+    z-index: 8;
+    cursor: pointer;
+  }
+}
+
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $secondary;
+  background-color: $secondary;
+}
+
+/** FIX la plateforme propose position:fixed mais ça créé un pb d'apparence sur PSP. */
+nav.nav.flex-column {
+  position: relative;
+}
+
+.sidebar-sticky {
+  top: 0;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: white;
+  position: sticky;
+
+  h2 {
+    padding: 0 0 1rem 1.5rem;
+  }
+
+  nav.collab-nav {
+    border-left: 2px solid $primary;
+    position: relative;
+    padding: 0 0 0 1rem;
+    margin: 0 0 0 2rem;
+    width: 100%;
+
+    a.nav-link {
+      width: 100%;
+      padding: .3rem 1rem;
+      margin: .2rem 0;
+      font-weight: 700;
+
+      .num {
+        background: white;
+        color: $primary;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 50%;
+        position: absolute;
+        left: -13px;
+        border: 1px solid $primary;
+      }
+
+      &:first-child {
+        padding-top: 0;
+        margin-top: 0;
+      }
+
+      &.active {
+        background: white;
+        color: $primary;
+
+        .num {
+          background: $primary;
+          color: white;
+        }
+      }
+    }
+
+    nav {
+      a.nav-link {
+        font-weight: 500;
+
+        &.active {
+          background: $light-bg;
+        }
+      }
+    }
+  }
+}
+
+.disabled-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+.disabled-common {
+  border: none;
+  background-color: transparent !important;
+
+  /** !important car le sélecteur "*" est moins spécifique qu'un sélecteur précis. */
+  *, *:hover {
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+/* TODO à faire dans le plateforme.scss */
+.sticky-top {
+  z-index: 9;
+}
+
+.root-nav-collaborateur {
+  /** doit être derrière le footer du DC qui est à 1000. */
+  z-index: 999;
+}
+
+.footer {
+  background: white;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  box-shadow: 0px -4px 5px 0px rgba(0, 0, 0, 0.14);
+  padding: 1.5rem;
+}
+
+/* icones formulaire collaborateur */
+.required::after {
+  color: red;
+  content: "*";
+  margin-left: 0.3em;
+}
+
+@mixin requisPaie() {
+  font-family: 'Font Awesome 5 Free', sans-serif;
+  content: '\f071';
+  color: #FF7701;
+  font-weight: 900;
+}
+
+label.requisPaie::after, h4.requisPaie::after {
+  @include requisPaie;
+  margin-left: 0.3em;
+}
+
+strong.requisPaie::before {
+  @include requisPaie;
+  margin-right: 0.3em;
+}
+
+.is-warning {
+  border-color: #FF7701;
+  background-color: lightyellow;
+  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+
+  .ng-select-container {
+    border-color: #FF7701;
+    background-color: lightyellow;
+  }
+}
+
+.is-error {
+  border-color: #dc3545;
+  background-color: lavenderblush;
+  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+
+
+  .ng-select-container {
+    border-color: #dc3545;
+    background-color: lavenderblush;
+  }
+}
+
+/* Css ngx-Datable recherche */
+.cell-dossier-incomplet {
+  color: #FF7701;
+  display: flex !important;
+}
+
+.cell-matricule-dossier-complet {
+  display: flex !important;
+}
+
+.cell-matricule-dossier-incomplet::before {
+  @include requisPaie;
+  margin-right: 0.3em;
+}
+
+.cell-matricule-dossier-incomplet {
+  color: #FF7701;
+  display: flex !important;
+  border-left: 4px solid #FF7701 !important;
+}
+
+.row-inactif > div {
+  background-color: whitesmoke;
+}
+
+.datatable-body-row.active .datatable-body-cell {
+  color: white;
+
+  i {
+    color: white;
+  }
+
+  a {
+    color: white !important;
+  }
+}
+
+.btn-group {
+  cursor: pointer;
+}
+
+.msg-erreur div {
+  margin-top: -1rem;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -150px;
+  visibility: hidden;
+}
+
+/** HACK : pour bug de postionnement popover : https://stackoverflow.com/questions/57595390/popover-from-ngx-bootstrap-placement-isnt-working-with-ngx-datatable-ngx-tr */
+.popover-content > div {
+  width: 236px;
+}
+
+.carousel-control {
+  display: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.datatable-body-row.active .datatable-body-cell i.fa-calendar-alt {
+  color: black;
+}
+
+/** customisation des tooltips (couleur et transparence) */
+.tooltip-inner {
+  background-color: #1c4587;
+  color: #fff;
+}
+
+.tooltip.in {
+  opacity: 1 !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.contact {
+  box-sizing: border-box;
+  position: relative;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0;
+  text-align: center;
+  font-style: normal;
+  font-size: 1.3em;
+}
+
+.icon-info-contact {
+  font-size: 80px;
+  color: #263499;
+  height: 100px;
+}
+
+.icon-info-version {
+  font-size: 30px;
+  padding: 0.1rem 1.2rem 0 1rem;
+}
+
+.affichage-version {
+  line-height: 17px;
+}
+
+.datatable-cell-vertical-align {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.echeances {
+  margin-left: auto !important;
+  padding: .5rem 1rem 5rem .5rem;
+}
+
+.ng-select.ng-select-opened .ng-select-container {
+  z-index: 0 !important;
+}
+
+.ng-dropdown-panel {
+  z-index: 1 !important;
+}
+
+app-arbre .form-control:disabled {
+  background-color: white;
+}
+
+/** Utiliser le mixin bootstrap pour diminuer la taille sur les écrans < lg. */
+@include media-breakpoint-down(lg) {
+  .sidebar-sticky {
+    /* 17em correspond à la taille du footer du DC. */
+    height: calc(100vh - 17em);
+  }
+}

@@ -1,2 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+@import '~@swimlane/ngx-datatable/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+@import 'assets/scss/ngx-datatable-custom';
+@import 'assets/scss/ngx-datepicker-custom';
+@import 'src/assets/scss/app';

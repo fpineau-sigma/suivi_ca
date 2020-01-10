@@ -1,3 +1,5 @@
 /ca_back/.idea
 /ca_front/.idea
 /ca_back/target
+/ca_front/ca-front/browserslist
+/ca_front/ca-front/yarn.lock

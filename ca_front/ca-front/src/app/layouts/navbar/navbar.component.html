@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light PSP-nav">
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav">
+      <li [routerLinkActiveOptions]="{ exact: true }" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" id="btnNavBarGestionAccueil" routerLink="/">
+          <span translate="global.menu.accueil"></span>
+        </a>
+      </li>
+      <li class="nav-item"
+          routerLinkActive="active">
+        <a class="nav-link" id="btnNavBarVentes" routerLink="ventes">
+          <span translate="global.menu.ventes"></span>
+        </a>
+      </li>
+      <li class="nav-item"
+          routerLinkActive="active">
+        <a class="nav-link" id="btnNavBarNegociateurs" routerLink="negociateurs">
+          <span translate="global.menu.negociateurs"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

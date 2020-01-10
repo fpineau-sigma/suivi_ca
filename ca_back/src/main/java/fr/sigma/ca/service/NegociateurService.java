@@ -1,35 +1,47 @@
 package fr.sigma.ca.service;
 
-        import fr.sigma.ca.dto.NegociateurDTO;
-        import org.springframework.stereotype.Service;
-        import org.springframework.transaction.annotation.Transactional;
+import fr.sigma.ca.entite.Negociateur;
+import fr.sigma.ca.dto.NegociateurDTO;
+import fr.sigma.ca.repository.CommissionRepository;
+import fr.sigma.ca.repository.NegociateurRepository;
+import fr.sigma.ca.service.mapper.CommissionMapper;
+import fr.sigma.ca.service.mapper.NegociateurMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-        import java.util.List;
-        import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-@Service("NegociateurService")
-@Transactional
-public interface NegociateurService {
+@Service
+@RequiredArgsConstructor
+public class NegociateurService {
+    
+    private final NegociateurRepository repository;
+    private final NegociateurMapper mapper;
 
-        /**
-         * Sauvegarder un nouveau sprint
-         *
-         * @param negociateurDTO
-         * @return
-         */
-        UUID enregistrerNegociateur(NegociateurDTO negociateurDTO);
+    @Transactional
+    public UUID enregistrerNegociateur(NegociateurDTO negociateurDTO) {
+        Negociateur negociateur = mapper.toEntity(negociateurDTO);
+        Negociateur persistEntity = repository.save(negociateur);
+        return persistEntity.getId();
+    }
 
-        /**
-         * Retourne la liste de tous les sprints
-         *
-         * @return
-         */
-        List<NegociateurDTO> findAll();
+    @Transactional
+    public List<NegociateurDTO> findAll() {
+        List<NegociateurDTO> negociateurDTOS = new ArrayList<>();
+        Iterable<Negociateur> NegociateursEntities = repository.findAll();
+        NegociateursEntities.forEach(negociateur ->{
+            NegociateurDTO negociateurDTO = mapper.toDto(negociateur);
+            negociateurDTOS.add(negociateurDTO);
+        });
+        return negociateurDTOS;
+    }
 
-        /**
-         * retourne le nombre d'elements
-         *
-         * @return
-         */
-        long countAll();
+    @Transactional
+    public long countAll() {
+        return repository.count();
+    }
 }

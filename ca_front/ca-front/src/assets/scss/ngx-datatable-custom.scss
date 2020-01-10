@@ -1,0 +1,150 @@
+@import './bootstrap-variables';
+
+.ngx-datatable.bootstrap {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+}
+
+.datatable-header {
+  font-weight: bold;
+
+  .datatable-header-cell {
+    display: flex !important;
+    align-items: center !important;
+    padding: .5rem .75rem !important;
+
+    .btn {
+      padding: 0 .5rem;
+
+      i {
+        color: black;
+      }
+    }
+  }
+}
+
+.datatable-footer {
+  .datatable-footer-inner{
+    background-color: white;
+    .page-count{
+      background-color: white;
+      color: #1483ff;
+      font-weight: bold;
+    }
+    .datatable-pager{
+      a:hover {
+        background-color: #1483ff !important;
+        color: white !important;
+      }
+      .pager{
+        background-color: white;
+        color: #1483ff;
+        .disabled{
+          visibility: hidden;
+        }
+        .pages.active{
+          a {
+            background-color: #1483ff !important;
+            color: white !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.datatable-body-cell {
+  i {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.datatable-body-row {
+  &.active {
+    color: white;
+  }
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+  white-space: pre-wrap !important;
+}
+
+
+/* chargement bootstrap */
+/** todo à voir si on garde */
+*.ngx-datatable.bootstrap .datatable-body .progress-linear {
+  display: block;
+  width: 100%;
+  height: 5px;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+}
+
+.ngx-datatable.bootstrap .datatable-body .progress-linear .container {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 5px;
+  -webkit-transform: translate(0, 0) scale(1, 1);
+  transform: translate(0, 0) scale(1, 1);
+  background-color: #aad1f9;
+}
+
+.ngx-datatable.bootstrap .datatable-body .progress-linear .container .bar {
+  -webkit-animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+  animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: transform .2s linear;
+  background-color: #106cc8;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+}
+
+/**
+ * Progress bar animations
+ */
+@keyframes query {
+  0% {
+    opacity: 1;
+    transform: translateX(35%) scale(0.3, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0, 1);
+  }
+}
+
+/** Border */
+.table-bordered {
+  .datatable-header-cell, .datatable-body-cell {
+    border: 1px solid #00000014;
+    border-collapse: collapse;
+  }
+
+  & {
+    border: 0px;
+  }
+}
+
+.ngx-datatable.bootstrap .datatable-body .empty-row {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.ngx-datatable.table-bordered.bootstrap .datatable-body .datatable-body-row {
+  border: none;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row:not(.active).datatable-row-even:not(.active) {
+  background: rgba(0, 0, 0, 0);
+}

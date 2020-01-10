@@ -1,17 +1,11 @@
 package fr.sigma.ca.service.mapper;
 
-import fr.sigma.ca.entities.Adresse;
+import fr.sigma.ca.entite.Adresse;
 import fr.sigma.ca.dto.AdresseDTO;
+import fr.sigma.ca.integration.persistence.MapperGenerique;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
-public interface AdresseMapper {
-
-    AdresseMapper MAPPER = Mappers.getMapper(AdresseMapper.class);
-
-    // Méthodes de conversions des adresses
-    AdresseDTO adresseToDTO(Adresse adresse);
-
-    Adresse dtoToAdresse(AdresseDTO dto);
+@Mapper(componentModel = "spring")
+public interface AdresseMapper extends MapperGenerique<AdresseDTO, Adresse> {
 }

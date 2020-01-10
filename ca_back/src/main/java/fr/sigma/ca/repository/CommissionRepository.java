@@ -1,6 +1,6 @@
 package fr.sigma.ca.repository;
 
-        import fr.sigma.ca.entities.Commission;
+        import fr.sigma.ca.entite.Commission;
         import org.springframework.data.jpa.repository.JpaRepository;
         import org.springframework.data.jpa.repository.Query;
         import org.springframework.data.repository.query.Param;
