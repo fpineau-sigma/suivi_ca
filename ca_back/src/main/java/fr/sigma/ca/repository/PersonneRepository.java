@@ -1,6 +1,6 @@
 package fr.sigma.ca.repository;
 
-import fr.sigma.ca.entities.Personne;
+import fr.sigma.ca.entite.Personne;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

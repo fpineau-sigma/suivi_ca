@@ -1,40 +1,37 @@
 package fr.sigma.ca.service;
 
 import fr.sigma.ca.dto.VenteDTO;
+import fr.sigma.ca.entite.Vente;
+import fr.sigma.ca.repository.VenteRepository;
+import fr.sigma.ca.service.mapper.VenteMapper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.UUID;
+@Service
+@RequiredArgsConstructor
+public class VenteService{
+    
+    private final VenteRepository repository;
+    private final VenteMapper mapper;
 
-@Service("VenteService")
-@Transactional
-public interface VenteService {
-    /**
-     * Sauvegarder un nouveau sprint
-     *
-     * @param venteDTO
-     * @return
-     */
-    UUID enregistrerVente(VenteDTO venteDTO);
+    @Transactional
+    public UUID enregistrerVente(VenteDTO venteDTO) {
+        Vente vente = mapper.toEntity(venteDTO);
+        Vente persistEntity = repository.save(vente);
+        return persistEntity.getId();
+    }
 
-    /**
-     * Retourne la liste de tous les sprints
-     *
-     * @return
-     */
-    List<VenteDTO> findAll();
+    @Transactional
+    public List<VenteDTO> findAll() {
+        return mapper.toDto(repository.findAll());
+    }
 
-    /**
-     * retourne le nombre d'elements
-     *
-     * @return
-     */
-    long countAll();
-
-    /**
-     * Retourne la liste de toutes les commissions + adresse + negociateur
-     * @return
-     */
-    List<VenteDTO> findAllByAdresses();
+    @Transactional
+    public long countAll() {
+        return repository.count();
+    }
 }

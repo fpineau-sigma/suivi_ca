@@ -1,59 +1,77 @@
 package fr.sigma.ca.service;
 
+import fr.sigma.ca.entite.Commission;
 import fr.sigma.ca.dto.CommissionDTO;
+import fr.sigma.ca.repository.CommissionRepository;
+import fr.sigma.ca.service.mapper.CommissionMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-@Service("CommissionService")
-@Transactional
-public interface CommissionService {
+@Service
+@RequiredArgsConstructor
+public class CommissionService {
 
-    /**
-     * Sauvegarder une nouvelle Commission
-     *
-     * @param commissionDTO
-     * @return
-     */
-    UUID enregistrerCommission(CommissionDTO commissionDTO);
+    private final CommissionRepository repository;
+    private final CommissionMapper mapper;
 
-    /**
-     * Retourne la liste de toutes les commissions
-     *
-     * @return
-     */
-    List<CommissionDTO> findAll();
+    @Transactional
+    public UUID enregistrerCommission(CommissionDTO commissionDTO) {
+        Commission commission = mapper.toEntity(commissionDTO);
+        Commission persistEntity = repository.save(commission);
+        return persistEntity.getId();
+    }
 
-    /**
-     * retourne le nombre d'elements
-     *
-     * @return
-     */
-    long countAll();
+    @Transactional
+    public List<CommissionDTO> findAll() {
+        List<CommissionDTO> commissionDTOS = new ArrayList<>();
+        //Iterable<Commission> CommissionsEntities = repository.findAllByOrderByNegociateurAsc();
+        Iterable<Commission> CommissionsEntities = repository.findAll();
+        CommissionsEntities.forEach(commission ->{
+            CommissionDTO commissionDTO = mapper.toDto(commission);
+            commissionDTOS.add(commissionDTO);
+        });
+        return commissionDTOS;
+    }
 
-    /**
-     * Retourne la liste de toutes les commissions
-     *
-     * @return
-     */
-    List<CommissionDTO> find(String nomCourt);
+    @Transactional
+    public long countAll() {
+        return repository.count();
+    }
 
-    /**
-     * Retourne la liste de toutes les commissions
-     *
-     * @return
-     */
-    List<CommissionDTO> find(Date date);
+    @Transactional
+    public List<CommissionDTO> find(String nomCourt) {
+        List<CommissionDTO> commissionDTOS = new ArrayList<>();
+        Iterable<Commission> CommissionsEntities = repository.findByNegociateur_nomCourt(nomCourt);
+        CommissionsEntities.forEach(commission ->{
+            CommissionDTO commissionDTO = mapper.toDto(commission);
+            commissionDTOS.add(commissionDTO);
+        });
+        return commissionDTOS;
+    }
 
-    /**
-     * Retourne la liste de toutes les commissions
-     *
-     * @return
-     */
-    List<CommissionDTO> find(String nomCourt, Date date);
+    @Transactional
+    public List<CommissionDTO> find(Date date) {
+        List<CommissionDTO> commissionDTOS = new ArrayList<>();
+        Iterable<Commission> CommissionsEntities = repository.findByDateVente(date);
+        CommissionsEntities.forEach(commission ->{
+            CommissionDTO commissionDTO = mapper.toDto(commission);
+            commissionDTOS.add(commissionDTO);
+        });
+        return commissionDTOS;
+    }
 
-
+    @Transactional
+    public List<CommissionDTO> find(String nomCourt, Date date) {
+        List<CommissionDTO> commissionDTOS = new ArrayList<>();
+        Iterable<Commission> CommissionsEntities = repository.findByNegociateur_nomCourtAndDateVente(nomCourt, date);
+        CommissionsEntities.forEach(commission ->{
+            CommissionDTO commissionDTO = mapper.toDto(commission);
+            commissionDTOS.add(commissionDTO);
+        });
+        return commissionDTOS;
+    }
 }

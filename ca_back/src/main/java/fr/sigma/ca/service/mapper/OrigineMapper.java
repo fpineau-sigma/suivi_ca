@@ -1,16 +1,11 @@
 package fr.sigma.ca.service.mapper;
 
-        import fr.sigma.ca.entities.Origine;
-        import fr.sigma.ca.dto.OrigineDTO;
-        import org.mapstruct.Mapper;
-        import org.mapstruct.factory.Mappers;
+import fr.sigma.ca.dto.OrigineDTO;
+import fr.sigma.ca.entite.Origine;
+import fr.sigma.ca.integration.persistence.MapperGenerique;
+import org.mapstruct.Mapper;
 
-@Mapper
-public interface OrigineMapper {
-    OrigineMapper MAPPER = Mappers.getMapper(OrigineMapper.class);
 
-    // Methode de conversion des origins
-    OrigineDTO origineToDTO(Origine origine);
-
-    Origine dtoToOrigine(OrigineDTO dto);
+@Mapper(componentModel = "spring")
+public interface OrigineMapper extends MapperGenerique<OrigineDTO, Origine> {
 }

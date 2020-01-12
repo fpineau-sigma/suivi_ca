@@ -1,17 +1,10 @@
 package fr.sigma.ca.service.mapper;
 
-import fr.sigma.ca.entities.Vente;
-import fr.sigma.ca.dto.VenteDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+    import fr.sigma.ca.dto.VenteDTO;
+    import fr.sigma.ca.entite.Vente;
+    import fr.sigma.ca.integration.persistence.MapperGenerique;
+    import org.mapstruct.Mapper;
 
-@Mapper
-public interface VenteMapper {
-
-    VenteMapper MAPPER = Mappers.getMapper(VenteMapper.class);
-
-    // MÃ©thode de conversion des ventes
-    VenteDTO venteToDTO(Vente vente);
-
-    Vente dtoToVente(VenteDTO dto);
+@Mapper(componentModel = "spring")
+public interface VenteMapper extends MapperGenerique<VenteDTO, Vente> {
 }
