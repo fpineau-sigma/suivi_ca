@@ -1,20 +1,26 @@
 package fr.sigma.ca.entite;
 
-import lombok.Data;
-
+import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.UUID;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class Origine {
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    private UUID id;
+  private static final long serialVersionUID = 1L;
 
-    private String libelle;
+  @Id
+  private UUID id;
+
+  private String libelle;
 
 }

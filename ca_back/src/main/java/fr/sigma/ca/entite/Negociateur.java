@@ -1,22 +1,25 @@
 package fr.sigma.ca.entite;
 
+import fr.sigma.ca.integration.persistence.Entite;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import lombok.Data;
-
-import javax.persistence.*;
-import java.util.UUID;
-
-@Data
 @Entity
-public class Negociateur {
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+public class Negociateur extends Entite {
 
-    private static final long serialVersionUID = 1L;
+  private String nom;
+  private String prenom;
 
-    @Id
-    private UUID id;
-
-    @OneToOne
-    private Personne personne;
-
-    private String nomCourt;
+  @NotNull
+  @Column(nullable = false, unique = true)
+  private String nomCourt;
 }

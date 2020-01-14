@@ -1,0 +1,56 @@
+{
+  "global": {
+    "title": "CA",
+    "menu": {
+      "accueil": "Accueil",
+      "ventes": "Suivi des ventes",
+      "negociateurs": "Negociateurs"
+    },
+    "ihm": {
+      "toast": {
+        "error": "Erreur",
+        "info": " Information",
+        "success": "Opération validée",
+        "warning": "Attention"
+      }
+    }
+  },
+  "commun": {
+    "bouton": {
+      "annuler": "Annuler",
+      "enregistrer.modification": "Enregistrer les modifications",
+      "enregistrer": "Enregistrer",
+      "supprimer": "Supprimer",
+      "fermer.sans.enregistrer": "Fermer sans enregistrer",
+      "fermer": "Fermer",
+      "valider": "Valider",
+      "creer": "Créer",
+      "confirmer": "Confirmer",
+      "importer": "Importer",
+      "envoyer.definitivement": "Envoyer définitivement",
+      "synchro": "Synchroniser"
+    }
+  },
+  "gestion":{
+    "ventes": {
+      "titre": "Suivi des ventes"
+    },
+    "negociateur": {
+      "nom": "Nom",
+      "prenom": "Prénom",
+      "nomCourt": "Nom court",
+      "creation" : {
+        "titre" : "Ajout d'un nouveau négociateur"
+      },
+      "modification": {
+        "titre" : "Modification du négociateur "
+      },
+      "action.success" : "Enregistrement effectué avec succès"
+    },
+    "negociateurs": {
+      "titre": "Suivi des négociateurs",
+      "ajout" : "Ajout d'un nouveau négociateur",
+      "liste" : "Liste des négociateurs"
+    }
+  }
+}

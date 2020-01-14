@@ -19,7 +19,7 @@ public class PersonneService {
     private final PersonneMapper mapper;
 
     @Transactional
-    public UUID enregistrerPersonne(PersonneDTO personneDTO) {
+    public Long enregistrerPersonne(PersonneDTO personneDTO) {
         Personne personne = mapper.toEntity(personneDTO);
         Personne persistEntity = repository.save(personne);
         return persistEntity.getId();
