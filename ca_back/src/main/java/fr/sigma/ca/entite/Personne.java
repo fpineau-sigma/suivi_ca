@@ -1,33 +1,24 @@
 package fr.sigma.ca.entite;
 
-import lombok.Data;
-
-import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.UUID;
+import fr.sigma.ca.integration.persistence.Entite;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Data
-public class Personne {
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+public class Personne extends Entite {
 
-    private static final long serialVersionUID = 1L;
+  @NotNull
+  @Column(nullable = false)
+  private String nom;
 
-    @Id
-    private UUID id;
-
-    private String nom;
-
-    private String prenom;
-
-    private Timestamp dateImport;
-
-    @PrePersist
-    public void beforeCreate(){
-        this.dateImport = new Timestamp(System.currentTimeMillis());
-    }
-
-    @PreUpdate
-    public void beforeUpdate(){
-        this.dateImport = new Timestamp(System.currentTimeMillis());
-    }
+  private String prenom;
 }

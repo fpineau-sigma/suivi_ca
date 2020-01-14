@@ -1,24 +1,37 @@
 package fr.sigma.ca.dto;
 
-import lombok.*;
+import fr.sigma.ca.integration.persistence.DTO;
 import java.util.Objects;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class NegociateurDTO extends PersonneDTO{
+public class NegociateurDTO extends DTO {
 
-    private String nomCourt;
+  private String nom;
+  private String prenom;
+  private String nomCourt;
 
-    @Builder
-    public NegociateurDTO(String nom, String prenom, String nomCourt) {
-        super(nom, prenom);
-        this.nomCourt = nomCourt;
+  @Builder
+  public NegociateurDTO(Long id, String nom, String prenom, String nomCourt) {
+    super(id);
+    this.nom = nom;
+    this.prenom = prenom;
+    this.nomCourt = nomCourt;
+  }
+
+  /**
+   * Two users are equal if their firstName, lastName and email address is same.
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (null == obj) {
+      return false;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj) && Objects.equals(this.nomCourt,((NegociateurDTO) obj).nomCourt);
-    }
+    return Objects.equals(this.nomCourt, ((NegociateurDTO) obj).nomCourt);
+  }
 }

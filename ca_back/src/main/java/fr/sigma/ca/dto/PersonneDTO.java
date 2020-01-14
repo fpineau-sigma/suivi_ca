@@ -1,38 +1,36 @@
 package fr.sigma.ca.dto;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
-import java.sql.Timestamp;
-import java.util.Date;
+import fr.sigma.ca.integration.persistence.DTO;
 import java.util.Objects;
-import java.util.UUID;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@FieldDefaults(level= AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(of= {"nom","prenom"})
-public class PersonneDTO {
+public class PersonneDTO extends DTO {
 
-    private UUID id;
+  private String nom;
+  private String prenom;
 
-    private String nom;
+  @Builder
+  public PersonneDTO(Long id, String nom, String prenom) {
+    super(id);
+    this.nom = nom;
+    this.prenom = prenom;
+  }
 
-    private String prenom;
-
-
-    public PersonneDTO(String nom, String prenom) {
-        this.id = UUID.randomUUID();
-        this.nom = nom;
-        this.prenom = prenom;
+  /**
+   * Two users are equal if their firstName, lastName and email address is same.
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (null == obj) {
+      return false;
     }
-
-    /**
-     * Two users are equal if their firstName, lastName and email address is same.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        return Objects.equals(this.nom, ((PersonneDTO) obj).nom) && Objects.equals(this.prenom, ((PersonneDTO) obj).prenom) ;
-    }
+    return Objects.equals(this.nom, ((PersonneDTO) obj).nom) && Objects
+        .equals(this.prenom, ((PersonneDTO) obj).prenom);
+  }
 }
