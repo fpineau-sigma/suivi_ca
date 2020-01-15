@@ -31,26 +31,27 @@
       "synchro": "Synchroniser"
     }
   },
-  "gestion":{
+  "gestion": {
     "ventes": {
-      "titre": "Suivi des ventes"
+      "titre": "Suivi des ventes",
+      "liste": "Liste des ventes"
     },
     "negociateur": {
       "nom": "Nom",
       "prenom": "Prénom",
       "nomCourt": "Nom court",
-      "creation" : {
-        "titre" : "Ajout d'un nouveau négociateur"
+      "creation": {
+        "titre": "Ajout d'un nouveau négociateur"
       },
       "modification": {
-        "titre" : "Modification du négociateur "
+        "titre": "Modification du négociateur "
       },
-      "action.success" : "Enregistrement effectué avec succès"
+      "action.success": "Enregistrement effectué avec succès"
     },
     "negociateurs": {
       "titre": "Suivi des négociateurs",
-      "ajout" : "Ajout d'un nouveau négociateur",
-      "liste" : "Liste des négociateurs"
+      "ajout": "Ajout d'un nouveau négociateur",
+      "liste": "Liste des négociateurs"
     }
   }
 }

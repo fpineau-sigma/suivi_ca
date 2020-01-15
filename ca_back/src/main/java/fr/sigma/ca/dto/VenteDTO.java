@@ -1,46 +1,54 @@
 package fr.sigma.ca.dto;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
+import fr.sigma.ca.entite.Origine;
+import fr.sigma.ca.integration.persistence.DTO;
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@FieldDefaults(level= AccessLevel.PRIVATE)
-@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class VenteDTO {
+@EqualsAndHashCode(callSuper = true)
+public class VenteDTO extends DTO {
 
-    private UUID id;
+  private Date dateVente;
+  private Collection<CommissionDTO> commissionsEntree;
+  private Collection<CommissionDTO> commissionsSortie;
+  private Origine origine;
+  private BigDecimal honorairesTTC;
+  private BigDecimal honorairesHT;
+  private AdresseDTO adresse;
+  private Collection<PersonneDTO> vendeurs;
+  private Collection<PersonneDTO> acquereurs;
 
-    private Date dateVente;
-
-    private List<CommissionDTO> commissionsEntree;
-
-    private List<CommissionDTO> commissionsSortie;
-
-    private OrigineDTO origine;
-
-    private BigDecimal honorairesTTC;
-
-    private BigDecimal honorairesHT;
-
-    private AdresseDTO adresse;
-
-    private List<PersonneDTO> vendeurs;
-
-    private List<PersonneDTO> acquereurs;
-
-
-    public VenteDTO() {
-        this.id = UUID.randomUUID();
-        this.vendeurs = new ArrayList<>();
-        this.acquereurs = new ArrayList<>();
-        this.commissionsEntree = new ArrayList<>();
-        this.commissionsSortie = new ArrayList<>();
-    }
+  @Builder
+  public VenteDTO(
+      Long id,
+      Date dateVente,
+      Collection<CommissionDTO> commissionsEntree,
+      Collection<CommissionDTO> commissionsSortie,
+      Origine origine,
+      BigDecimal honorairesTTC,
+      BigDecimal honorairesHT,
+      AdresseDTO adresse,
+      Collection<PersonneDTO> vendeurs,
+      Collection<PersonneDTO> acquereurs
+  ) {
+    super(id);
+    this.dateVente = dateVente;
+    this.commissionsEntree = commissionsEntree;
+    this.commissionsSortie = commissionsSortie;
+    this.origine = origine;
+    this.honorairesTTC = honorairesTTC;
+    this.honorairesHT = honorairesHT;
+    this.adresse = adresse;
+    this.vendeurs = vendeurs;
+    this.acquereurs = acquereurs;
+  }
 }

@@ -1,26 +1,18 @@
 package fr.sigma.ca.entite;
 
-import java.util.UUID;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-
-@Entity
 @Getter
-@Setter
-@NoArgsConstructor
-@ToString
-public class Origine {
-
-  private static final long serialVersionUID = 1L;
-
-  @Id
-  private UUID id;
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public enum Origine {
+  C("Copro"),
+  C_SYNERGIE("Copro_Synergie"),
+  D("Diffu"),
+  D_SYNERGIE("Diffu_Synergie"),
+  G("Gestion"),
+  G_UFF("Gestion_UFF");
 
   private String libelle;
-
 }

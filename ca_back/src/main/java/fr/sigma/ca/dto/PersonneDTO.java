@@ -1,8 +1,8 @@
 package fr.sigma.ca.dto;
 
 import fr.sigma.ca.integration.persistence.DTO;
-import java.util.Objects;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 public class PersonneDTO extends DTO {
 
   private String nom;
@@ -20,17 +21,5 @@ public class PersonneDTO extends DTO {
     super(id);
     this.nom = nom;
     this.prenom = prenom;
-  }
-
-  /**
-   * Two users are equal if their firstName, lastName and email address is same.
-   */
-  @Override
-  public boolean equals(Object obj) {
-    if (null == obj) {
-      return false;
-    }
-    return Objects.equals(this.nom, ((PersonneDTO) obj).nom) && Objects
-        .equals(this.prenom, ((PersonneDTO) obj).prenom);
   }
 }
