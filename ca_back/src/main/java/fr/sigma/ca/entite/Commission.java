@@ -1,41 +1,27 @@
 package fr.sigma.ca.entite;
 
+import fr.sigma.ca.integration.persistence.Entite;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.UUID;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
-public class Commission {
+public class Commission extends Entite {
 
-  private static final long serialVersionUID = 1L;
-
-  @Id
-  private UUID id;
-
-  @OneToOne
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "negociateur_id", nullable = false)
+  @NotNull
   private Negociateur negociateur;
 
   private BigDecimal pourcentage;
 
   private BigDecimal montantHT;
-
-  private Timestamp dateVente;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "VENTE_ID")
-  private Vente vente;
 }

@@ -1,32 +1,30 @@
 package fr.sigma.ca.dto;
 
-import lombok.*;
+import fr.sigma.ca.integration.persistence.DTO;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.UUID;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
-public class CommissionDTO {
+public class CommissionDTO extends DTO {
 
-    private UUID id;
+  private NegociateurDTO negociateur;
+  private BigDecimal pourcentage;
+  private BigDecimal montantHT;
 
-    private NegociateurDTO negociateur;
+  @Builder
+  public CommissionDTO(Long id, NegociateurDTO negociateur, BigDecimal pourcentage,
+      BigDecimal montantHT) {
+    super(id);
+    this.negociateur = negociateur;
+    this.pourcentage = pourcentage;
+    this.montantHT = montantHT;
+  }
 
-    private BigDecimal pourcentage;
-
-    private BigDecimal montantHT;
-
-    private Date dateVente;
-
-    public CommissionDTO(NegociateurDTO negociateur, BigDecimal pourcentage, BigDecimal montantHT, Date dateVente) {
-        this.id = UUID.randomUUID();
-        this.negociateur = negociateur;
-        this.pourcentage = pourcentage;
-        this.montantHT = montantHT;
-        this.dateVente = dateVente;
-    }
 }

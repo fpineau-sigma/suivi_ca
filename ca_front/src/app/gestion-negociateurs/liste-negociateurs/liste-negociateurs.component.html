@@ -2,10 +2,11 @@
   <div class="container-fluid">
     <p translate="gestion.negociateurs.liste">
     </p>
-    <button id="ajoutNegociateur" (click)="creerNegociateur()" translate='gestion.negociateurs.ajout'> </button>
+    <button id="ajoutNegociateur" class="btn" (click)="creerNegociateur()"
+            translate='gestion.negociateurs.ajout'></button>
     <ul>
       <li *ngFor="let negociateur of negociateurs">
-        <a  (click)="modifierNegociateur(negociateur)">
+        <a (click)="modifierNegociateur(negociateur)">
           {{ negociateur.nomCourt }}
         </a>
       </li>

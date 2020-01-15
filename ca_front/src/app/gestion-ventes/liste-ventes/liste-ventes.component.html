@@ -1,7 +1,13 @@
 <main class="container-fluid" role="main">
   <div class="container-fluid">
-    <p>
-      Liste des Ventes
+    <p translate="gestion.ventes.liste">
     </p>
+    <ul>
+      <li *ngFor="let vente of ventes">
+        <a>
+          {{ vente.adresse.numero }} {{ vente.adresse.nomVoie }} {{ vente.dateVente }} {{ vente.origine }}
+        </a>
+      </li>
+    </ul>
   </div>
 </main>

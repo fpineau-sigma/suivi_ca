@@ -1,8 +1,9 @@
 package fr.sigma.ca.entite;
 
-import java.util.UUID;
+import fr.sigma.ca.integration.persistence.Entite;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,18 +14,14 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Adresse {
+public class Adresse extends Entite {
 
-  private static final long serialVersionUID = 1L;
+  private Integer numeroVoie;
 
-  @Id
-  private UUID id;
-
-  private Integer numero;
-
+  @NotNull
+  @Column(nullable = false)
   private String nomVoie;
 
   private Integer codePostal;
-
   private String ville;
 }

@@ -1,19 +1,21 @@
 package fr.sigma.ca.controller.fileService;
 
-import com.google.common.collect.Lists;
 import fr.sigma.ca.dto.AdresseDTO;
 import fr.sigma.ca.dto.CommissionDTO;
 import fr.sigma.ca.dto.NegociateurDTO;
-import fr.sigma.ca.dto.OrigineDTO;
 import fr.sigma.ca.dto.PersonneDTO;
 import fr.sigma.ca.dto.VenteDTO;
+import fr.sigma.ca.entite.Origine;
 import fr.sigma.ca.service.AdresseService;
 import fr.sigma.ca.service.CommissionService;
 import fr.sigma.ca.service.NegociateurService;
-import fr.sigma.ca.service.OrigineService;
 import fr.sigma.ca.service.PersonneService;
 import fr.sigma.ca.service.VenteService;
+import fr.sigma.ca.service.mapper.AdresseMapper;
+import fr.sigma.ca.service.mapper.CommissionMapper;
 import fr.sigma.ca.service.mapper.NegociateurMapper;
+import fr.sigma.ca.service.mapper.PersonneMapper;
+import fr.sigma.ca.service.mapper.VenteMapper;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +24,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.poifs.crypt.Decryptor;
@@ -43,12 +47,16 @@ public class XlsxFile implements IFileFacade {
 
   private final PersonneService personneService;
   private final NegociateurService negociateurService;
-  private final OrigineService origineService;
   private final AdresseService adresseService;
   private final VenteService venteService;
   private final CommissionService commissionService;
 
   private final NegociateurMapper negociateurMapper;
+  private final AdresseMapper adresseMapper;
+  private final PersonneMapper personneMapper;
+  private final VenteMapper venteMapper;
+  private final CommissionMapper commissionMapper;
+
 
   /**
    * Fonction de lecture du fichier Excel
@@ -62,13 +70,12 @@ public class XlsxFile implements IFileFacade {
     List<String> messages = new ArrayList<>();
 
     // Recuperer la liste des Personnes
-    List<PersonneDTO> personnesDTOs = Lists.newArrayList(personneService.findAll());
+    Collection<PersonneDTO> personnesDTOs = personneMapper.toDto(personneService.lister());
     // Recuperer la liste des Adresses
-    List<AdresseDTO> adressesDTOS = Lists.newArrayList(adresseService.findAll());
+    Collection<AdresseDTO> adressesDTOS = adresseMapper.toDto(adresseService.lister());
     // Recuperer la liste des negociateurs
-    List<NegociateurDTO> negociateursDTOs = negociateurMapper.toDto(negociateurService.lister());
-    // Recuperer la liste des Origine
-    List<OrigineDTO> originesDTOs = Lists.newArrayList(origineService.findAll());
+    Collection<NegociateurDTO> negociateursDTOs = negociateurMapper
+        .toDto(negociateurService.lister());
 
     try {
       Path path = Paths.get("src/main/resources/" + fileName);
@@ -91,79 +98,85 @@ public class XlsxFile implements IFileFacade {
       // Parcours de l'ensemble des lignes
       for (int rowNum = 1; rowNum <= ws.getLastRowNum(); rowNum++) {
         final XSSFRow row = ws.getRow(rowNum);
-        VenteDTO venteDTO = new VenteDTO();
+        VenteDTO venteDTO = VenteDTO.builder().vendeurs(new ArrayList<>())
+            .acquereurs(new ArrayList<>()).build();
+        ArrayList<CommissionDTO> commissionsEntree = new ArrayList<>();
+        ArrayList<CommissionDTO> commissionsSortie = new ArrayList<>();
+
         for (int colNum = row.getFirstCellNum(); colNum < row.getLastCellNum(); colNum++) {
           String value;
           switch (colNum) {
             case (EnumTypeColonne.VENDEURS):
               value = row.getCell(colNum).getStringCellValue().trim();
-              Arrays.asList(value.split("/")).stream().forEach(val -> {
+              Arrays.stream(value.split("/")).forEach(val -> {
                 if (!StringUtils.isEmpty(val)) {
-                  PersonneDTO personneDTO = enregistrerPersonne(personnesDTOs, val);
-                  venteDTO.getVendeurs().add(personneDTO);
+                  venteDTO.getVendeurs().add(enregistrerPersonne(personnesDTOs, val));
                 }
               });
               break;
             case (EnumTypeColonne.ACQUEREURS):
               value = row.getCell(colNum).getStringCellValue().trim();
-              Arrays.asList(value.split("/")).stream().forEach(val -> {
+              Arrays.stream(value.split("/")).forEach(val -> {
                 if (!StringUtils.isEmpty(val)) {
-                  PersonneDTO personneDTO = enregistrerPersonne(personnesDTOs, val);
-                  venteDTO.getAcquereurs().add(personneDTO);
+                  venteDTO.getAcquereurs().add(enregistrerPersonne(personnesDTOs, val));
                 }
               });
               break;
             case (EnumTypeColonne.ADRESSE):
               if (!StringUtils.isEmpty(value = row.getCell(colNum).getStringCellValue().trim())) {
-                AdresseDTO adresseDTO = enregistrerAdresse(adressesDTOS, value);
-                venteDTO.setAdresse(adresseDTO);
+                venteDTO.setAdresse(deduireAdresse(adressesDTOS, value));
               }
               break;
             // colonne honoraire TTC
             case (EnumTypeColonne.HONORAIRES_TTC):
-              venteDTO.setHonorairesTTC(new BigDecimal(row.getCell(colNum).getNumericCellValue()));
+              venteDTO
+                  .setHonorairesTTC(BigDecimal.valueOf(row.getCell(colNum).getNumericCellValue()));
               break;
             // colonne honoraire HT
             case (EnumTypeColonne.HONORAIRES_HT):
-              venteDTO.setHonorairesHT(new BigDecimal(row.getCell(colNum).getNumericCellValue()));
+              venteDTO
+                  .setHonorairesHT(BigDecimal.valueOf(row.getCell(colNum).getNumericCellValue()));
               break;
             case (EnumTypeColonne.NEGOS_ENTREE):
               value = row.getCell(colNum).getStringCellValue().trim();
-              enregistrerCommissions(value, negociateursDTOs).stream()
-                  .forEach(x -> venteDTO.getCommissionsEntree().add(x));
+              commissionsEntree.addAll(enregistrerCommissions(value, negociateursDTOs));
               break;
             case (EnumTypeColonne.NEGOS_SORTIE):
               value = row.getCell(colNum).getStringCellValue().trim();
-              enregistrerCommissions(value, negociateursDTOs).stream()
-                  .forEach(x -> venteDTO.getCommissionsSortie().add(x));
+              commissionsSortie.addAll(enregistrerCommissions(value, negociateursDTOs));
               break;
             case (EnumTypeColonne.ORIGINE):
               if (!StringUtils.isEmpty(value = row.getCell(colNum).getStringCellValue().trim())) {
-                OrigineDTO origineDTO = enregistrerOrigine(originesDTOs, value);
-                venteDTO.setOrigine(origineDTO);
+                venteDTO.setOrigine(Origine.valueOf(value));
               }
               break;
             case (EnumTypeColonne.DATE):
               venteDTO.setDateVente(row.getCell(colNum).getDateCellValue());
               break;
+            default:
+              break;
           }
         }
+        venteDTO.setCommissionsEntree(new ArrayList<>());
+        venteDTO.setCommissionsSortie(new ArrayList<>());
         // Parcours des commissions pour calculs le montant des commissions
-        venteDTO.getCommissionsEntree().stream().forEach(x -> {
-          x.setMontantHT(
-              venteDTO.getHonorairesHT().multiply(x.getPourcentage()).divide(new BigDecimal(100))
+        commissionsEntree.forEach(commissionEntreeDTO -> {
+          commissionEntreeDTO.setMontantHT(
+              venteDTO.getHonorairesHT().multiply(commissionEntreeDTO.getPourcentage())
+                  .divide(new BigDecimal(100))
                   .setScale(2, BigDecimal.ROUND_HALF_EVEN));
-          x.setDateVente(venteDTO.getDateVente());
-          commissionService.enregistrerCommission(x);
+          venteDTO.getCommissionsEntree().add(commissionMapper.toDto(commissionService
+              .enregistrerCommission(commissionMapper.toEntity(commissionEntreeDTO))));
         });
-        venteDTO.getCommissionsSortie().stream().forEach(x -> {
-          x.setMontantHT(
-              venteDTO.getHonorairesHT().multiply(x.getPourcentage()).divide(new BigDecimal(100))
+        commissionsSortie.forEach(commisionSortieDTO -> {
+          commisionSortieDTO.setMontantHT(
+              venteDTO.getHonorairesHT().multiply(commisionSortieDTO.getPourcentage())
+                  .divide(new BigDecimal(100))
                   .setScale(2, BigDecimal.ROUND_HALF_EVEN));
-          x.setDateVente(venteDTO.getDateVente());
-          commissionService.enregistrerCommission(x);
+          venteDTO.getCommissionsSortie().add(commissionMapper.toDto(commissionService
+              .enregistrerCommission(commissionMapper.toEntity(commisionSortieDTO))));
         });
-        venteService.enregistrerVente(venteDTO);
+        venteService.enregistrerVente(venteMapper.toEntity(venteDTO));
       }
     } catch (IOException i) {
       log.error("Problème de format de fichier : " + i);
@@ -182,7 +195,7 @@ public class XlsxFile implements IFileFacade {
    * @return
    */
   private List<CommissionDTO> enregistrerCommissions(String value,
-      List<NegociateurDTO> negociateursDTOs) {
+      Collection<NegociateurDTO> negociateursDTOs) {
     List<CommissionDTO> commissionDTOS = new ArrayList<>();
     Arrays.asList(value.split("-")).stream().forEach(val -> {
       if (!StringUtils.isEmpty(val)) {
@@ -193,7 +206,8 @@ public class XlsxFile implements IFileFacade {
           val = val.substring(0, 3);
         }
         NegociateurDTO negociateurDTO = enregistrerNegociateur(negociateursDTOs, val);
-        CommissionDTO commissionDTO = new CommissionDTO(negociateurDTO, pourcentage, null, null);
+        CommissionDTO commissionDTO = CommissionDTO.builder().negociateur(negociateurDTO)
+            .pourcentage(pourcentage).build();
         commissionDTOS.add(commissionDTO);
       }
     });
@@ -201,7 +215,7 @@ public class XlsxFile implements IFileFacade {
     int size = commissionDTOS.size();
     commissionDTOS.forEach(x -> {
       if (x.getPourcentage().compareTo(new BigDecimal(50)) == 0) {
-        x.setPourcentage(x.getPourcentage().divide(new BigDecimal(size)));
+        x.setPourcentage(x.getPourcentage().divide(BigDecimal.valueOf(size), BigDecimal.ROUND_UP));
       }
     });
     return commissionDTOS;
@@ -210,28 +224,30 @@ public class XlsxFile implements IFileFacade {
   /**
    * Enregistrement des personnes
    *
-   * @param personnesDTOs
-   * @param value
+   * @param personnesDTO
+   * @param nom
    */
-  private PersonneDTO enregistrerPersonne(List<PersonneDTO> personnesDTOs, String value) {
-    PersonneDTO personneDTO = PersonneDTO.builder().nom(value).build();
-    int index = personnesDTOs.indexOf(personneDTO);
-    if (index == -1) {
-      personnesDTOs.add(personneDTO);
-      personneService.enregistrerPersonne(personneDTO);
+  private PersonneDTO enregistrerPersonne(Collection<PersonneDTO> personnesDTO, String nom) {
+    Optional<PersonneDTO> personneBDD = personnesDTO.stream()
+        .filter(personneDTO -> personneDTO.getNom().equals(nom)).findFirst();
+    if (personneBDD.isPresent()) {
+      return personneBDD.get();
     } else {
-      return personnesDTOs.get(index);
+      PersonneDTO nouvellePersonne = PersonneDTO.builder().nom(nom).build();
+      nouvellePersonne = personneMapper
+          .toDto(personneService.creer(personneMapper.toEntity(nouvellePersonne)));
+      personnesDTO.add(nouvellePersonne);
+      return nouvellePersonne;
     }
-    return personneDTO;
   }
 
   /**
    * Enregistrement des adresses
    *
-   * @param adressesDTOs
+   * @param adressesDTO
    * @param value
    */
-  private AdresseDTO enregistrerAdresse(List<AdresseDTO> adressesDTOs, String value) {
+  private AdresseDTO deduireAdresse(Collection<AdresseDTO> adressesDTO, String value) {
     // Récupération des informations liées à l'adresse
     String[] elements = value.split(",");
     Integer numeroVoie = null;
@@ -243,51 +259,45 @@ public class XlsxFile implements IFileFacade {
       nomVoie = elements[0].trim();
     }
 
-    AdresseDTO adresseDTO = new AdresseDTO(numeroVoie, nomVoie, null, null);
-    int index = adressesDTOs.indexOf(adresseDTO);
-    if (index == -1) {
-      adressesDTOs.add(adresseDTO);
-      adresseService.enregistrerAdresse(adresseDTO);
+    return enregistrerAdresse(adressesDTO, numeroVoie, nomVoie);
+  }
+
+  private AdresseDTO enregistrerAdresse(Collection<AdresseDTO> adressesDTO,
+      final Integer numeroVoie,
+      final String nomVoie) {
+    Optional<AdresseDTO> adresseBDD = adressesDTO.stream()
+        .filter(adresseDTO -> adresseDTO.getNomVoie().equals(nomVoie) && adresseDTO.getNumeroVoie()
+            .equals(numeroVoie)).findFirst();
+    if (adresseBDD.isPresent()) {
+      return adresseBDD.get();
     } else {
-      return adressesDTOs.get(index);
+      AdresseDTO nouvelleAdresse = AdresseDTO.builder().nomVoie(nomVoie).numeroVoie(numeroVoie)
+          .build();
+      nouvelleAdresse = adresseMapper
+          .toDto(adresseService.creer(adresseMapper.toEntity(nouvelleAdresse)));
+      adressesDTO.add(nouvelleAdresse);
+      return nouvelleAdresse;
     }
-    return adresseDTO;
   }
 
   /**
    * Enregistrement des negociateurs
    *
-   * @param negociateursDTOs
-   * @param value
+   * @param negociateursDTO
+   * @param nomCourt
    */
-  private NegociateurDTO enregistrerNegociateur(List<NegociateurDTO> negociateursDTOs,
-      String value) {
-    NegociateurDTO negociateurDTO = NegociateurDTO.builder().nomCourt(value).build();
-    int index = negociateursDTOs.indexOf(negociateurDTO);
-    if (index == -1) {
-      negociateursDTOs.add(negociateurDTO);
-      negociateurDTO = negociateurMapper.toDto(negociateurService.creer(negociateurDTO));
+  private NegociateurDTO enregistrerNegociateur(Collection<NegociateurDTO> negociateursDTO,
+      String nomCourt) {
+    Optional<NegociateurDTO> negociateurBDD = negociateursDTO.stream()
+        .filter(negociateurDTO -> negociateurDTO.getNomCourt().equals(nomCourt)).findFirst();
+    if (negociateurBDD.isPresent()) {
+      return negociateurBDD.get();
     } else {
-      return negociateursDTOs.get(index);
+      NegociateurDTO nouveauNego = NegociateurDTO.builder().nomCourt(nomCourt).build();
+      nouveauNego = negociateurMapper
+          .toDto(negociateurService.creer(negociateurMapper.toEntity(nouveauNego)));
+      negociateursDTO.add(nouveauNego);
+      return nouveauNego;
     }
-    return negociateurDTO;
-  }
-
-  /**
-   * Enregistrement des origines
-   *
-   * @param originesDTOs
-   * @param value
-   */
-  private OrigineDTO enregistrerOrigine(List<OrigineDTO> originesDTOs, String value) {
-    OrigineDTO origineDTO = new OrigineDTO(value);
-    int index = originesDTOs.indexOf(origineDTO);
-    if (index == -1) {
-      originesDTOs.add(origineDTO);
-      origineService.enregistrerOrigine(origineDTO);
-    } else {
-      return originesDTOs.get(index);
-    }
-    return origineDTO;
   }
 }
