@@ -29,6 +29,10 @@
       "importer": "Importer",
       "envoyer.definitivement": "Envoyer définitivement",
       "synchro": "Synchroniser"
+    },
+    "champ": {
+      "oui": "Oui",
+      "non": "Non"
     }
   },
   "gestion": {
@@ -40,6 +44,7 @@
       "nom": "Nom",
       "prenom": "Prénom",
       "nomCourt": "Nom court",
+      "actif": "Actif/Inactif",
       "creation": {
         "titre": "Ajout d'un nouveau négociateur"
       },

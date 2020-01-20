@@ -89,6 +89,6 @@ export class ListeNegociateursComponent implements OnInit, OnDestroy {
   }
 
   public modifierNegociateur(negociateur: Negociateur): void {
-    this.ouvrirModalNegociateur(negociateur, Mode.CREATION);
+    this.ouvrirModalNegociateur(negociateur, Mode.EDITION);
   }
 }

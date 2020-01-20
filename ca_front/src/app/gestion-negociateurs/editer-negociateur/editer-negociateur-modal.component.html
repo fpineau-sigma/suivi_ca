@@ -3,9 +3,11 @@
     <fieldset #fieldSetElement class="align-items-end">
       <div class="row align-items-start mb-2">
         <div class="col-12">
-          <h5 *ngIf="mode === ModeEnum.CREATION" translate="gestion.negociateur.creation.titre"></h5>
-          <h5 *ngIf="mode === ModeEnum.EDITION"> {{ 'gestion.negociateur.modification.titre' | translate }}
-            &mdash; {{negociateur.nom}}  {{negociateur.prenom}}</h5>
+          <h5 *ngIf="mode === ModeEnum.CREATION"
+              translate="gestion.negociateur.creation.titre"></h5>
+          <h5
+            *ngIf="mode === ModeEnum.EDITION"> {{ 'gestion.negociateur.modification.titre' | translate }}
+            &mdash; {{negociateurEditer.nom}}  {{negociateurEditer.prenom}}</h5>
         </div>
       </div>
       <!-- Ligne 1 : Nom -->
@@ -14,7 +16,7 @@
           <div class="form-group">
             <label class="required" for="negociateur_nom"
                    translate="gestion.negociateur.nom"></label>
-            <input [(ngModel)]="negociateur.nom"
+            <input [(ngModel)]="negociateurEditer.nom"
                    id="negociateur_nom"
                    name="negociateur_nom"
                    required/>
@@ -25,7 +27,7 @@
           <div class="form-group">
             <label class="required" for="negociateur_prenom"
                    translate="gestion.negociateur.prenom"></label>
-            <input [(ngModel)]="negociateur.prenom"
+            <input [(ngModel)]="negociateurEditer.prenom"
                    id="negociateur_prenom"
                    name="negociateur_prenom"
                    required/>
@@ -34,13 +36,43 @@
       </div>
       <!-- Ligne 2 : Nom Court -->
       <div class="row align-items-end">
-        <div class="col-12">
+        <div class="col-6">
           <label class="required" for="negociateur_nomCourt"
                  translate="gestion.negociateur.nomCourt"></label>
-          <input [(ngModel)]="negociateur.nomCourt"
+          <input [(ngModel)]="negociateurEditer.nomCourt"
                  id="negociateur_nomCourt"
                  name="negociateur_nomCourt"
                  required/>
+        </div>
+        <!-- Ligne 2 : Actif/Inactif -->
+        <div class="col-6">
+          <div class="form-group">
+            <label class="required" for="negociateur_actif_oui"
+                   translate="gestion.negociateur.actif"></label>
+            <div class="row">
+              <div class="col">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input [(ngModel)]="negociateurEditer.actif"
+                         required
+                         [value]="true"
+                         class="custom-control-input" id="negociateur_actif_oui"
+                         name="negociateur_actif"
+                         type="radio"/>
+                  <label class="custom-control-label font-weight-normal" for="negociateur_actif_oui"
+                         translate="commun.champ.oui"></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input [(ngModel)]="negociateurEditer.actif"
+                         [value]="false"
+                         class="custom-control-input" id="negociateur_actif_non"
+                         name="negociateur_actif"
+                         type="radio"/>
+                  <label class="custom-control-label font-weight-normal" for="negociateur_actif_non"
+                         translate="commun.champ.non"></label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Ligne 4 : Annuler / Valider -->
@@ -62,7 +94,7 @@
             {{ "commun.bouton.fermer" | translate }}
             <i aria-hidden="true" class="fas fa-times ml-2"></i>
           </button>
-          <button (click)="enregistrer.emit(negociateur)"
+          <button (click)="enregistrer.emit(negociateurEditer)"
                   *ngIf="mode === ModeEnum.CREATION"
                   [disabled]="!form.valid"
                   [ngClass]="form.valid ? 'btn-success': 'btn.disabled'"
@@ -72,7 +104,7 @@
             {{ "commun.bouton.creer" | translate }}
             <i aria-hidden="true" class="fas fa-check ml-2"></i>
           </button>
-          <button (click)="modifier.emit(negociateur)"
+          <button (click)="modifier.emit(negociateurEditer)"
                   *ngIf="mode === ModeEnum.EDITION"
                   [disabled]="!form.valid"
                   [ngClass]="form.valid ? 'btn-success' : 'btn.disabled'"

@@ -22,4 +22,6 @@ public class Negociateur extends Entite {
   @NotNull
   @Column(nullable = false, unique = true)
   private String nomCourt;
+
+  private Boolean actif;
 }
