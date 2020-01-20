@@ -16,12 +16,14 @@ public class NegociateurDTO extends DTO {
   private String nom;
   private String prenom;
   private String nomCourt;
+  private Boolean actif;
 
   @Builder
-  public NegociateurDTO(Long id, String nom, String prenom, String nomCourt) {
+  public NegociateurDTO(Long id, String nom, String prenom, String nomCourt, Boolean actif) {
     super(id);
     this.nom = nom;
     this.prenom = prenom;
     this.nomCourt = nomCourt;
+    this.actif = actif;
   }
 }
