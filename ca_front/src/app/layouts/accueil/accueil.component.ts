@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRouteSnapshot, NavigationEnd, NavigationError, Router} from "@angular/router";
-import {Title} from "@angular/platform-browser";
-import {TranslateService} from "@ngx-translate/core";
-import {LangageAssistant} from "../../core/language/langage-assistant.service";
-import {Subscription} from "rxjs";
+import {Subscription} from 'rxjs';
+import {LangageAssistant} from '../../core/language/langage-assistant.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRouteSnapshot, NavigationEnd, NavigationError, Router} from '@angular/router';
 
 
 @Component({

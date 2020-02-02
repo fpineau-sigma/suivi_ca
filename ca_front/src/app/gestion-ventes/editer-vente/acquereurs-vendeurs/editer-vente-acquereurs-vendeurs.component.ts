@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {Mode} from "../../../core/model/mode.enum";
-import {ColumnMode} from "@swimlane/ngx-datatable";
-import {Personne} from "../../../core/model/personne.model";
-import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {editerVenteRoute} from "../editer-vente.route";
-import {Vente} from "../../../core/model/vente.model";
-import {ChampCommission} from "../commissions/editer-vente-commissions.component";
+import {Mode} from '../../../core/model/mode.enum';
+import {Vente} from '../../../core/model/vente.model';
+import {Personne} from '../../../core/model/personne.model';
+import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
+import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
+import {ColumnMode} from '@swimlane/ngx-datatable';
+
 
 export enum ChampVendeurAcquereur {
   ACQUEREUR,
@@ -29,7 +29,7 @@ export class EditerVenteAcquereursVendeursComponent implements OnInit {
   public faEdit = faEdit;
   public personneEnEdition: Personne;
   private personneSelectionnee: Personne;
-  public editionEnCours: boolean = false;
+  public editionEnCours = false;
 
   constructor(public readonly form: NgForm) {
   }

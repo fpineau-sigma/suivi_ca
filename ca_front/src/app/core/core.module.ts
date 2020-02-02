@@ -3,7 +3,8 @@ import {registerLocaleData} from '@angular/common';
 import locale from '@angular/common/locales/fr';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BsLocaleService, defineLocale, frLocale} from 'ngx-bootstrap';
-import {LangageAssistant} from "./language/langage-assistant.service";
+import {LangageAssistant} from './language/langage-assistant.service';
+
 
 @NgModule({
   exports: [],

@@ -1,8 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Negociateur} from "../model/negociateur.model";
-import {Vente} from "../model/vente.model";
+import {Vente} from '../model/vente.model';
+
 
 const url = '//localhost:8090/ventes';
 

@@ -1,5 +1,6 @@
 import {Route} from '@angular/router';
-import {ListeNegociateursComponent} from "./liste-negociateurs.component";
+import {ListeNegociateursComponent} from './liste-negociateurs.component';
+
 
 export const listeNegociateursRoute: Route = {
   path: '',

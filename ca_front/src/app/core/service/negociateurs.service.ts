@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Negociateur} from "../model/negociateur.model";
+import {Negociateur} from '../model/negociateur.model';
+
 
 const url = '//localhost:8090/negociateurs';
 
 @Injectable({providedIn: 'root'})
 export class NegociateursService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   lister(): Observable<any> {
     return this.http.get(`${url}`);

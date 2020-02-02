@@ -5,4 +5,4 @@ export let Origines = {
   D_SYNERGIE: 'Diffu_Synergie',
   G: 'Gestion',
   G_UFF: 'Gestion_UFF'
-}
+};

@@ -1,13 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {NegociateursService} from "../../core/service/negociateurs.service";
-import {Negociateur} from "../../core/model/negociateur.model";
-import {EditerNegociateurModalComponent} from "../editer-negociateur/editer-negociateur-modal.component";
-import {Mode} from "../../core/model/mode.enum";
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {ConfigModalCommun} from "../../core/configuration/config-modal-commun.class";
-import {ToastService} from "../../core/service/toast.service";
-import {RefreshService} from "../../core/service/refresh.service";
+import {Negociateur} from '../../core/model/negociateur.model';
+import {Subscription} from 'rxjs';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {NegociateursService} from '../../core/service/negociateurs.service';
+import {ToastService} from '../../core/service/toast.service';
+import {RefreshService} from '../../core/service/refresh.service';
+import {EditerNegociateurModalComponent} from '../editer-negociateur/editer-negociateur-modal.component';
+import {ConfigModalCommun} from '../../core/configuration/config-modal-commun.class';
+import {Mode} from '../../core/model/mode.enum';
+
 
 @Component({
   selector: 'app-negociateurs',
@@ -47,8 +48,8 @@ export class ListeNegociateursComponent implements OnInit, OnDestroy {
     this.modalActive = this.modalService.show(EditerNegociateurModalComponent, Object.assign(new ConfigModalCommun(), {
       class: 'modal-dialog-centered modal-lg',
       initialState: {
-        mode: mode,
-        negociateur: negociateur
+        mode,
+        negociateur
       }
     }));
     this.subscriptions.push(
@@ -58,15 +59,15 @@ export class ListeNegociateursComponent implements OnInit, OnDestroy {
       (this.modalActive.content as EditerNegociateurModalComponent).annuler.subscribe(() => {
         this.fermerModal();
       }),
-      (this.modalActive.content as EditerNegociateurModalComponent).enregistrer.subscribe((negociateur: Negociateur) => {
-        this.negociateursService.enregistrer(negociateur).subscribe(() => {
+      (this.modalActive.content as EditerNegociateurModalComponent).enregistrer.subscribe(nego => {
+        this.negociateursService.enregistrer(nego).subscribe(() => {
           this.toastService.success('gestion.negociateur.action.success');
           this.fermerModal();
           this.refreshService.refresh();
         });
       }),
-      (this.modalActive.content as EditerNegociateurModalComponent).modifier.subscribe((negociateur: Negociateur) => {
-        this.negociateursService.modifier(negociateur).subscribe(() => {
+      (this.modalActive.content as EditerNegociateurModalComponent).modifier.subscribe(nego => {
+        this.negociateursService.modifier(nego).subscribe(() => {
           this.toastService.success('gestion.negociateur.action.success');
           this.fermerModal();
           this.refreshService.refresh();

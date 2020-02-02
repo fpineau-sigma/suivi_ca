@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {Mode} from "../../../core/model/mode.enum";
-import {Vente} from "../../../core/model/vente.model";
-import {Origines} from "../../../core/model/origine.enum";
+import {Mode} from '../../../core/model/mode.enum';
+import {Origines} from '../../../core/model/origine.enum';
+import {Vente} from '../../../core/model/vente.model';
 
 
 @Component({

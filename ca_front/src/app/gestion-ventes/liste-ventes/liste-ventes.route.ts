@@ -1,5 +1,5 @@
 import {Route} from '@angular/router';
-import {ListeVentesComponent} from "./liste-ventes.component";
+import {ListeVentesComponent} from './liste-ventes.component';
 
 
 export const listeVentesRoute: Route = {
