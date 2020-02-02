@@ -3,17 +3,27 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AccueilComponent} from './app/layouts/accueil/accueil.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {NavbarComponent} from "./app/layouts/navbar/navbar.component";
-import {Page403Component} from "./app/layouts/page-erreur/page403/page403.component";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {GestionVentesModule} from "./app/gestion-ventes/gestion-ventes.module";
-import {GestionNegociateursModule} from "./app/gestion-negociateurs/gestion-negociateurs.module";
-import {SharedModule} from "./app/shared/shared.module";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {NavbarComponent} from './app/layouts/navbar/navbar.component';
+import {Page403Component} from './app/layouts/page-erreur/page403/page403.component';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {GestionVentesModule} from './app/gestion-ventes/gestion-ventes.module';
+import {GestionNegociateursModule} from './app/gestion-negociateurs/gestion-negociateurs.module';
+import {SharedModule} from './app/shared/shared.module';
+import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap';
+import {AngularDateHttpInterceptor} from './app/core/interceptor/angular-date.interceptor';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
+}
+
+export function getDatepickerConfig(): BsDatepickerConfig {
+  return Object.assign(new BsDatepickerConfig(), {
+    containerClass: 'theme-dark-blue',
+    adaptivePosition: true
+  });
 }
 
 @NgModule({
@@ -29,6 +39,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GestionNegociateursModule,
     HttpClientModule,
     AppRoutingModule,
+    FontAwesomeModule,
+    BsDatepickerModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -37,6 +49,15 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
+  providers: [
+    {provide: BsDatepickerConfig, useFactory: getDatepickerConfig},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AngularDateHttpInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AccueilComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
