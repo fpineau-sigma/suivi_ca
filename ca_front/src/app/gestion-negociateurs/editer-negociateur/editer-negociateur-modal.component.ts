@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Negociateur} from "../../core/model/negociateur.model";
-import {Mode} from "../../core/model/mode.enum";
+import {Negociateur} from '../../core/model/negociateur.model';
+import {Mode} from '../../core/model/mode.enum';
+
 
 @Component({
   selector: 'app-negociateur',

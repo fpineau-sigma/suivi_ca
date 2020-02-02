@@ -6,7 +6,7 @@ import {
   ToastApplicative,
   ToastLevelEnum,
   toasts
-} from "../../shared/toast/toast.model";
+} from '../../shared/toast/toast.model';
 
 
 // tslint:disable:no-any

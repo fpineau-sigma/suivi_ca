@@ -1,13 +1,13 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Vente} from "../../core/model/vente.model";
-import {Mode} from "../../core/model/mode.enum";
-import {ActivatedRoute} from "@angular/router";
-import {Subscription} from "rxjs";
-import {VentesService} from "../../core/service/ventes.service";
-import {Adresse} from "../../core/model/adresse.model";
-import {Negociateur} from "../../core/model/negociateur.model";
-import {ChampVendeurAcquereur} from "./acquereurs-vendeurs/editer-vente-acquereurs-vendeurs.component";
-import {ChampCommission} from "./commissions/editer-vente-commissions.component";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Adresse} from '../../core/model/adresse.model';
+import {ActivatedRoute} from '@angular/router';
+import {ChampVendeurAcquereur} from './acquereurs-vendeurs/editer-vente-acquereurs-vendeurs.component';
+import {Mode} from '../../core/model/mode.enum';
+import {Vente} from '../../core/model/vente.model';
+import {VentesService} from '../../core/service/ventes.service';
+import {ChampCommission} from './commissions/editer-vente-commissions.component';
+import {Subscription} from 'rxjs';
+
 
 @Component({
   selector: 'app-vente',

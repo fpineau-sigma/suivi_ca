@@ -37,7 +37,7 @@ export class EditerVenteCommissionsComponent implements OnInit, OnDestroy {
 
   public commissionEnEdition: Commission;
   private commissionSelectionnee: Commission;
-  public editionEnCours: boolean = false;
+  public editionEnCours = false;
 
   constructor(public readonly form: NgForm,
               private readonly  negociateursService: NegociateursService) {

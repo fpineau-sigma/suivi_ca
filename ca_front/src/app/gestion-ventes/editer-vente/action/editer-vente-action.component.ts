@@ -2,10 +2,10 @@ import {Location} from '@angular/common';
 import {Component, Input, OnDestroy} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {Mode} from "../../../core/model/mode.enum";
-import {Vente} from "../../../core/model/vente.model";
-import {VentesService} from "../../../core/service/ventes.service";
-import {ToastService} from "../../../core/service/toast.service";
+import {Vente} from '../../../core/model/vente.model';
+import {Mode} from '../../../core/model/mode.enum';
+import {VentesService} from '../../../core/service/ventes.service';
+import {ToastService} from '../../../core/service/toast.service';
 
 
 @Component({

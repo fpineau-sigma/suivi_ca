@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
-import {listeVentesRoute} from "./liste-ventes/liste-ventes.route";
-import {editerVenteRoute} from "./editer-vente/editer-vente.route";
+import {listeVentesRoute} from './liste-ventes/liste-ventes.route';
+import {editerVenteRoute} from './editer-vente/editer-vente.route';
+
 
 const GESTION_VENTES_ROUTES = [listeVentesRoute, ...editerVenteRoute];
 

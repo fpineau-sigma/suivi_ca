@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {VentesService} from "../../core/service/ventes.service";
-import {Negociateur} from "../../core/model/negociateur.model";
-import {Vente} from "../../core/model/vente.model";
-import {Subscription} from "rxjs";
-import {Mode} from "../../core/model/mode.enum";
-import {Router} from "@angular/router";
-import {ColumnMode} from "@swimlane/ngx-datatable";
-import {Origines} from "../../core/model/origine.enum";
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
+import {Vente} from '../../core/model/vente.model';
+import {Subscription} from 'rxjs';
+import {VentesService} from '../../core/service/ventes.service';
+import {Router} from '@angular/router';
+import {ColumnMode} from '@swimlane/ngx-datatable';
+import {Mode} from '../../core/model/mode.enum';
+import {Origines} from '../../core/model/origine.enum';
+
 
 @Component({
   selector: 'app-ventes',

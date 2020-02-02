@@ -1,6 +1,7 @@
-import {Adresse} from "./adresse.model";
-import {Personne} from "./personne.model";
-import {Commission} from "./commission.model";
+import {Commission} from './commission.model';
+import {Adresse} from './adresse.model';
+import {Personne} from './personne.model';
+
 
 export class Vente {
   id?: number;

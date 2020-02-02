@@ -1,5 +1,6 @@
 import {Routes} from '@angular/router';
-import {EditerVenteComponent} from "./editer-vente.component";
+import {EditerVenteComponent} from './editer-vente.component';
+
 
 export const editerVenteRoute: Routes = [
   {
