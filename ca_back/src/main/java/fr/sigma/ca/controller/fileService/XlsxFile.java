@@ -151,7 +151,10 @@ public class XlsxFile implements IFileFacade {
               }
               break;
             case (EnumTypeColonne.DATE):
-              venteDTO.setDateVente(row.getCell(colNum).getDateCellValue());
+              venteDTO
+                  .setDateActeAuthentique(
+                      new java.sql.Date(row.getCell(colNum).getDateCellValue().getTime())
+                          .toLocalDate());
               break;
             default:
               break;
@@ -166,7 +169,7 @@ public class XlsxFile implements IFileFacade {
                   .divide(new BigDecimal(100))
                   .setScale(2, BigDecimal.ROUND_HALF_EVEN));
           venteDTO.getCommissionsEntree().add(commissionMapper.toDto(commissionService
-              .enregistrerCommission(commissionMapper.toEntity(commissionEntreeDTO))));
+              .creer(commissionMapper.toEntity(commissionEntreeDTO))));
         });
         commissionsSortie.forEach(commisionSortieDTO -> {
           commisionSortieDTO.setMontantHT(
@@ -174,7 +177,7 @@ public class XlsxFile implements IFileFacade {
                   .divide(new BigDecimal(100))
                   .setScale(2, BigDecimal.ROUND_HALF_EVEN));
           venteDTO.getCommissionsSortie().add(commissionMapper.toDto(commissionService
-              .enregistrerCommission(commissionMapper.toEntity(commisionSortieDTO))));
+              .creer(commissionMapper.toEntity(commisionSortieDTO))));
         });
         venteService.enregistrerVente(venteMapper.toEntity(venteDTO));
       }

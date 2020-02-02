@@ -1,6 +1,8 @@
 package fr.sigma.ca.service;
 
 import fr.sigma.ca.entite.Commission;
+import fr.sigma.ca.integration.exception.BusinessException;
+import fr.sigma.ca.integration.utilitaire.ObjetUtilitaire;
 import fr.sigma.ca.integration.utilitaire.ValidationAssistant;
 import fr.sigma.ca.repository.CommissionRepository;
 import java.util.Collection;
@@ -15,7 +17,7 @@ public class CommissionService {
   private final CommissionRepository repository;
 
   @Transactional
-  public Commission enregistrerCommission(Commission commission) {
+  public Commission creer(Commission commission) {
     ValidationAssistant.valider(commission);
     return repository.save(commission);
   }
@@ -29,4 +31,18 @@ public class CommissionService {
   public Collection<Commission> trouverParNegociateur(String nomCourt) {
     return repository.findByNegociateur_nomCourt(nomCourt);
   }
+
+  @Transactional
+  public Commission mettreAJour(Commission commission) {
+    ValidationAssistant.valider(commission);
+    if (null == commission.getId()) {
+      return repository.save(commission);
+    } else {
+      Commission commissionBdd = repository.findById(commission.getId())
+          .orElseThrow(() -> new BusinessException(""));
+      ObjetUtilitaire.merge(commissionBdd, commission, Commission.class);
+      return repository.save(commissionBdd);
+    }
+  }
+
 }

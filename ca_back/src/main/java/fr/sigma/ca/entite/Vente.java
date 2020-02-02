@@ -2,7 +2,7 @@ package fr.sigma.ca.entite;
 
 import fr.sigma.ca.integration.persistence.Entite;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,13 @@ public class Vente extends Entite {
 
   @NotNull
   @Column(nullable = false)
-  private Timestamp dateVente;
+  private LocalDate dateActeAuthentique;
+
+  private LocalDate dateCompromis;
+
+  private String typeBien;
+
+  private String numeroFacture;
 
   @OneToMany
   private Collection<Commission> commissionsEntree;

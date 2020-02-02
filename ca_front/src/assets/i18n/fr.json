@@ -32,13 +32,45 @@
     },
     "champ": {
       "oui": "Oui",
-      "non": "Non"
+      "non": "Non",
+      "date.placeholder": "jj/mm/aaaa"
+    },
+    "composant": {
+      "datatable": {
+        "lancerLaRechercheUnePremierefois": "Veuillez lancer la recherche une première fois",
+        "vide": "Pas de résultats",
+        "total": "Total"
+      }
     }
   },
   "gestion": {
     "ventes": {
       "titre": "Suivi des ventes",
-      "liste": "Liste des ventes"
+      "liste": "Liste des ventes",
+      "ajout": "Nouvelle vente"
+    },
+    "vente": {
+      "origine": "Origine",
+      "date.vente.compromis": "Date du compromis de vente",
+      "date.acte.authentique": "Date acte authentique",
+      "honorairesTTC": "Honoraires TTC",
+      "honorairesHT": "Honoraires HT",
+      "numero.facture": "Numéro de facture",
+      "type.bien": "Type de bien",
+      "creation": {
+        "titre": "Nouvelle vente",
+        "adresse": "Adresse",
+        "honoraires": "Honoraires",
+        "commissions": {
+          "entree": "Commissions entree",
+          "sortie": "Commissions sortie"
+        },
+        "acquereurs": "Acquereurs",
+        "vendeurs": "Vendeurs"
+      },
+      "modification": {
+        "titre": "Modification de la vente n°"
+      }
     },
     "negociateur": {
       "nom": "Nom",
@@ -57,6 +89,23 @@
       "titre": "Suivi des négociateurs",
       "ajout": "Ajout d'un nouveau négociateur",
       "liste": "Liste des négociateurs"
+    },
+    "adresse": {
+      "nom.voie": "Nom de la voie",
+      "code.postal": "Code postal",
+      "numero": "Numéro",
+      "ville": "Ville"
+    },
+    "personne": {
+      "nom": "Nom",
+      "prenom": "Prénom",
+      "ajout": "Ajouter une personne"
+    },
+    "commission": {
+      "negociateur": "Negociateur",
+      "pourcentage": "Pourcentage",
+      "montant.ht": "Montant HT",
+      "ajout": "Ajouter une commission"
     }
   }
 }

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Subscription, timer} from 'rxjs';
-import {ToastService} from "../../core/service/toast.service";
-import {DelaisParType, optionToastDefault, ToastApplicative, ToastLevelEnum} from "./toast.model";
+import {ToastService} from '../../core/service/toast.service';
+import {DelaisParType, optionToastDefault, ToastApplicative, ToastLevelEnum} from './toast.model';
 
 @Component({
   selector: 'app-pms-toast',

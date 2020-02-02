@@ -1,8 +1,12 @@
 package fr.sigma.ca.service;
 
+import fr.sigma.ca.dto.AdresseDTO;
 import fr.sigma.ca.entite.Adresse;
+import fr.sigma.ca.integration.exception.BusinessException;
+import fr.sigma.ca.integration.utilitaire.ObjetUtilitaire;
 import fr.sigma.ca.integration.utilitaire.ValidationAssistant;
 import fr.sigma.ca.repository.AdresseRepository;
+import fr.sigma.ca.service.mapper.AdresseMapper;
 import java.util.Collection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdresseService {
 
   private final AdresseRepository repository;
+  private final AdresseMapper mapper;
 
   @Transactional
   public Adresse creer(Adresse adresse) {
@@ -23,5 +28,14 @@ public class AdresseService {
   @Transactional
   public Collection<Adresse> lister() {
     return repository.findAll();
+  }
+
+  @Transactional
+  public AdresseDTO mettreAJour(Adresse adresse) {
+    ValidationAssistant.valider(adresse);
+    Adresse adresseBdd = repository.findById(adresse.getId())
+        .orElseThrow(() -> new BusinessException(""));
+    ObjetUtilitaire.merge(adresseBdd, adresse, Adresse.class);
+    return mapper.toDto(repository.save(adresseBdd));
   }
 }

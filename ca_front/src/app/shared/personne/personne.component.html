@@ -1,0 +1,32 @@
+<main class="container-fluid" role="main">
+  <form #form="ngForm" autocomplete="off" class="card-body" novalidate>
+    <fieldset #fieldSetElement class="align-items-end">
+      <!-- Ligne 1 : Personne Nom -->
+      <div class="row align-items-end">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="required" for="personne_mom"
+                   translate="gestion.personne.nom"></label>
+            <input [(ngModel)]="personne.nom"
+                   id="personne_mom"
+                   name="personne_mom"
+                   required/>
+          </div>
+        </div>
+        <!-- Ligne 1 : Personne Prénom -->
+        <div class="col-6">
+          <div class="form-group">
+            <label class="required" for="personne_prenom"
+                   translate="gestion.personne.prenom"></label>
+            <input [(ngModel)]="personne.prenom"
+                   id="personne_prenom"
+                   name="personne_prenom"/>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</main>
+
+
+
