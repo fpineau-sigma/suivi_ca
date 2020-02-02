@@ -4,7 +4,8 @@
     "menu": {
       "accueil": "Accueil",
       "ventes": "Suivi des ventes",
-      "negociateurs": "Negociateurs"
+      "negociateurs": "Negociateurs",
+      "commissions": "Commissions"
     },
     "ihm": {
       "toast": {
@@ -106,6 +107,12 @@
       "pourcentage": "Pourcentage",
       "montant.ht": "Montant HT",
       "ajout": "Ajouter une commission"
+    }
+  },
+  "suivi": {
+    "commissions": {
+      "titre": "Suivi des commissions",
+      "liste": "Liste des commissions"
     }
   }
 }

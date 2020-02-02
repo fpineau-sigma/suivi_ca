@@ -14,6 +14,7 @@ import {SharedModule} from './app/shared/shared.module';
 import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap';
 import {AngularDateHttpInterceptor} from './app/core/interceptor/angular-date.interceptor';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {SuiviCommissionsModule} from './app/suivi-commissions/suivi-commissions.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -37,6 +38,7 @@ export function getDatepickerConfig(): BsDatepickerConfig {
     BrowserAnimationsModule,
     GestionVentesModule,
     GestionNegociateursModule,
+    SuiviCommissionsModule,
     HttpClientModule,
     AppRoutingModule,
     FontAwesomeModule,
