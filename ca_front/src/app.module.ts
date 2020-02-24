@@ -11,10 +11,11 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {GestionVentesModule} from './app/gestion-ventes/gestion-ventes.module';
 import {GestionNegociateursModule} from './app/gestion-negociateurs/gestion-negociateurs.module';
 import {SharedModule} from './app/shared/shared.module';
-import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap';
+import {BsDatepickerConfig, BsDatepickerModule, BsDropdownModule} from 'ngx-bootstrap';
 import {AngularDateHttpInterceptor} from './app/core/interceptor/angular-date.interceptor';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SuiviCommissionsModule} from './app/suivi-commissions/suivi-commissions.module';
+import {ParametrageModule} from './app/parametrage/parametrage.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -35,10 +36,12 @@ export function getDatepickerConfig(): BsDatepickerConfig {
   ],
   imports: [
     SharedModule.forRoot(),
+    BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     GestionVentesModule,
     GestionNegociateursModule,
     SuiviCommissionsModule,
+    ParametrageModule,
     HttpClientModule,
     AppRoutingModule,
     FontAwesomeModule,

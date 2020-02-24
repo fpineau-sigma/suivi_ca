@@ -18,11 +18,24 @@
           <span translate="global.menu.commissions"></span>
         </a>
       </li>
-      <li class="nav-item"
-          routerLinkActive="active">
-        <a class="nav-link" id="btnNavBarNegociateurs" routerLink="negociateurs">
-          <span translate="global.menu.negociateurs"></span>
+    </ul>
+  </div>
+  <div class="text-right">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown text-right" dropdown routerLinkActive="active"
+          placement="bottom right">
+        <a class="nav-link" id="btnNavBarParametrages" data-toggle="dropdown" dropdownToggle>
+          <fa-icon [icon]="faBar" class="dropdown-toggle"></fa-icon>
         </a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+          <a class="nav-link dropdown-item" id="btnNavBarParametragesNegociateur"
+             routerLink="negociateurs">
+            {{ 'global.menu.negociateurs' | translate }}
+          </a>
+          <a class="nav-link" id="btnNavBarImportDonnees" routerLink="parametrage/importFichier">
+            {{ 'global.menu.importer.fichier' | translate }}
+          </a>
+        </div>
       </li>
     </ul>
   </div>

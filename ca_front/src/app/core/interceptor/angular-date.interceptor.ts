@@ -32,7 +32,7 @@ export class AngularDateHttpInterceptor implements HttpInterceptor {
     let newReq = req;
     // FIXME l'intercepteur n'est pas utilisé pour psp-ged car il casse les multipart
     // à corriger le jour ou on a besoin de passer des dates du front au back de ged
-    if (req.url.indexOf('psp-ged') !== -1) {
+    if (req.url.indexOf('fichiers') !== -1) {
       return next.handle(req);
     }
     if (['PUT', 'POST', 'PATCH'].includes(req.method)) {
@@ -40,13 +40,13 @@ export class AngularDateHttpInterceptor implements HttpInterceptor {
     }
 
     return next.handle(newReq).pipe(
-        tap((event: HttpEvent<any>) => {
-              if (event instanceof HttpResponse) {
-                const body = event.body;
-                this.convertirEnDate(body);
-              }
-            }
-        ));
+      tap((event: HttpEvent<any>) => {
+          if (event instanceof HttpResponse) {
+            const body = event.body;
+            this.convertirEnDate(body);
+          }
+        }
+      ));
   }
 
   /**
@@ -67,8 +67,8 @@ export class AngularDateHttpInterceptor implements HttpInterceptor {
 
     // filtre seulements les dates ou les objets
     Object.keys(newBody).filter(
-        // On filtre sur les champs Date ainsi que sur les objects qui peuvent contenir des dates
-        cle => newBody[cle] instanceof Date || newBody[cle] instanceof Object).forEach(cle => {
+      // On filtre sur les champs Date ainsi que sur les objects qui peuvent contenir des dates
+      cle => newBody[cle] instanceof Date || newBody[cle] instanceof Object).forEach(cle => {
       const valeur = newBody[cle];
       if (valeur instanceof Date) {
         newBody[cle] = AngularDateHttpInterceptor.ajoutDateTimeZoneOffset(valeur);
@@ -95,9 +95,9 @@ export class AngularDateHttpInterceptor implements HttpInterceptor {
 
     // filtre seulements les dates ou les objets
     Object.keys(body).filter(
-        cle => cle.startsWith('date')
-            && AngularDateHttpInterceptor.estDateValide(body[cle])
-            || typeof body[cle] === 'object').forEach(cle => {
+      cle => cle.startsWith('date')
+        && AngularDateHttpInterceptor.estDateValide(body[cle])
+        || typeof body[cle] === 'object').forEach(cle => {
       const valeur = body[cle];
       if (typeof valeur === 'string') {
         body[cle] = new Date(valeur);

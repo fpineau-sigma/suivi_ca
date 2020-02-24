@@ -1,4 +1,4 @@
-package fr.sigma.ca.controller.fileService;
+package fr.sigma.ca.controller.fichierService;
 
 import fr.sigma.ca.dto.AdresseDTO;
 import fr.sigma.ca.dto.CommissionDTO;
@@ -16,12 +16,9 @@ import fr.sigma.ca.service.mapper.CommissionMapper;
 import fr.sigma.ca.service.mapper.NegociateurMapper;
 import fr.sigma.ca.service.mapper.PersonneMapper;
 import fr.sigma.ca.service.mapper.VenteMapper;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,21 +26,19 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.poifs.crypt.Decryptor;
-import org.apache.poi.poifs.crypt.EncryptionInfo;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class XlsxFile implements IFileFacade {
+public class XlsxFile {
 
   private final PersonneService personneService;
   private final NegociateurService negociateurService;
@@ -61,11 +56,11 @@ public class XlsxFile implements IFileFacade {
   /**
    * Fonction de lecture du fichier Excel
    *
-   * @param fileName
+   * @param fichier Fichier à intégrer
    * @return
    */
 
-  public String lecture_fichier(String fileName, String password) {
+  public String lecture_fichier(MultipartFile fichier) {
 
     List<String> messages = new ArrayList<>();
 
@@ -78,18 +73,7 @@ public class XlsxFile implements IFileFacade {
         .toDto(negociateurService.lister());
 
     try {
-      Path path = Paths.get("src/main/resources/" + fileName);
-      InputStream fileStream = new FileInputStream(path.toAbsolutePath().toString());
-      InputStream streamToAnalyze = fileStream;
-      if (!StringUtils.isEmpty(password)) {
-
-        POIFSFileSystem fs = new POIFSFileSystem(fileStream);
-        EncryptionInfo info = new EncryptionInfo(fs);
-        Decryptor d = Decryptor.getInstance(info);
-        d.verifyPassword(password);
-        streamToAnalyze = d.getDataStream(fs);
-
-      }
+      InputStream streamToAnalyze = fichier.getInputStream();
 
       XSSFWorkbook workbook = (XSSFWorkbook) WorkbookFactory.create(streamToAnalyze);
       XSSFSheet ws = workbook.getSheetAt(workbook.getActiveSheetIndex());
