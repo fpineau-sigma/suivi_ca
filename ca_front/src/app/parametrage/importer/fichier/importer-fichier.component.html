@@ -1,0 +1,9 @@
+<main class="container-fluid" role="main">
+  <div class="container-fluid">
+    <input id="importFichier" name="fichier" (change)="chargementFichier($event)"
+           [(ngModel)]="nomFichier"
+           type="file"/>
+    <button translate='parametrage.importer.fichier.importer' class="btn"
+            (click)="importerFichier()"></button>
+  </div>
+</main>

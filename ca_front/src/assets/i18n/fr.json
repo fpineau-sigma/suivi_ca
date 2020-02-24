@@ -5,7 +5,8 @@
       "accueil": "Accueil",
       "ventes": "Suivi des ventes",
       "negociateurs": "Negociateurs",
-      "commissions": "Commissions"
+      "commissions": "Commissions",
+      "importer.fichier": "Import de fichier"
     },
     "ihm": {
       "toast": {
@@ -107,6 +108,14 @@
       "pourcentage": "Pourcentage",
       "montant.ht": "Montant HT",
       "ajout": "Ajouter une commission"
+    }
+  },
+  "parametrage": {
+    "importer": {
+      "fichier": {
+        "titre": "Importer des données",
+        "importer": "Importer"
+      }
     }
   },
   "suivi": {
