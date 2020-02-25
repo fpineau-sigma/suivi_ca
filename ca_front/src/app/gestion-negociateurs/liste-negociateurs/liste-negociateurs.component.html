@@ -1,9 +1,11 @@
 <main class="container-fluid" role="main">
   <div class="container-fluid">
-    <p translate="gestion.negociateurs.liste">
-    </p>
-    <button id="ajoutNegociateur" class="btn" (click)="creerNegociateur()"
-            translate='gestion.negociateurs.ajout'></button>
+    <div class="row">
+      <div class="col-12 p-2 text-right">
+        <button id="ajoutNegociateur" class="btn btn-primary" (click)="creerNegociateur()"
+                translate='gestion.negociateurs.ajout'></button>
+      </div>
+    </div>
     <ul>
       <li *ngFor="let negociateur of negociateurs">
         <a (click)="modifierNegociateur(negociateur)">

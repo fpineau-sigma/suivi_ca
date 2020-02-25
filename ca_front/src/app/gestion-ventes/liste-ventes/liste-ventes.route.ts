@@ -6,7 +6,7 @@ export const listeVentesRoute: Route = {
   path: '',
   component: ListeVentesComponent,
   data: {
-    pageTitle: 'gestion.ventes.titre',
+    pageTitle: 'gestion.ventes.liste',
   },
   canActivate: []
 };

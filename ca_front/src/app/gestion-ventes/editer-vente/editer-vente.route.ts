@@ -7,7 +7,7 @@ export const editerVenteRoute: Routes = [
     path: 'editer-vente/:mode/:id',
     component: EditerVenteComponent,
     data: {
-      pageTitle: 'gestion.ventes.titre',
+      pageTitle: 'gestion.vente.modification.titre',
     },
     canActivate: []
   },
@@ -15,7 +15,7 @@ export const editerVenteRoute: Routes = [
     path: 'editer-vente/:mode',
     component: EditerVenteComponent,
     data: {
-      pageTitle: 'gestion.ventes.titre'
+      pageTitle: 'gestion.vente.creation.titre'
     },
     canActivate: []
   }
