@@ -32,13 +32,12 @@
           <div class="form-group">
             <label class="required" for="vente_origine"
                    translate="gestion.vente.origine"></label>
-            <select [(ngModel)]="vente.origine"
-                    class="form-control"
-                    id="vente_origine"
-                    name="vente_origine">
-              <option *ngFor="let origine of origines | keyvalue"
-                      value="{{origine.key}}">{{origine.value}}</option>
-            </select>
+            <ng-select [(ngModel)]="vente.origine"
+                       [items]="origines"
+                       bindLabel="libelle"
+                       id="vente_origine"
+                       name="vente_origine">
+            </ng-select>
           </div>
         </div>
         <!-- Ligne 1 : Honoraires TTC -->
@@ -110,13 +109,12 @@
           <div class="form-group">
             <label class="required" for="vente_type_bien"
                    translate="gestion.vente.type.bien"></label>
-            <select [(ngModel)]="vente.typeBien"
-                    class="form-control"
-                    id="vente_type_bien"
-                    name="vente_type_bien">
-              <option *ngFor="let origine of origines | keyvalue"
-                      value="{{origine.key}}">{{origine.value}}</option>
-            </select>
+            <ng-select [(ngModel)]="vente.typeBien"
+                       [items]=" typeDeBiens"
+                       bindLabel="libelle"
+                       id="vente_type_bien"
+                       name="vente_type_bien">
+            </ng-select>
           </div>
         </div>
       </div>

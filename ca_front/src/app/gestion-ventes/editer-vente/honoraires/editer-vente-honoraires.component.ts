@@ -1,8 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
 import {Mode} from '../../../core/model/mode.enum';
-import {Origines} from '../../../core/model/origine.enum';
 import {Vente} from '../../../core/model/vente.model';
+import {OriginesService} from '../../../core/service/origines.service';
+import {Subscription} from 'rxjs';
+import {Origine} from '../../../core/model/origine.model';
+import {TypeDeBiensService} from '../../../core/service/typedebiens.service';
+import {TypeDeBien} from '../../../core/model/typedebien.model';
 
 
 @Component({
@@ -10,20 +14,41 @@ import {Vente} from '../../../core/model/vente.model';
   templateUrl: './editer-vente-honoraires.component.html',
   viewProviders: [{provide: ControlContainer, useExisting: NgForm}]
 })
-export class EditerVenteHonorairesComponent {
+export class EditerVenteHonorairesComponent implements OnInit, OnDestroy {
 
   @Input() public mode: Mode;
   @Input() public vente: Vente;
 
+  public origines: Origine[];
+  public typeDeBiens: TypeDeBien[];
 
-  constructor(public readonly form: NgForm) {
+  // Liste subscription
+  private readonly subscriptions: Subscription[] = [];
+
+  constructor(public readonly form: NgForm,
+              private originesService: OriginesService,
+              private typeDeBiensService: TypeDeBiensService) {
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.push(this.originesService.lister().subscribe((res: Origine[]) => {
+        this.origines = res;
+      }),
+      this.typeDeBiensService.lister().subscribe((res: TypeDeBien[]) => {
+        this.typeDeBiens = res;
+      }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      if (!!subscription) {
+        subscription.unsubscribe();
+      }
+    });
   }
 
   get Mode() {
     return Mode;
   }
 
-  get origines() {
-    return Origines;
-  }
 }

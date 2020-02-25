@@ -4,9 +4,11 @@
     "menu": {
       "accueil": "Accueil",
       "ventes": "Suivi des ventes",
-      "negociateurs": "Negociateurs",
-      "commissions": "Commissions",
-      "importer.fichier": "Import de fichier"
+      "negociateurs": "Gestion des negociateurs",
+      "commissions": "Suivi des commissions",
+      "importer.fichier": "Import de données",
+      "origines": "Gestion des origines",
+      "typedebiens": "Gestion des types de biens"
     },
     "ihm": {
       "toast": {
@@ -73,6 +75,36 @@
       "modification": {
         "titre": "Modification de la vente"
       }
+    },
+    "typedebien": {
+      "libelle": "Libellé",
+      "creation": {
+        "titre": "Ajout d'un nouveau type de bien"
+      },
+      "modification": {
+        "titre": "Modification d'un type de bien "
+      },
+      "action.success": "Enregistrement effectué avec succès"
+    },
+    "typedebiens": {
+      "titre": "Gestion des types de biens",
+      "ajout": "Ajout d'un type de bien",
+      "liste": "Liste des types de biens"
+    },
+    "origine": {
+      "libelle": "Libellé",
+      "creation": {
+        "titre": "Ajout d'une nouvelle origine"
+      },
+      "modification": {
+        "titre": "Modification d'une origine "
+      },
+      "action.success": "Enregistrement effectué avec succès"
+    },
+    "origines": {
+      "titre": "Gestion des origines",
+      "ajout": "Ajout d'une origine",
+      "liste": "Liste des origines"
     },
     "negociateur": {
       "nom": "Nom",

@@ -1,6 +1,5 @@
 package fr.sigma.ca.dto;
 
-import fr.sigma.ca.entite.Origine;
 import fr.sigma.ca.integration.persistence.DTO;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,7 +22,7 @@ public class VenteDTO extends DTO {
   private String typeBien;
   private Collection<CommissionDTO> commissionsEntree;
   private Collection<CommissionDTO> commissionsSortie;
-  private Origine origine;
+  private OrigineDTO origine;
   private BigDecimal honorairesTTC;
   private BigDecimal honorairesHT;
   private AdresseDTO adresse;
@@ -39,7 +38,7 @@ public class VenteDTO extends DTO {
       String typeBien,
       Collection<CommissionDTO> commissionsEntree,
       Collection<CommissionDTO> commissionsSortie,
-      Origine origine,
+      OrigineDTO origine,
       BigDecimal honorairesTTC,
       BigDecimal honorairesHT,
       AdresseDTO adresse,
