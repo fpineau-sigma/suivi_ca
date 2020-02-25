@@ -71,14 +71,14 @@
         "vendeurs": "Vendeurs"
       },
       "modification": {
-        "titre": "Modification de la vente n°"
+        "titre": "Modification de la vente"
       }
     },
     "negociateur": {
       "nom": "Nom",
       "prenom": "Prénom",
       "nomCourt": "Nom court",
-      "actif": "Actif/Inactif",
+      "actif": "Actif / Inactif",
       "creation": {
         "titre": "Ajout d'un nouveau négociateur"
       },

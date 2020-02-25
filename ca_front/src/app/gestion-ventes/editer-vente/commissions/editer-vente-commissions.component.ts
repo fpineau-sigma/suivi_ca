@@ -80,7 +80,6 @@ export class EditerVenteCommissionsComponent implements OnInit, OnDestroy {
   }
 
   public editerCommission(commission: Commission): void {
-    console.log(this.negociateurs);
     if (null === commission) {
       this.commissionEnEdition = Object.assign({}, new Commission());
     } else {

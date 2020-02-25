@@ -9,7 +9,7 @@ export const gestionNegociateursRoutes: Routes = [
     path: 'negociateurs',
     children: GESTION_NEGOCIATEURS_ROUTES,
     data: {
-      pageTitle: 'gestion.negociateurs.titre'
+      pageTitle: 'gestion.negociateurs.liste'
     },
     canActivate: []
   }

@@ -7,7 +7,7 @@
               translate="gestion.negociateur.creation.titre"></h5>
           <h5
             *ngIf="mode === ModeEnum.EDITION"> {{ 'gestion.negociateur.modification.titre' | translate }}
-            &mdash; {{negociateurEditer.nom}}  {{negociateurEditer.prenom}}</h5>
+            &mdash; {{negociateurEditer.nomCourt}}</h5>
         </div>
       </div>
       <!-- Ligne 1 : Nom -->
@@ -17,6 +17,7 @@
             <label class="required" for="negociateur_nom"
                    translate="gestion.negociateur.nom"></label>
             <input [(ngModel)]="negociateurEditer.nom"
+                   class="form-control"
                    id="negociateur_nom"
                    name="negociateur_nom"
                    required/>
@@ -28,6 +29,7 @@
             <label class="required" for="negociateur_prenom"
                    translate="gestion.negociateur.prenom"></label>
             <input [(ngModel)]="negociateurEditer.prenom"
+                   class="form-control"
                    id="negociateur_prenom"
                    name="negociateur_prenom"
                    required/>
@@ -37,12 +39,15 @@
       <!-- Ligne 2 : Nom Court -->
       <div class="row align-items-end">
         <div class="col-6">
-          <label class="required" for="negociateur_nomCourt"
-                 translate="gestion.negociateur.nomCourt"></label>
-          <input [(ngModel)]="negociateurEditer.nomCourt"
-                 id="negociateur_nomCourt"
-                 name="negociateur_nomCourt"
-                 required/>
+          <div class="form-group">
+            <label class="required" for="negociateur_nomCourt"
+                   translate="gestion.negociateur.nomCourt"></label>
+            <input [(ngModel)]="negociateurEditer.nomCourt"
+                   class="form-control"
+                   id="negociateur_nomCourt"
+                   name="negociateur_nomCourt"
+                   required/>
+          </div>
         </div>
         <!-- Ligne 2 : Actif/Inactif -->
         <div class="col-6">

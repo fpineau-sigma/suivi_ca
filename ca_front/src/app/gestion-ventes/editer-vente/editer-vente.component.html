@@ -1,14 +1,5 @@
 <main class="container-fluid" role="main">
   <form #form="ngForm" autocomplete="off" class="card-body" novalidate>
-    <div class="row align-items-start mb-2">
-      <div class="col-12">
-        <h5 *ngIf="mode === ModeEnum.CREATION"
-            translate="gestion.vente.creation.titre"></h5>
-        <h5
-          *ngIf="mode === ModeEnum.EDITION"> {{ 'gestion.vente.modification.titre' | translate }}
-          {{venteEditer.id}}</h5>
-      </div>
-    </div>
     <!-- Adresse -->
     <h5 translate="gestion.vente.creation.adresse"></h5>
     <app-adresse [adresse]="venteEditer.adresse" [mode]="mode"></app-adresse>
