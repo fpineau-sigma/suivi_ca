@@ -1,0 +1,21 @@
+<main class="container-fluid" role="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 p-2 text-right">
+        <button id="ajoutOrigine" class="btn btn-primary" (click)="creerOrigine()"
+                translate='gestion.origines.ajout'></button>
+      </div>
+    </div>
+    <ul>
+      <li *ngFor="let origine of origines">
+        <a (click)="modifierOrigine(origine)">
+          {{ origine.libelle }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</main>
+
+
+
+

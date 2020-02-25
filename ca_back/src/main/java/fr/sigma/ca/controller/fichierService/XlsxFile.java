@@ -3,17 +3,19 @@ package fr.sigma.ca.controller.fichierService;
 import fr.sigma.ca.dto.AdresseDTO;
 import fr.sigma.ca.dto.CommissionDTO;
 import fr.sigma.ca.dto.NegociateurDTO;
+import fr.sigma.ca.dto.OrigineDTO;
 import fr.sigma.ca.dto.PersonneDTO;
 import fr.sigma.ca.dto.VenteDTO;
-import fr.sigma.ca.entite.Origine;
 import fr.sigma.ca.service.AdresseService;
 import fr.sigma.ca.service.CommissionService;
 import fr.sigma.ca.service.NegociateurService;
+import fr.sigma.ca.service.OrigineService;
 import fr.sigma.ca.service.PersonneService;
 import fr.sigma.ca.service.VenteService;
 import fr.sigma.ca.service.mapper.AdresseMapper;
 import fr.sigma.ca.service.mapper.CommissionMapper;
 import fr.sigma.ca.service.mapper.NegociateurMapper;
+import fr.sigma.ca.service.mapper.OrigineMapper;
 import fr.sigma.ca.service.mapper.PersonneMapper;
 import fr.sigma.ca.service.mapper.VenteMapper;
 import java.io.IOException;
@@ -42,11 +44,13 @@ public class XlsxFile {
 
   private final PersonneService personneService;
   private final NegociateurService negociateurService;
+  private final OrigineService origineService;
   private final AdresseService adresseService;
   private final VenteService venteService;
   private final CommissionService commissionService;
 
   private final NegociateurMapper negociateurMapper;
+  private final OrigineMapper origineMapper;
   private final AdresseMapper adresseMapper;
   private final PersonneMapper personneMapper;
   private final VenteMapper venteMapper;
@@ -71,6 +75,8 @@ public class XlsxFile {
     // Recuperer la liste des negociateurs
     Collection<NegociateurDTO> negociateursDTOs = negociateurMapper
         .toDto(negociateurService.lister());
+    // Recuperer la liste des origines
+    Collection<OrigineDTO> originesDTO = origineService.lister();
 
     try {
       InputStream streamToAnalyze = fichier.getInputStream();
@@ -131,7 +137,7 @@ public class XlsxFile {
               break;
             case (EnumTypeColonne.ORIGINE):
               if (!StringUtils.isEmpty(value = row.getCell(colNum).getStringCellValue().trim())) {
-                venteDTO.setOrigine(Origine.valueOf(value));
+                venteDTO.setOrigine(enregistrerOrigine(originesDTO, value));
               }
               break;
             case (EnumTypeColonne.DATE):
@@ -285,6 +291,26 @@ public class XlsxFile {
           .toDto(negociateurService.creer(negociateurMapper.toEntity(nouveauNego)));
       negociateursDTO.add(nouveauNego);
       return nouveauNego;
+    }
+  }
+
+  /**
+   * Enregistrement des origines
+   *
+   * @param originesDTO
+   * @param libelle
+   */
+  private OrigineDTO enregistrerOrigine(Collection<OrigineDTO> originesDTO,
+      String libelle) {
+    Optional<OrigineDTO> origineBDD = originesDTO.stream()
+        .filter(origineDTO -> origineDTO.getLibelle().equals(libelle)).findFirst();
+    if (origineBDD.isPresent()) {
+      return origineBDD.get();
+    } else {
+      OrigineDTO nouvealOrigine = OrigineDTO.builder().libelle(libelle).build();
+      nouvealOrigine = origineService.creer(origineMapper.toEntity(nouvealOrigine));
+      originesDTO.add(nouvealOrigine);
+      return nouvealOrigine;
     }
   }
 }

@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -41,8 +39,7 @@ public class Vente extends Entite {
   private Collection<Commission> commissionsSortie;
 
   @NotNull
-  @Column(nullable = false)
-  @Enumerated(EnumType.STRING)
+  @ManyToOne(optional = false)
   private Origine origine;
 
   private BigDecimal honorairesTTC;

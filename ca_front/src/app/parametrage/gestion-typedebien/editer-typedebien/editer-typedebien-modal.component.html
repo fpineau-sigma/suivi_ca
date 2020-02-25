@@ -1,0 +1,73 @@
+<main class="container-fluid" role="main">
+  <form #form="ngForm" autocomplete="off" class="card-body" novalidate>
+    <fieldset #fieldSetElement class="align-items-end">
+      <div class="row align-items-start mb-2">
+        <div class="col-12">
+          <h5 *ngIf="mode === ModeEnum.CREATION"
+              translate="gestion.typedebien.creation.titre"></h5>
+          <h5
+            *ngIf="mode === ModeEnum.EDITION"> {{ 'gestion.typedebien.modification.titre' | translate }}
+            &mdash; {{typeDeBienEditer.libelle}}</h5>
+        </div>
+      </div>
+      <!-- Ligne 1 : Libellé -->
+      <div class="row align-items-end">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="required" for="typedebien_libelle"
+                   translate="gestion.typedebien.libelle"></label>
+            <input [(ngModel)]="typeDeBienEditer.libelle"
+                   class="form-control"
+                   id="typedebien_libelle"
+                   name="typedebien_libelle"
+                   required/>
+          </div>
+        </div>
+      </div>
+      <!-- Ligne 2 : Annuler / Valider -->
+      <div class="row align-items-end">
+        <div class="col-12 text-right">
+          <button (click)="annuler.emit()"
+                  *ngIf="mode === ModeEnum.CREATION || mode === ModeEnum.EDITION"
+                  class="btn btn-danger mt-5 mr-2"
+                  id="btnAnnulerCreation"
+                  type="button">
+            {{ "commun.bouton.annuler" | translate }}
+            <i aria-hidden="true" class="fas fa-times ml-2"></i>
+          </button>
+          <button (click)="fermer.emit()"
+                  *ngIf="mode === ModeEnum.CONSULTATION"
+                  class="btn btn-danger mt-5 mr-2"
+                  id="btnFermerConsultation"
+                  type="button">
+            {{ "commun.bouton.fermer" | translate }}
+            <i aria-hidden="true" class="fas fa-times ml-2"></i>
+          </button>
+          <button (click)="enregistrer.emit(typeDeBienEditer)"
+                  *ngIf="mode === ModeEnum.CREATION"
+                  [disabled]="!form.valid"
+                  [ngClass]="form.valid ? 'btn-success': 'btn.disabled'"
+                  class="btn mt-5"
+                  id="btnConfirmerCreation"
+                  type="button">
+            {{ "commun.bouton.creer" | translate }}
+            <i aria-hidden="true" class="fas fa-check ml-2"></i>
+          </button>
+          <button (click)="modifier.emit(typeDeBienEditer)"
+                  *ngIf="mode === ModeEnum.EDITION"
+                  [disabled]="!form.valid"
+                  [ngClass]="form.valid ? 'btn-success' : 'btn.disabled'"
+                  class="btn mt-5"
+                  id="btnConfirmerModification"
+                  type="button">
+            {{ "commun.bouton.enregistrer.modification" | translate }}
+            <i aria-hidden="true" class="fas fa-check ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</main>
+
+
+

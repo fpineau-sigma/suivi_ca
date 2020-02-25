@@ -54,7 +54,7 @@
                                   [name]="'gestion.vente.origine' | translate"
                                   class="pr-0">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ Origine[row.origine] }}
+                {{ row.origine.libelle }}
               </ng-template>
             </ngx-datatable-column>
             <!-- bouton afficher / masquer des colonnes --->

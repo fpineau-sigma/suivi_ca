@@ -6,7 +6,6 @@ import {VentesService} from '../../core/service/ventes.service';
 import {Router} from '@angular/router';
 import {ColumnMode} from '@swimlane/ngx-datatable';
 import {Mode} from '../../core/model/mode.enum';
-import {Origines} from '../../core/model/origine.enum';
 
 
 @Component({
@@ -55,9 +54,4 @@ export class ListeVentesComponent implements OnInit, OnDestroy {
   public modifierVente(vente: Vente): void {
     this.router.navigate([`/ventes/editer-vente/${Mode.EDITION}/${vente.id}`]);
   }
-
-  public get Origine() {
-    return Origines;
-  }
-
 }

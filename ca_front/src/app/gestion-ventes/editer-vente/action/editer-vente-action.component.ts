@@ -1,7 +1,6 @@
 import {Location} from '@angular/common';
-import {Component, Input, OnDestroy} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {Subscription} from 'rxjs';
 import {Vente} from '../../../core/model/vente.model';
 import {Mode} from '../../../core/model/mode.enum';
 import {VentesService} from '../../../core/service/ventes.service';
@@ -13,12 +12,10 @@ import {ToastService} from '../../../core/service/toast.service';
   templateUrl: './editer-vente-action.component.html',
   viewProviders: [{provide: ControlContainer, useExisting: NgForm}]
 })
-export class EditerVenteActionComponent implements OnDestroy {
+export class EditerVenteActionComponent {
 
   @Input() public mode: Mode;
   @Input() public vente: Vente;
-
-  private subscriptions: Subscription[] = [];
 
   constructor(private readonly location: Location,
               public readonly form: NgForm,
@@ -28,14 +25,6 @@ export class EditerVenteActionComponent implements OnDestroy {
 
   get Mode() {
     return Mode;
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => {
-      if (!!sub) {
-        sub.unsubscribe();
-      }
-    });
   }
 
   public retour() {

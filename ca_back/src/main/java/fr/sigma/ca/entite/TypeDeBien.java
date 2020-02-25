@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Origine extends Entite {
+public class TypeDeBien extends Entite {
 
   @NotNull
   @Column(nullable = false, unique = true)

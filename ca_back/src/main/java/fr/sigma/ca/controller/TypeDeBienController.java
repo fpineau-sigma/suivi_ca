@@ -1,8 +1,8 @@
 package fr.sigma.ca.controller;
 
-import fr.sigma.ca.dto.OrigineDTO;
-import fr.sigma.ca.service.OrigineService;
-import fr.sigma.ca.service.mapper.OrigineMapper;
+import fr.sigma.ca.dto.TypeDeBienDTO;
+import fr.sigma.ca.service.TypeDeBienService;
+import fr.sigma.ca.service.mapper.TypeDeBienMapper;
 import java.util.Collection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,30 +16,30 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/origines")
+@RequestMapping(path = "/typedebiens")
 @RequiredArgsConstructor
-public class OrigineController {
+public class TypeDeBienController {
 
-  private final OrigineService origineService;
-  private final OrigineMapper mapper;
+  private final TypeDeBienService typeDeBienService;
+  private final TypeDeBienMapper mapper;
 
   @GetMapping()
   @ResponseStatus(HttpStatus.OK)
-  public Collection<OrigineDTO> lister() {
-    return origineService.lister();
+  public Collection<TypeDeBienDTO> lister() {
+    return typeDeBienService.lister();
   }
 
   @PostMapping("")
   @ResponseStatus(HttpStatus.CREATED)
-  public OrigineDTO creer(@RequestBody OrigineDTO origineDTO) {
-    return origineService.creer(mapper.toEntity(origineDTO));
+  public TypeDeBienDTO creer(@RequestBody TypeDeBienDTO typeDeBienDTO) {
+    return typeDeBienService.creer(mapper.toEntity(typeDeBienDTO));
   }
 
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public OrigineDTO modifier(
-      @RequestBody OrigineDTO origineDTO, @PathVariable("id") Long id) {
-    origineDTO.setId(id);
-    return origineService.mettreAJour(mapper.toEntity(origineDTO));
+  public TypeDeBienDTO modifier(
+      @RequestBody TypeDeBienDTO typeDeBienDTO, @PathVariable("id") Long id) {
+    typeDeBienDTO.setId(id);
+    return typeDeBienService.mettreAJour(mapper.toEntity(typeDeBienDTO));
   }
 }
