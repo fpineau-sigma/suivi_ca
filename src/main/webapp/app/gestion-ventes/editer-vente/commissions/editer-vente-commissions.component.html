@@ -1,0 +1,115 @@
+<form #form="ngForm" autocomplete="off" class="card-body" novalidate>
+    <fieldset #fieldSetElement class="card w-100">
+        <div class="card-body">
+            <div class="row w-100 mx-0">
+                <ngx-datatable
+                    [columnMode]="ColumnMode.flex"
+                    [footerHeight]="0"
+                    [headerHeight]="40"
+                    [loadingIndicator]="false"
+                    [messages]="{
+                   emptyMessage: 'global.commun.composant.datatable.vide' | translate ,
+                   totalMessage: 'global.commun.composant.datatable.total' | translate
+                   }"
+                    [rowHeight]="'auto'"
+                    [rows]="commissions"
+                    class="bootstrap table-bordered col-12 mx-0 px-0 mb-3 w-100 ">
+
+                    <!-- Negociateur -->
+                    <ngx-datatable-column [flexGrow]="5"
+                                          [name]="'gestion.commission.negociateur' | translate"
+                                          class="pr-0">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row.negociateur.nomCourt }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <!-- Pourcentage -->
+                    <ngx-datatable-column [flexGrow]="5"
+                                          [name]="'gestion.commission.pourcentage' | translate"
+                                          class="pr-0">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row.pourcentage }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <!-- Montant HT -->
+                    <ngx-datatable-column [flexGrow]="5"
+                                          [name]="'gestion.commission.montant.ht' | translate"
+                                          class="pr-0">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row.montantHT }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <!-- bouton afficher / masquer des colonnes --->
+                    <ngx-datatable-column [draggable]="false"
+                                          [flexGrow]="1"
+                                          [resizeable]="false"
+                                          cellClass="text-center">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <fa-icon (click)="editerCommission(row)" [icon]="faEdit"></fa-icon>
+                            <fa-icon (click)="supprimerCommission(row)" [icon]="faTrash"
+                                     class="ml-2"></fa-icon>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+
+            <div *ngIf="editionEnCours" class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="required" for="commission_negociateur"
+                               translate="gestion.commission.negociateur"></label>
+                        <ng-select [(ngModel)]="commissionEnEdition.negociateur"
+                                   [items]="negociateurs"
+                                   bindLabel="nomCourt"
+                                   id="commission_negociateur"
+                                   name="commission_negociateur"
+                                   required>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="required" for="commission_pourcentage"
+                               translate="gestion.commission.pourcentage"></label>
+                        <input [(ngModel)]="commissionEnEdition.pourcentage"
+                               class="form-control"
+                               id="commission_pourcentage"
+                               name="commission_pourcentage"
+                               required/>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="required" for="commission_montant_ht"
+                               translate="gestion.commission.montant.ht"></label>
+                        <input [(ngModel)]="commissionEnEdition.montantHT"
+                               class="form-control"
+                               id="commission_montant_ht"
+                               name="commission_montant_ht"
+                               required/>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="editionEnCours" class="row">
+                <div class="col-12 text-right">
+                    <button id="annulerAjoutCommission" class="btn btn-secondary mr-2"
+                            (click)="editionEnCours = false"
+                            translate='global.commun.bouton.annuler'></button>
+                    <button id="validerAjoutCommission" class="btn btn-primary"
+                            (click)="ajouterCommission()"
+                            translate='global.commun.bouton.valider'></button>
+                </div>
+            </div>
+            <div *ngIf="!editionEnCours" class="row">
+                <div class="col-12 text-right">
+                    <button id="ajoutCommission" class="btn btn-primary"
+                            (click)="editerCommission(null)"
+                            translate='gestion.commission.ajout'></button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

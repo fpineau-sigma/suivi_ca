@@ -1,0 +1,34 @@
+<fieldset class="footer container-fluid">
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button (click)="retour()"
+                    *ngIf="mode === Mode.EDITION || Mode.CONSULTATION"
+                    class="btn btn-danger mr-2"
+                    id="btnFermerConsultation"
+                    type="button">
+                {{ "global.commun.bouton.fermer" | translate }}
+                <fa-icon icon="times" class="ml-2"></fa-icon>
+            </button>
+            <button (click)="modifierVente()"
+                    [ngClass]="!form.valid ? 'btn.disabled': 'btn-success'"
+                    [disabled]="!form.valid"
+                    *ngIf="mode === Mode.EDITION"
+                    class="btn"
+                    id="btnConfirmerModification"
+                    type="button">
+                {{ "global.commun.bouton.enregistrer.modification" | translate }}
+                <fa-icon icon="save" class="ml-2"></fa-icon>
+            </button>
+            <button (click)="enregistrerVente()"
+                    *ngIf="mode === Mode.CREATION"
+                    [ngClass]="!form.valid ? 'btn.disabled': 'btn-success'"
+                    [disabled]="!form.valid"
+                    class="btn"
+                    id="btnAjouterVente"
+                    type="button">
+                {{ "global.commun.bouton.valider" | translate }}
+                <fa-icon icon="save">class="ml-2"></fa-icon>
+            </button>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="00000000000002" author="fpi">
+        <!-- Création de la table Origine -->
+        <createTable tableName="origine">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="libelle" type="varchar(255)">
+                <constraints unique="true" nullable="false"
+                    uniqueConstraintName="ux_origine_libelle"/>
+            </column>
+        </createTable>
+        <!-- Création de la table Adresse -->
+        <createTable tableName="adresse">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom_voie" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numero_voie" type="smallint">
+            </column>
+            <column name="code_postal" type="int">
+            </column>
+            <column name="ville" type="varchar(255)">
+            </column>
+        </createTable>
+        <!-- Création de la table Negociateur -->
+        <createTable tableName="negociateur">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom" type="varchar(256)">
+            </column>
+            <column name="prenom" type="varchar(256)">
+            </column>
+            <column name="nom_court" type="varchar(10)">*
+                <constraints unique="true" nullable="false"
+                    uniqueConstraintName="ux_negociateur_nom_court"/>
+            </column>
+            <column name="actif" type="boolean" defaultValue="false">
+                <constraints nullable="false"
+                    uniqueConstraintName="ux_negociateur_actif"/>
+            </column>
+        </createTable>
+        <!-- Creation de la table type de bien -->
+        <createTable tableName="type_de_bien">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="libelle" type="varchar(255)">
+                <constraints unique="true" nullable="false"
+                    uniqueConstraintName="ux_typedebien_libelle"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

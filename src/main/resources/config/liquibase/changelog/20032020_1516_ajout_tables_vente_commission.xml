@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="20032020_1516" author="fpi">
+        <!-- Création de la table Personne -->
+        <createTable tableName="personne">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom" type="varchar(256)">
+            </column>
+            <column name="prenom" type="varchar(256)">
+            </column>
+        </createTable>
+        <!-- Création de la table Commission -->
+        <createTable tableName="commission">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="negociateur_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_commission_negociateur"
+                    references="negociateur(id)"/>
+            </column>
+            <column name="pourcentage" type="decimal(10,2)">
+            </column>
+            <column name="montantht" type="decimal(10,2)">
+            </column>
+        </createTable>
+        <!-- Création de la table Vente -->
+        <createTable tableName="vente">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date_acte_authentique" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_compromis" type="date">
+            </column>
+            <column name="type_de_bien_id" type="int">
+                <constraints foreignKeyName="fk_vente_type_de_bien"
+                    references="type_de_bien(id)"/>
+            </column>
+            <column name="numero_facture" type="varchar(20)">
+            </column>
+            <column name="origine_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_vente_origine"
+                    references="origine(id)"/>
+            </column>
+            <column name="honorairesttc" type="decimal(10,2)">
+            </column>
+            <column name="honorairesht" type="decimal(10,2)">
+            </column>
+            <column name="adresse_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_vente_adresse"
+                    references="adresse(id)"/>
+            </column>
+        </createTable>
+        <!-- Création de la table vente_commissions_entree -->
+        <createTable tableName="vente_commissions_entree">
+            <column name="vente_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_commission_entree_vente"
+                    references="vente(id)"/>
+            </column>
+            <column name="commissions_entree_id" type="bigint">
+                <constraints nullable="false"
+                    foreignKeyName="fk_vente_commissions_entree_commission"
+                    references="commission(id)"/>
+            </column>
+        </createTable>
+        <!-- Création de la table vente_commissions_sortie -->
+        <createTable tableName="vente_commissions_sortie">
+            <column name="vente_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_commission_sortie_vente"
+                    references="vente(id)"/>
+            </column>
+            <column name="commissions_sortie_id" type="bigint">
+                <constraints nullable="false"
+                    foreignKeyName="fk_vente_commissions_sortie_commission"
+                    references="commission(id)"/>
+            </column>
+        </createTable>
+        <!-- Création de la table vente_vendeurs -->
+        <createTable tableName="vente_vendeurs">
+            <column name="vente_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_vente_vendeurs_vente"
+                    references="vente(id)"/>
+            </column>
+            <column name="vendeurs_id" type="bigint">
+                <constraints nullable="false"
+                    foreignKeyName="fk_vente_vendeurs_personne"
+                    references="personne(id)"/>
+            </column>
+        </createTable>
+        <!-- Création de la table vente_acquereurs -->
+        <createTable tableName="vente_acquereurs">
+            <column name="vente_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_vente_acquereur_vente"
+                    references="vente(id)"/>
+            </column>
+            <column name="acquereurs_id" type="bigint">
+                <constraints nullable="false"
+                    foreignKeyName="fk_vente_acquereurs_personne"
+                    references="personne(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

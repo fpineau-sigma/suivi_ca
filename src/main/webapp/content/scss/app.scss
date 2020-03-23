@@ -1,0 +1,536 @@
+@mixin card-footer {
+  background: $secondary;
+  padding: 0.7rem 2.5rem;
+  .btn {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    text-transform: uppercase;
+    padding: .5rem 3.5rem;
+  }
+}
+
+@mixin w-0 {
+  width: 0;
+}
+
+@mixin list {
+  padding: 0;
+  list-style: none;
+}
+
+strong {
+  font-weight: 700;
+}
+
+h3 {
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+
+.overflow-visible {
+  overflow: visible !important;
+}
+
+
+.form-control {
+  font-size: inherit;
+
+  .placeholder {
+    font-style: italic;
+  }
+
+  .has-search {
+    .form-control {
+      padding-left: 2.375rem;
+    }
+
+    .form-control-feedback {
+      position: absolute;
+      z-index: 2;
+      display: block;
+      width: 2.375rem;
+      height: 2.375rem;
+      line-height: 2.375rem;
+      text-align: center;
+      pointer-events: none;
+      color: #aaa;
+    }
+  }
+}
+
+.modal-header {
+  h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+.modal-open > .dropdown {
+  z-index: 1070 !important;
+}
+
+.dropdown-menu {
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+  margin: 0;
+}
+
+
+/* Buttons */
+.btn {
+
+  &.primary {
+    &:hover {
+      background: white;
+      color: $primary !important;
+    }
+  }
+
+  &:hover {
+    background: white;
+    color: $secondary;
+  }
+
+  &.btn-outline-secondary {
+    color: $secondary;
+    border: 1px solid $secondary;
+
+    &:hover {
+      background: $secondary;
+      color: white;
+    }
+
+    &:disabled {
+      color: #d2d2d2;
+      background: white;
+      border-color: #d2d2d2;
+    }
+  }
+
+  &.btn-danger {
+    background: $alert;
+    border: 1px solid $alert;
+
+    &:hover {
+      color: white;
+      opacity: .8;
+    }
+  }
+
+  &.btn-success {
+    background: $success;
+    border: 1px solid $success;
+    color: white;
+
+    &:hover {
+      color: white;
+      opacity: .8;
+    }
+  }
+}
+
+
+html {
+  height: inherit;
+}
+
+body {
+  background-color: $light-bg;
+  color: #000 !important;
+
+  font-weight: normal;
+  height: inherit;
+  font-size: 15px;
+}
+
+/* Header */
+header {
+  .bg-primary {
+    background: $primary !important;
+  }
+
+  .sub-header-client {
+    border-top: 1px solid $light-border;
+    border-bottom: 1px solid $light-border;
+    padding: .4rem;
+    background: $light-bg;
+
+    .logo-client {
+      margin-right: 2rem;
+    }
+
+    label:after {
+      margin-right: .5rem;
+      margin-left: .5rem;
+      content: ":";
+    }
+
+    .ng-select-container {
+      min-width: 150px;
+    }
+
+    .gestionnaire {
+      .fas {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+/* Homepage > Liens externes */
+.liens-externes .lien {
+  margin: 1rem 2rem 1rem 0;
+  display: inline-block;
+}
+
+.liens-externes .lien img {
+  max-height: 36px;
+  margin-right: .5rem;
+}
+
+.breadcrumb {
+  background: transparent;
+  padding: 1.2rem 0 .2rem;
+  font-size: .85rem;
+}
+
+main {
+  h1 {
+    color: inherit;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 100;
+  }
+
+  /* Forms */
+  .form-group {
+    label {
+      font-weight: 700;
+      font-size: inherit;
+    }
+  }
+
+
+  .card {
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
+
+    table {
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    h3 {
+      font-size: inherit;
+      font-weight: 700;
+    }
+
+    &.calendrier {
+      background: transparent;
+      box-shadow: none;
+
+      .timeline {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .li {
+          transition: all 200ms ease-in;
+
+          .timestamp {
+            margin-bottom: 20px;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 100;
+          }
+
+          .status {
+            padding: 0 40px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #D6DCE0;
+            position: relative;
+            transition: all 200ms ease-in;
+          }
+        }
+      }
+    }
+  }
+
+  .badge {
+    background-color: #F2F2F2;
+    font-size: 85%;
+    font-weight: normal;
+    border-radius: 1rem;
+    padding: .3rem .8rem;
+    margin: 0 .5rem 0;
+  }
+
+  /* Tables */
+  .table {
+    .alert {
+      border-left: 5px solid $alert;
+      color: $alert;
+    }
+
+    .disabled {
+      background: $disabled;
+      color: rgba(0, 0, 0, 0.50)
+    }
+
+    .btn-dropdown {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      color: $secondary;
+    }
+  }
+}
+
+
+/* Form recherche coolabs + barre action*/
+.btn-menu {
+  background: transparent;
+  border: 0;
+  position: absolute;
+  right: .2rem;
+  top: .4rem;
+  z-index: 8;
+  cursor: pointer;
+}
+
+/* Affichage icônes multi-menu */
+.btn-multi-menu {
+  position: absolute;
+  right: .2rem;
+  top: .4rem;
+
+  * {
+    background: transparent;
+    border: 0;
+    z-index: 8;
+    cursor: pointer;
+  }
+}
+
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $secondary;
+  background-color: $secondary;
+}
+
+
+.sidebar-sticky {
+  top: 0;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: white;
+  position: sticky;
+
+  h2 {
+    padding: 0 0 1rem 1.5rem;
+  }
+}
+
+.disabled-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+.disabled-common {
+  border: none;
+  background-color: transparent !important;
+
+  /** !important car le sélecteur "*" est moins spécifique qu'un sélecteur précis. */
+  *, *:hover {
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+/* TODO à faire dans le plateforme.scss */
+.sticky-top {
+  z-index: 9;
+}
+
+.footer {
+  background: white;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  box-shadow: 0px -4px 5px 0px rgba(0, 0, 0, 0.14);
+  padding: 1.5rem;
+  margin-left: -2rem;
+}
+
+/* icones formulaire collaborateur */
+.required::after {
+  color: red;
+  content: "*";
+  margin-left: 0.3em;
+}
+
+
+.is-error {
+  border-color: #dc3545;
+  background-color: lavenderblush;
+  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+
+
+  .ng-select-container {
+    border-color: #dc3545;
+    background-color: lavenderblush;
+  }
+}
+
+
+.datatable-body-row.active .datatable-body-cell {
+  color: white;
+
+  i {
+    color: white;
+  }
+
+  a {
+    color: white !important;
+  }
+}
+
+.btn-group {
+  cursor: pointer;
+}
+
+.msg-erreur div {
+  margin-top: -1rem;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -150px;
+  visibility: hidden;
+}
+
+/** HACK : pour bug de postionnement popover : https://stackoverflow.com/questions/57595390/popover-from-ngx-bootstrap-placement-isnt-working-with-ngx-datatable-ngx-tr */
+.popover-content > div {
+  width: 236px;
+}
+
+.datatable-body-row.active .datatable-body-cell i.fa-calendar-alt {
+  color: black;
+}
+
+/** customisation des tooltips (couleur et transparence) */
+.tooltip-inner {
+  background-color: #1c4587;
+  color: #fff;
+}
+
+.tooltip.in {
+  opacity: 1 !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.vertical-align {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.ng-select.ng-select-opened .ng-select-container {
+  z-index: 0 !important;
+}
+
+.ng-dropdown-panel {
+  z-index: 1 !important;
+}
+
+app-arbre .form-control:disabled {
+  background-color: white;
+}
+
+.notify {
+  max-width: 450px;
+  border-radius: 0.2em;
+  color: inherit !important;
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  background-color: #fff !important
+}
+
+.notify .fa {
+  top: 1em;
+  right: 1em;
+  font-size: 2em;
+  float: left
+}
+
+.notify.success .notif-icon {
+  background: url(../images/icon-success.png) no-repeat center 1.5em #54C266
+}
+
+.notify .warning .notif-icon {
+  background: url(../images/icon-warning.png) no-repeat center 1.5em #f70
+}
+
+.notify .error .notif-icon {
+  background: url(../images/icon-error.png) no-repeat center 1.5em #dc3545
+}
+
+.notify.info .notif-icon {
+  background: url(../images/icon-info.png) no-repeat center 1.5em #338bff
+}
+
+.wrap {
+  display: flex;
+  background: white;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 7px 7px 30px -5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.wrap:hover {
+  background: linear-gradient(135deg, #6394ff 0%, #0a193b 100%);
+  color: white;
+}
+
+.tuile {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.venter {
+  margin: auto;
+}
+
+.wrap a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}

@@ -1,0 +1,123 @@
+<form #form="ngForm" autocomplete="off" class="card-body" novalidate>
+    <fieldset #fieldSetElement class="card w-100">
+        <div class="card-body">
+            <!-- Ligne 1 : Date du compromis de vente -->
+            <div class="row align-items-end">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label class="required" for="vente_date_vente_compromis"
+                               translate="gestion.vente.date.vente.compromis"></label>
+                        <div class="input-group">
+                            <input #dpDateVente="bsDatepicker"
+                                   [(ngModel)]="vente.dateCompromis"
+                                   bsDatepicker
+                                   class="form-control"
+                                   id="vente_date_vente_compromis"
+                                   name="vente_date_vente_compromis"
+                                   placeholder="{{ 'global.commun.champ.date.placeholder' | translate }}"
+                                   type="text"
+                            />
+                            <div class="input-group-append">
+                                <button (click)="dpDateVente.toggle()"
+                                        class="btn-menu"
+                                        type="button">
+                                    <fa-icon icon="calendar-alt"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ligne 1 : Origine -->
+                <div class="col-3">
+                    <div class="form-group">
+                        <label class="required" for="vente_origine"
+                               translate="gestion.vente.origine"></label>
+                        <ng-select [(ngModel)]="vente.origine"
+                                   [items]="origines"
+                                   bindLabel="libelle"
+                                   id="vente_origine"
+                                   name="vente_origine">
+                        </ng-select>
+                    </div>
+                </div>
+                <!-- Ligne 1 : Honoraires TTC -->
+                <div class="col-3">
+                    <div class="form-group">
+                        <label class="required" for="vente_honorairesTTC"
+                               translate="gestion.vente.honorairesTTC"></label>
+                        <input [(ngModel)]="vente.honorairesTTC"
+                               class="form-control"
+                               id="vente_honorairesTTC"
+                               name="vente_honorairesTTC"
+                               required/>
+                    </div>
+                </div>
+                <!-- Ligne 1 : Honoraires HT -->
+                <div class="col-3">
+                    <div class="form-group">
+                        <label class="required" for="vente_honorairesHT"
+                               translate="gestion.vente.honorairesHT"></label>
+                        <input [(ngModel)]="vente.honorairesHT"
+                               class="form-control"
+                               id="vente_honorairesHT"
+                               name="vente_honorairesHT"
+                               required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-end">
+                <!-- Ligne 2 : Date acte authentique -->
+                <div class="col-3">
+                    <div class="form-group">
+                        <label class="required" for="vente_date_acte_authentique"
+                               translate="gestion.vente.date.acte.authentique"></label>
+                        <div class="input-group">
+                            <input #dpDateVente="bsDatepicker"
+                                   [(ngModel)]="vente.dateActeAuthentique"
+                                   bsDatepicker
+                                   class="form-control"
+                                   id="vente_date_acte_authentique"
+                                   name="vente_date_acte_authentique"
+                                   placeholder="{{ 'global.commun.champ.date.placeholder' | translate }}"
+                                   type="text"
+                            />
+                            <div class="input-group-append">
+                                <button (click)="dpDateVente.toggle()"
+                                        class="btn-menu"
+                                        type="button">
+                                    <fa-icon icon="calendar-alt"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ligne 2 : Numéro Facture -->
+                <div class="col-3">
+                    <div class="form-group">
+                        <label class="required" for="vente_numero_facture"
+                               translate="gestion.vente.numero.facture"></label>
+                        <input [(ngModel)]="vente.numeroFacture"
+                               class="form-control"
+                               id="vente_numero_facture"
+                               name="vente_numero_facture"
+                               required/>
+                    </div>
+                </div>
+                <!-- Ligne 2 : Type de bien -->
+                <div class="col-3">
+                    <div class="form-group">
+                        <label class="required" for="vente_type_bien"
+                               translate="gestion.vente.type.bien"></label>
+                        <ng-select [(ngModel)]="vente.typeBien"
+                                   [items]=" typeDeBiens"
+                                   bindLabel="libelle"
+                                   id="vente_type_bien"
+                                   name="vente_type_bien">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
