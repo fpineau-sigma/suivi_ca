@@ -1,0 +1,35 @@
+<form #form="ngForm" autocomplete="off" novalidate>
+    <!-- Adresse -->
+    <h5 translate="gestion.vente.creation.adresse"></h5>
+    <jhi-adresse [adresse]="venteEditer.adresse" [mode]="mode"></jhi-adresse>
+    <!-- Honoraires -->
+    <h5 translate="gestion.vente.creation.honoraires"></h5>
+    <jhi-editer-vente-honoraires [vente]="venteEditer"
+                                 [mode]="mode"></jhi-editer-vente-honoraires>
+    <!-- Acquereurs -->
+    <h5 translate="gestion.vente.creation.acquereurs"></h5>
+    <jhi-editer-vente-acquereurs-vendeurs [vente]="venteEditer" [champ]="ChampVendeur.ACQUEREUR"
+                                          [mode]="mode"></jhi-editer-vente-acquereurs-vendeurs>
+    <!-- Vendeurs -->
+    <h5 translate="gestion.vente.creation.vendeurs"></h5>
+    <jhi-editer-vente-acquereurs-vendeurs [vente]="venteEditer" [champ]="ChampVendeur.VENDEUR"
+                                          [mode]="mode"></jhi-editer-vente-acquereurs-vendeurs>
+    <!-- Commissions Entrees -->
+    <h5 translate="gestion.vente.creation.commissions.entree"></h5>
+    <jhi-editer-vente-commissions [mode]="mode" [champ]="ChampCommission.ENTREE"
+                                  [vente]="venteEditer"></jhi-editer-vente-commissions>
+    <!-- Commissions Sorties -->
+    <h5 translate="gestion.vente.creation.commissions.sortie"></h5>
+    <jhi-editer-vente-commissions [mode]="mode" [champ]="ChampCommission.SORTIE"
+                                  [vente]="venteEditer"></jhi-editer-vente-commissions>
+
+    <br>
+    <br>
+    <br>
+
+    <!-- Action -->
+    <jhi-editer-vente-action [mode]="mode" [vente]="venteEditer"></jhi-editer-vente-action>
+</form>
+
+
+

@@ -1,0 +1,16 @@
+version: '2'
+services:
+  ca_clemence-app:
+    image: ca_clemence
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://ca_clemence-mysql:3306/ca_clemence?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+    ports:
+      - 8080:8080
+  ca_clemence-mysql:
+    extends:
+      file: mysql.yml
+      service: ca_clemence-mysql

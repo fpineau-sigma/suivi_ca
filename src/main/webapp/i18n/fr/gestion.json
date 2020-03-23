@@ -1,0 +1,97 @@
+{
+  "gestion": {
+    "ventes": {
+      "titre": "Suivi des ventes",
+      "liste": "Liste des ventes",
+      "ajout": "Nouvelle vente"
+    },
+    "vente": {
+      "origine": "Origine",
+      "date.vente.compromis": "Date du compromis de vente",
+      "date.acte.authentique": "Date acte authentique",
+      "honorairesTTC": "Honoraires TTC",
+      "honorairesHT": "Honoraires HT",
+      "numero.facture": "Numéro de facture",
+      "type.bien": "Type de bien",
+      "creation": {
+        "titre": "Nouvelle vente",
+        "adresse": "Adresse",
+        "honoraires": "Honoraires",
+        "commissions": {
+          "entree": "Commissions entree",
+          "sortie": "Commissions sortie"
+        },
+        "acquereurs": "Acquereurs",
+        "vendeurs": "Vendeurs"
+      },
+      "modification": {
+        "titre": "Modification de la vente"
+      }
+    },
+    "typedebien": {
+      "libelle": "Libellé",
+      "creation": {
+        "titre": "Ajout d'un nouveau type de bien"
+      },
+      "modification": {
+        "titre": "Modification d'un type de bien "
+      },
+      "action.success": "Enregistrement effectué avec succès"
+    },
+    "typedebiens": {
+      "titre": "Gestion des types de biens",
+      "ajout": "Ajout d'un type de bien",
+      "liste": "Liste des types de biens"
+    },
+    "origine": {
+      "libelle": "Libellé",
+      "creation": {
+        "titre": "Ajout d'une nouvelle origine"
+      },
+      "modification": {
+        "titre": "Modification d'une origine "
+      },
+      "action.success": "Enregistrement effectué avec succès"
+    },
+    "origines": {
+      "titre": "Gestion des origines",
+      "ajout": "Ajout d'une origine",
+      "liste": "Liste des origines"
+    },
+    "negociateur": {
+      "nom": "Nom",
+      "prenom": "Prénom",
+      "nomCourt": "Nom court",
+      "actif": "Actif / Inactif",
+      "creation": {
+        "titre": "Ajout d'un nouveau négociateur"
+      },
+      "modification": {
+        "titre": "Modification du négociateur "
+      },
+      "action.success": "Enregistrement effectué avec succès"
+    },
+    "negociateurs": {
+      "titre": "Suivi des négociateurs",
+      "ajout": "Ajout d'un nouveau négociateur",
+      "liste": "Liste des négociateurs"
+    },
+    "adresse": {
+      "nom.voie": "Nom de la voie",
+      "code.postal": "Code postal",
+      "numero": "Numéro",
+      "ville": "Ville"
+    },
+    "personne": {
+      "nom": "Nom",
+      "prenom": "Prénom",
+      "ajout": "Ajouter une personne"
+    },
+    "commission": {
+      "negociateur": "Negociateur",
+      "pourcentage": "Pourcentage",
+      "montant.ht": "Montant HT",
+      "ajout": "Ajouter une commission"
+    }
+  }
+}
