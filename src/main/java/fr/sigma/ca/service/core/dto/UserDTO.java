@@ -1,14 +1,15 @@
 package fr.sigma.ca.service.core.dto;
 
 import fr.sigma.ca.config.Constants;
-
-import fr.sigma.ca.domain.Authority;
-import fr.sigma.ca.domain.User;
-
-import javax.validation.constraints.*;
+import fr.sigma.ca.entite.Authority;
+import fr.sigma.ca.entite.User;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * A DTO representing a user, with his authorities.

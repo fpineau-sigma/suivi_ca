@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Mode} from '../../../core/model/mode.enum';
 import {TypeDeBien} from '../../../core/model/typedebien.model';
+import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class EditerTypeDeBienModalComponent implements OnInit {
   @Input() public mode!: Mode;
 
   public typeDeBienEditer: TypeDeBien = {};
+  public faCheck = faCheck;
 
   constructor() {
   }

@@ -1,4 +1,4 @@
 /**
  * JPA domain objects.
  */
-package fr.sigma.ca.domain;
+package fr.sigma.ca.entite;

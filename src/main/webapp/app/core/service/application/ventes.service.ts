@@ -1,8 +1,11 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Vente} from '../../model/vente.model';
 import {SERVER_API_URL} from 'app/app.constants';
+import {CriteresRechercheVente} from 'app/core/model/criteres.recherche/criteresRechercheVente.model';
+import {createRequestOption} from 'app/shared/util/request-util';
+import {Page} from 'app/core/model/pagination/page.model';
 
 
 const url = SERVER_API_URL + 'api/ventes';
@@ -15,8 +18,13 @@ export class VentesService {
   constructor(private http: HttpClient) {
   }
 
-  lister(): Observable<any> {
-    return this.http.get(`${url}`);
+  lister(criteresRechercheVente: CriteresRechercheVente, req: any): Observable<HttpResponse<Page<Vente[]>>> {
+    const params: HttpParams = createRequestOption(req);
+
+    return this.http.post<Page<Vente[]>>(`${url}/lister`, criteresRechercheVente, {
+      params,
+      observe: 'response'
+    });
   }
 
   lire(id: number): Observable<any> {

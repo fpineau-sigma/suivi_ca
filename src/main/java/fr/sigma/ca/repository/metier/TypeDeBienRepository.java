@@ -1,6 +1,6 @@
 package fr.sigma.ca.repository.metier;
 
-import fr.sigma.ca.domain.metier.TypeDeBien;
+import fr.sigma.ca.entite.metier.TypeDeBien;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

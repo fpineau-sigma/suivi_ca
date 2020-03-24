@@ -1,4 +1,4 @@
-package fr.sigma.ca.domain.metier;
+package fr.sigma.ca.entite.metier;
 
 import fr.sigma.ca.integration.persistence.Entite;
 import javax.persistence.Column;
@@ -14,9 +14,9 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Origine extends Entite {
+public class TypeDeBien extends Entite {
 
-  @NotNull
-  @Column(nullable = false, unique = true)
-  private String libelle;
+    @NotNull
+    @Column(nullable = false, unique = true)
+    private String libelle;
 }

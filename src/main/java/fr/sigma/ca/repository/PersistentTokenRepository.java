@@ -1,11 +1,10 @@
 package fr.sigma.ca.repository;
 
-import fr.sigma.ca.domain.PersistentToken;
-import fr.sigma.ca.domain.User;
+import fr.sigma.ca.entite.PersistentToken;
+import fr.sigma.ca.entite.User;
 import java.time.LocalDate;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Spring Data JPA repository for the {@link PersistentToken} entity.

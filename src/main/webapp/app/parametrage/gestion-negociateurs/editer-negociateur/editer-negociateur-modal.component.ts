@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Negociateur} from 'app/core/model/negociateur.model';
 import {Mode} from 'app/core/model/mode.enum';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class EditerNegociateurModalComponent implements OnInit {
   @Output() public fermer: EventEmitter<Negociateur> = new EventEmitter();
   @Input() public negociateur!: Negociateur;
   @Input() public mode!: Mode;
+
+  public faCheck = faCheck;
 
   public negociateurEditer: Negociateur = {};
 

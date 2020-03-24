@@ -1,9 +1,20 @@
 package fr.sigma.ca.web.rest;
 
+import static fr.sigma.ca.web.rest.AccountResourceIT.TEST_USER_LOGIN;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import fr.sigma.ca.CaClemenceApp;
 import fr.sigma.ca.config.Constants;
-import fr.sigma.ca.domain.PersistentToken;
-import fr.sigma.ca.domain.User;
+import fr.sigma.ca.entite.PersistentToken;
+import fr.sigma.ca.entite.User;
 import fr.sigma.ca.repository.AuthorityRepository;
 import fr.sigma.ca.repository.PersistentTokenRepository;
 import fr.sigma.ca.repository.UserRepository;
@@ -13,8 +24,13 @@ import fr.sigma.ca.service.core.dto.PasswordChangeDTO;
 import fr.sigma.ca.service.core.dto.UserDTO;
 import fr.sigma.ca.web.rest.vm.KeyAndPasswordVM;
 import fr.sigma.ca.web.rest.vm.ManagedUserVM;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,17 +41,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static fr.sigma.ca.web.rest.AccountResourceIT.TEST_USER_LOGIN;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 /**
  * Integration tests for the {@link AccountResource} REST controller.
  */
@@ -43,6 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser(value = TEST_USER_LOGIN)
 @SpringBootTest(classes = CaClemenceApp.class)
 public class AccountResourceIT {
+
     static final String TEST_USER_LOGIN = "test";
 
     @Autowired
@@ -374,7 +380,8 @@ public class AccountResourceIT {
 
         Optional<User> testUser4 = userRepository.findOneByLogin("test-register-duplicate-email-3");
         assertThat(testUser4.isPresent()).isTrue();
-        assertThat(testUser4.get().getEmail()).isEqualTo("test-register-duplicate-email@example.com");
+        assertThat(testUser4.get().getEmail())
+            .isEqualTo("test-register-duplicate-email@example.com");
 
         testUser4.get().setActivated(true);
         userService.updateUser((new UserDTO(testUser4.get())));
@@ -584,7 +591,8 @@ public class AccountResourceIT {
                 .with(csrf()))
             .andExpect(status().isOk());
 
-        User updatedUser = userRepository.findOneByLogin("save-existing-email-and-login").orElse(null);
+        User updatedUser = userRepository.findOneByLogin("save-existing-email-and-login")
+            .orElse(null);
         assertThat(updatedUser.getEmail()).isEqualTo("save-existing-email-and-login@example.com");
     }
 
@@ -601,11 +609,13 @@ public class AccountResourceIT {
 
         restAccountMockMvc.perform(post("/api/account/change-password")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(new PasswordChangeDTO("1"+currentPassword, "new password")))
+            .content(TestUtil.convertObjectToJsonBytes(
+                new PasswordChangeDTO("1" + currentPassword, "new password")))
             .with(csrf()))
             .andExpect(status().isBadRequest());
 
-        User updatedUser = userRepository.findOneByLogin("change-password-wrong-existing-password").orElse(null);
+        User updatedUser = userRepository.findOneByLogin("change-password-wrong-existing-password")
+            .orElse(null);
         assertThat(passwordEncoder.matches("new password", updatedUser.getPassword())).isFalse();
         assertThat(passwordEncoder.matches(currentPassword, updatedUser.getPassword())).isTrue();
     }
@@ -623,7 +633,8 @@ public class AccountResourceIT {
 
         restAccountMockMvc.perform(post("/api/account/change-password")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(new PasswordChangeDTO(currentPassword, "new password")))
+            .content(TestUtil
+                .convertObjectToJsonBytes(new PasswordChangeDTO(currentPassword, "new password")))
             .with(csrf()))
             .andExpect(status().isOk());
 
@@ -646,7 +657,8 @@ public class AccountResourceIT {
 
         restAccountMockMvc.perform(post("/api/account/change-password")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(new PasswordChangeDTO(currentPassword, newPassword)))
+            .content(TestUtil
+                .convertObjectToJsonBytes(new PasswordChangeDTO(currentPassword, newPassword)))
             .with(csrf()))
             .andExpect(status().isBadRequest());
 
@@ -669,7 +681,8 @@ public class AccountResourceIT {
 
         restAccountMockMvc.perform(post("/api/account/change-password")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(new PasswordChangeDTO(currentPassword, newPassword)))
+            .content(TestUtil
+                .convertObjectToJsonBytes(new PasswordChangeDTO(currentPassword, newPassword)))
             .with(csrf()))
             .andExpect(status().isBadRequest());
 
@@ -816,7 +829,9 @@ public class AccountResourceIT {
             .andExpect(status().isOk());
 
         User updatedUser = userRepository.findOneByLogin(user.getLogin()).orElse(null);
-        assertThat(passwordEncoder.matches(keyAndPassword.getNewPassword(), updatedUser.getPassword())).isTrue();
+        assertThat(
+            passwordEncoder.matches(keyAndPassword.getNewPassword(), updatedUser.getPassword()))
+            .isTrue();
     }
 
     @Test
@@ -842,7 +857,9 @@ public class AccountResourceIT {
             .andExpect(status().isBadRequest());
 
         User updatedUser = userRepository.findOneByLogin(user.getLogin()).orElse(null);
-        assertThat(passwordEncoder.matches(keyAndPassword.getNewPassword(), updatedUser.getPassword())).isFalse();
+        assertThat(
+            passwordEncoder.matches(keyAndPassword.getNewPassword(), updatedUser.getPassword()))
+            .isFalse();
     }
 
     @Test

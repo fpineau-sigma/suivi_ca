@@ -1,26 +1,27 @@
 package fr.sigma.ca.service;
 
-import fr.sigma.ca.domain.PersistentAuditEvent;
-import fr.sigma.ca.repository.PersistenceAuditEventRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import fr.sigma.ca.CaClemenceApp;
+import fr.sigma.ca.entite.PersistentAuditEvent;
+import fr.sigma.ca.repository.PersistenceAuditEventRepository;
 import fr.sigma.ca.service.core.AuditEventService;
 import io.github.jhipster.config.JHipsterProperties;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Integration tests for {@link AuditEventService}.
  */
 @SpringBootTest(classes = CaClemenceApp.class)
 @Transactional
-public class AuditEventServiceIT  {
+public class AuditEventServiceIT {
+
     @Autowired
     private AuditEventService auditEventService;
 
@@ -39,12 +40,14 @@ public class AuditEventServiceIT  {
     @BeforeEach
     public void init() {
         auditEventOld = new PersistentAuditEvent();
-        auditEventOld.setAuditEventDate(Instant.now().minus(jHipsterProperties.getAuditEvents().getRetentionPeriod() + 1, ChronoUnit.DAYS));
+        auditEventOld.setAuditEventDate(Instant.now()
+            .minus(jHipsterProperties.getAuditEvents().getRetentionPeriod() + 1, ChronoUnit.DAYS));
         auditEventOld.setPrincipal("test-user-old");
         auditEventOld.setAuditEventType("test-type");
 
         auditEventWithinRetention = new PersistentAuditEvent();
-        auditEventWithinRetention.setAuditEventDate(Instant.now().minus(jHipsterProperties.getAuditEvents().getRetentionPeriod() - 1, ChronoUnit.DAYS));
+        auditEventWithinRetention.setAuditEventDate(Instant.now()
+            .minus(jHipsterProperties.getAuditEvents().getRetentionPeriod() - 1, ChronoUnit.DAYS));
         auditEventWithinRetention.setPrincipal("test-user-retention");
         auditEventWithinRetention.setAuditEventType("test-type");
 
@@ -68,7 +71,8 @@ public class AuditEventServiceIT  {
 
         assertThat(persistenceAuditEventRepository.findAll().size()).isEqualTo(2);
         assertThat(persistenceAuditEventRepository.findByPrincipal("test-user-old")).isEmpty();
-        assertThat(persistenceAuditEventRepository.findByPrincipal("test-user-retention")).isNotEmpty();
+        assertThat(persistenceAuditEventRepository.findByPrincipal("test-user-retention"))
+            .isNotEmpty();
         assertThat(persistenceAuditEventRepository.findByPrincipal("test-user-new")).isNotEmpty();
     }
 }

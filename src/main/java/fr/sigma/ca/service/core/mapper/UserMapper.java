@@ -1,19 +1,20 @@
 package fr.sigma.ca.service.core.mapper;
 
-import fr.sigma.ca.domain.Authority;
-import fr.sigma.ca.domain.User;
+import fr.sigma.ca.entite.Authority;
+import fr.sigma.ca.entite.User;
 import fr.sigma.ca.service.core.dto.UserDTO;
-
-import org.springframework.stereotype.Service;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
 
 /**
  * Mapper for the entity {@link User} and its DTO called {@link UserDTO}.
- *
- * Normal mappers are generated using MapStruct, this one is hand-coded as MapStruct
- * support is still in beta, and requires a manual step with an IDE.
+ * <p>
+ * Normal mappers are generated using MapStruct, this one is hand-coded as MapStruct support is
+ * still in beta, and requires a manual step with an IDE.
  */
 @Service
 public class UserMapper {

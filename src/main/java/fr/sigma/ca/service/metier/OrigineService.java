@@ -1,6 +1,6 @@
 package fr.sigma.ca.service.metier;
 
-import fr.sigma.ca.domain.metier.Origine;
+import fr.sigma.ca.entite.metier.Origine;
 import fr.sigma.ca.integration.exception.BusinessException;
 import fr.sigma.ca.integration.utilitaire.ObjetUtilitaire;
 import fr.sigma.ca.integration.utilitaire.ValidationAssistant;
@@ -16,26 +16,26 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class OrigineService {
 
-  private final OrigineRepository repository;
-  private final OrigineMapper mapper;
+    private final OrigineRepository repository;
+    private final OrigineMapper mapper;
 
-  @Transactional
-  public OrigineDTO creer(Origine origine) {
-    ValidationAssistant.valider(origine);
-    return mapper.toDto(repository.save(origine));
-  }
+    @Transactional
+    public OrigineDTO creer(Origine origine) {
+        ValidationAssistant.valider(origine);
+        return mapper.toDto(repository.save(origine));
+    }
 
-  @Transactional
-  public Collection<OrigineDTO> lister() {
-    return mapper.toDto(repository.findAll());
-  }
+    @Transactional
+    public Collection<OrigineDTO> lister() {
+        return mapper.toDto(repository.findAll());
+    }
 
-  @Transactional
-  public OrigineDTO mettreAJour(Origine origine) {
-    ValidationAssistant.valider(origine);
-    Origine origineBdd = repository.findById(origine.getId())
-        .orElseThrow(() -> new BusinessException(""));
-    ObjetUtilitaire.merge(origineBdd, origine, Origine.class);
-    return mapper.toDto(repository.save(origineBdd));
-  }
+    @Transactional
+    public OrigineDTO mettreAJour(Origine origine) {
+        ValidationAssistant.valider(origine);
+        Origine origineBdd = repository.findById(origine.getId())
+            .orElseThrow(() -> new BusinessException(""));
+        ObjetUtilitaire.merge(origineBdd, origine, Origine.class);
+        return mapper.toDto(repository.save(origineBdd));
+    }
 }

@@ -1,6 +1,6 @@
 package fr.sigma.ca.service.metier;
 
-import fr.sigma.ca.domain.metier.Adresse;
+import fr.sigma.ca.entite.metier.Adresse;
 import fr.sigma.ca.integration.exception.BusinessException;
 import fr.sigma.ca.integration.utilitaire.ObjetUtilitaire;
 import fr.sigma.ca.integration.utilitaire.ValidationAssistant;
@@ -16,26 +16,26 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AdresseService {
 
-  private final AdresseRepository repository;
-  private final AdresseMapper mapper;
+    private final AdresseRepository repository;
+    private final AdresseMapper mapper;
 
-  @Transactional
-  public Adresse creer(Adresse adresse) {
-    ValidationAssistant.valider(adresse);
-    return repository.save(adresse);
-  }
+    @Transactional
+    public Adresse creer(Adresse adresse) {
+        ValidationAssistant.valider(adresse);
+        return repository.save(adresse);
+    }
 
-  @Transactional
-  public Collection<Adresse> lister() {
-    return repository.findAll();
-  }
+    @Transactional
+    public Collection<Adresse> lister() {
+        return repository.findAll();
+    }
 
-  @Transactional
-  public AdresseDTO mettreAJour(Adresse adresse) {
-    ValidationAssistant.valider(adresse);
-    Adresse adresseBdd = repository.findById(adresse.getId())
-        .orElseThrow(() -> new BusinessException(""));
-    ObjetUtilitaire.merge(adresseBdd, adresse, Adresse.class);
-    return mapper.toDto(repository.save(adresseBdd));
-  }
+    @Transactional
+    public AdresseDTO mettreAJour(Adresse adresse) {
+        ValidationAssistant.valider(adresse);
+        Adresse adresseBdd = repository.findById(adresse.getId())
+            .orElseThrow(() -> new BusinessException(""));
+        ObjetUtilitaire.merge(adresseBdd, adresse, Adresse.class);
+        return mapper.toDto(repository.save(adresseBdd));
+    }
 }

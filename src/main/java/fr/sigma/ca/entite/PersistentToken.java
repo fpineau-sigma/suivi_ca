@@ -1,14 +1,16 @@
-package fr.sigma.ca.domain;
+package fr.sigma.ca.entite;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import java.io.Serializable;
-import java.util.Objects;
-import java.time.LocalDate;
 
 /**
  * Persistent tokens are used by Spring Security to automatically log in users.
@@ -30,7 +32,7 @@ public class PersistentToken implements Serializable {
     @NotNull
     @Column(name = "token_value", nullable = false)
     private String tokenValue;
-    
+
     @Column(name = "token_date")
     private LocalDate tokenDate;
 
