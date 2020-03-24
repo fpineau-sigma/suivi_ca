@@ -5,6 +5,7 @@ import {Vente} from '../../../core/model/vente.model';
 import {Mode} from '../../../core/model/mode.enum';
 import {VentesService} from '../../../core/service/application/ventes.service';
 import {ToastService} from '../../../core/service/toast.service';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -13,6 +14,8 @@ import {ToastService} from '../../../core/service/toast.service';
   viewProviders: [{provide: ControlContainer, useExisting: NgForm}]
 })
 export class EditerVenteActionComponent {
+
+  public faCheck = faCheck;
 
   @Input() public mode: Mode;
   @Input() public vente: Vente;

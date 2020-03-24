@@ -1,7 +1,7 @@
 package fr.sigma.ca.web.rest;
 
 import fr.sigma.ca.config.Constants;
-import fr.sigma.ca.domain.User;
+import fr.sigma.ca.entite.User;
 import fr.sigma.ca.repository.UserRepository;
 import fr.sigma.ca.security.AuthoritiesConstants;
 import fr.sigma.ca.service.core.MailService;
@@ -10,11 +10,14 @@ import fr.sigma.ca.service.core.dto.UserDTO;
 import fr.sigma.ca.web.rest.errors.BadRequestAlertException;
 import fr.sigma.ca.web.rest.errors.EmailAlreadyUsedException;
 import fr.sigma.ca.web.rest.errors.LoginAlreadyUsedException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,22 +27,24 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
 
 /**
  * REST controller for managing users.
  * <p>
  * This class accesses the {@link User} entity, and needs to fetch its collection of authorities.
  * <p>
- * For a normal use-case, it would be better to have an eager relationship between User and Authority,
- * and send everything to the client side: there would be no View Model and DTO, a lot less code, and an outer-join
- * which would be good for performance.
+ * For a normal use-case, it would be better to have an eager relationship between User and
+ * Authority, and send everything to the client side: there would be no View Model and DTO, a lot
+ * less code, and an outer-join which would be good for performance.
  * <p>
  * We use a View Model and a DTO for 3 reasons:
  * <ul>
@@ -71,7 +76,8 @@ public class UserResource {
 
     private final MailService mailService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository,
+        MailService mailService) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
@@ -80,22 +86,25 @@ public class UserResource {
     /**
      * {@code POST  /users}  : Creates a new user.
      * <p>
-     * Creates a new user if the login and email are not already used, and sends an
-     * mail with an activation link.
-     * The user needs to be activated on creation.
+     * Creates a new user if the login and email are not already used, and sends an mail with an
+     * activation link. The user needs to be activated on creation.
      *
      * @param userDTO the user to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new user, or with status {@code 400 (Bad Request)} if the login or email is already in use.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     * @throws BadRequestAlertException {@code 400 (Bad Request)} if the login or email is already in use.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new
+     * user, or with status {@code 400 (Bad Request)} if the login or email is already in use.
+     * @throws URISyntaxException       if the Location URI syntax is incorrect.
+     * @throws BadRequestAlertException {@code 400 (Bad Request)} if the login or email is already
+     *                                  in use.
      */
     @PostMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO)
+        throws URISyntaxException {
         log.debug("REST request to save User : {}", userDTO);
 
         if (userDTO.getId() != null) {
-            throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
+            throw new BadRequestAlertException("A new user cannot already have an ID",
+                "userManagement", "idexists");
             // Lowercase the user login before comparing with database
         } else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {
             throw new LoginAlreadyUsedException();
@@ -105,7 +114,8 @@ public class UserResource {
             User newUser = userService.createUser(userDTO);
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert(applicationName,  "userManagement.created", newUser.getLogin()))
+                .headers(HeaderUtil
+                    .createAlert(applicationName, "userManagement.created", newUser.getLogin()))
                 .body(newUser);
         }
     }
@@ -114,7 +124,8 @@ public class UserResource {
      * {@code PUT /users} : Updates an existing User.
      *
      * @param userDTO the user to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated user.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated
+     * user.
      * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already in use.
      * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already in use.
      */
@@ -145,12 +156,14 @@ public class UserResource {
     @GetMapping("/users")
     public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+            .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * Gets a list of all roles.
+     *
      * @return a string list of all roles.
      */
     @GetMapping("/users/authorities")
@@ -163,7 +176,8 @@ public class UserResource {
      * {@code GET /users/:login} : get the "login" user.
      *
      * @param login the login of the user to find.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the "login" user, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the "login"
+     * user, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
@@ -184,6 +198,8 @@ public class UserResource {
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
-        return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName,  "userManagement.deleted", login)).build();
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createAlert(applicationName, "userManagement.deleted", login))
+            .build();
     }
 }

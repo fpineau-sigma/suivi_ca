@@ -1,6 +1,6 @@
 package fr.sigma.ca.repository.metier;
 
-import fr.sigma.ca.domain.metier.Personne;
+import fr.sigma.ca.entite.metier.Personne;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

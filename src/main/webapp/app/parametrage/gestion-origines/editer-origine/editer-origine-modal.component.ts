@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Origine} from '../../../core/model/origine.model';
 import {Mode} from '../../../core/model/mode.enum';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class EditerOrigineModalComponent implements OnInit {
   @Output() public fermer: EventEmitter<Origine> = new EventEmitter();
   @Input() public origine!: Origine;
   @Input() public mode!: Mode;
+
+  public faCheck = faCheck;
 
   public origineEditer: Origine = {};
 

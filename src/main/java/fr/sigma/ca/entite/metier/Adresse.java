@@ -1,4 +1,4 @@
-package fr.sigma.ca.domain.metier;
+package fr.sigma.ca.entite.metier;
 
 import fr.sigma.ca.integration.persistence.Entite;
 import javax.persistence.Column;
@@ -14,11 +14,14 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Personne extends Entite {
+public class Adresse extends Entite {
 
-  @NotNull
-  @Column(nullable = false)
-  private String nom;
+    private Integer numeroVoie;
 
-  private String prenom;
+    @NotNull
+    @Column(nullable = false)
+    private String nomVoie;
+
+    private Integer codePostal;
+    private String ville;
 }

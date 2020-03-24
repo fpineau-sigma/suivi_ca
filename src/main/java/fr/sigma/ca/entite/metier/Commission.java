@@ -1,4 +1,4 @@
-package fr.sigma.ca.domain.metier;
+package fr.sigma.ca.entite.metier;
 
 import fr.sigma.ca.integration.persistence.Entite;
 import java.math.BigDecimal;

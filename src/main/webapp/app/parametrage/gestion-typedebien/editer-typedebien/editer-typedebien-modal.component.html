@@ -51,7 +51,7 @@
                             id="btnConfirmerCreation"
                             type="button">
                         {{ "global.commun.bouton.creer" | translate }}
-                        <fa-icon icon="save" class="ml-2"></fa-icon>
+                        <fa-icon [icon]="faCheck" class="ml-2"></fa-icon>
                     </button>
                     <button (click)="modifier.emit(typeDeBienEditer)"
                             *ngIf="mode === ModeEnum.EDITION"
@@ -61,7 +61,7 @@
                             id="btnConfirmerModification"
                             type="button">
                         {{ "global.commun.bouton.enregistrer.modification" | translate }}
-                        <fa-icon icon="save" class="ml-2"></fa-icon>
+                        <fa-icon [icon]="faCheck" class="ml-2"></fa-icon>
                     </button>
                 </div>
             </div>

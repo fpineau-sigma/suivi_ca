@@ -1,16 +1,23 @@
 package fr.sigma.ca.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
 import fr.sigma.ca.CaClemenceApp;
 import fr.sigma.ca.config.Constants;
-import fr.sigma.ca.domain.PersistentToken;
-import fr.sigma.ca.domain.User;
+import fr.sigma.ca.entite.PersistentToken;
+import fr.sigma.ca.entite.User;
 import fr.sigma.ca.repository.PersistentTokenRepository;
 import fr.sigma.ca.repository.UserRepository;
 import fr.sigma.ca.service.core.UserService;
 import fr.sigma.ca.service.core.dto.UserDTO;
-
 import io.github.jhipster.security.RandomUtil;
-
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,15 +29,6 @@ import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 /**
  * Integration tests for {@link UserService}.
@@ -133,7 +131,8 @@ public class UserServiceIT {
         user.setResetKey(resetKey);
         userRepository.saveAndFlush(user);
 
-        Optional<User> maybeUser = userService.completePasswordReset("johndoe2", user.getResetKey());
+        Optional<User> maybeUser = userService
+            .completePasswordReset("johndoe2", user.getResetKey());
         assertThat(maybeUser).isNotPresent();
         userRepository.delete(user);
     }
@@ -147,7 +146,8 @@ public class UserServiceIT {
         user.setResetKey("1234");
         userRepository.saveAndFlush(user);
 
-        Optional<User> maybeUser = userService.completePasswordReset("johndoe2", user.getResetKey());
+        Optional<User> maybeUser = userService
+            .completePasswordReset("johndoe2", user.getResetKey());
         assertThat(maybeUser).isNotPresent();
         userRepository.delete(user);
     }
@@ -163,7 +163,8 @@ public class UserServiceIT {
         user.setResetKey(resetKey);
         userRepository.saveAndFlush(user);
 
-        Optional<User> maybeUser = userService.completePasswordReset("johndoe2", user.getResetKey());
+        Optional<User> maybeUser = userService
+            .completePasswordReset("johndoe2", user.getResetKey());
         assertThat(maybeUser).isPresent();
         assertThat(maybeUser.orElse(null).getResetDate()).isNull();
         assertThat(maybeUser.orElse(null).getResetKey()).isNull();
@@ -182,10 +183,14 @@ public class UserServiceIT {
         User dbUser = userRepository.saveAndFlush(user);
         dbUser.setCreatedDate(now.minus(4, ChronoUnit.DAYS));
         userRepository.saveAndFlush(user);
-        List<User> users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(now.minus(3, ChronoUnit.DAYS));
+        List<User> users = userRepository
+            .findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(
+                now.minus(3, ChronoUnit.DAYS));
         assertThat(users).isNotEmpty();
         userService.removeNotActivatedUsers();
-        users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(now.minus(3, ChronoUnit.DAYS));
+        users = userRepository
+            .findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(
+                now.minus(3, ChronoUnit.DAYS));
         assertThat(users).isEmpty();
     }
 
@@ -198,7 +203,9 @@ public class UserServiceIT {
         User dbUser = userRepository.saveAndFlush(user);
         dbUser.setCreatedDate(now.minus(4, ChronoUnit.DAYS));
         userRepository.saveAndFlush(user);
-        List<User> users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(now.minus(3, ChronoUnit.DAYS));
+        List<User> users = userRepository
+            .findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(
+                now.minus(3, ChronoUnit.DAYS));
         assertThat(users).isEmpty();
         userService.removeNotActivatedUsers();
         Optional<User> maybeDbUser = userRepository.findById(dbUser.getId());

@@ -1,6 +1,6 @@
 package fr.sigma.ca.service.metier;
 
-import fr.sigma.ca.domain.metier.TypeDeBien;
+import fr.sigma.ca.entite.metier.TypeDeBien;
 import fr.sigma.ca.integration.exception.BusinessException;
 import fr.sigma.ca.integration.utilitaire.ObjetUtilitaire;
 import fr.sigma.ca.integration.utilitaire.ValidationAssistant;
@@ -16,26 +16,26 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TypeDeBienService {
 
-  private final TypeDeBienRepository repository;
-  private final TypeDeBienMapper mapper;
+    private final TypeDeBienRepository repository;
+    private final TypeDeBienMapper mapper;
 
-  @Transactional
-  public TypeDeBienDTO creer(TypeDeBien typeDeBien) {
-    ValidationAssistant.valider(typeDeBien);
-    return mapper.toDto(repository.save(typeDeBien));
-  }
+    @Transactional
+    public TypeDeBienDTO creer(TypeDeBien typeDeBien) {
+        ValidationAssistant.valider(typeDeBien);
+        return mapper.toDto(repository.save(typeDeBien));
+    }
 
-  @Transactional
-  public Collection<TypeDeBienDTO> lister() {
-    return mapper.toDto(repository.findAll());
-  }
+    @Transactional
+    public Collection<TypeDeBienDTO> lister() {
+        return mapper.toDto(repository.findAll());
+    }
 
-  @Transactional
-  public TypeDeBienDTO mettreAJour(TypeDeBien typeDeBien) {
-    ValidationAssistant.valider(typeDeBien);
-    TypeDeBien typeDeBienBdd = repository.findById(typeDeBien.getId())
-        .orElseThrow(() -> new BusinessException(""));
-    ObjetUtilitaire.merge(typeDeBienBdd, typeDeBien, TypeDeBien.class);
-    return mapper.toDto(repository.save(typeDeBienBdd));
-  }
+    @Transactional
+    public TypeDeBienDTO mettreAJour(TypeDeBien typeDeBien) {
+        ValidationAssistant.valider(typeDeBien);
+        TypeDeBien typeDeBienBdd = repository.findById(typeDeBien.getId())
+            .orElseThrow(() -> new BusinessException(""));
+        ObjetUtilitaire.merge(typeDeBienBdd, typeDeBien, TypeDeBien.class);
+        return mapper.toDto(repository.save(typeDeBienBdd));
+    }
 }
