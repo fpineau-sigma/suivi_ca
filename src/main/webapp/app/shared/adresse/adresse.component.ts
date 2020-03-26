@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Mode} from '../../core/model/mode.enum';
-import {Adresse} from 'app/core/model/adresse.model';
+import {Mode} from '../../core/model/metier/mode.enum';
+import {Adresse} from 'app/core/model/metier/adresse.model';
 
 
 @Component({

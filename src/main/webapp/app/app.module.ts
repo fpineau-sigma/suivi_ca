@@ -15,7 +15,7 @@ import {ActiveMenuDirective} from './layouts/navbar/active-menu.directive';
 import {ErrorComponent} from './layouts/error/error.component';
 import {ParametrageModule} from 'app/parametrage/parametrage.module';
 import {GestionVentesModule} from 'app/gestion-ventes/gestion-ventes.module';
-import {SuiviCommissionsModule} from 'app/suivi-commissions/suivi-commissions.module';
+import {SuiviCommissionsModule} from 'app/suivi/commissions/suivi-commissions.module';
 import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AngularDateHttpInterceptor} from 'app/core/interceptor/angular-date.interceptor';

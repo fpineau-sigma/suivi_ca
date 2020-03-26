@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {listeCommissionsRoute} from './liste-commissions/liste-commissions.route';
+import {listeCommissionsRoute} from 'app/suivi/commissions/liste-commissions/liste-commissions.route';
 
 
 const SUIVI_COMMISSIONS_ROUTES = [listeCommissionsRoute];

@@ -5,7 +5,7 @@ import {SERVER_API_URL} from 'app/app.constants';
 import {Page} from 'app/core/model/pagination/page.model';
 import {createRequestOption} from 'app/shared/util/request-util';
 import {CriteresRechercheCommission} from 'app/core/model/criteres.recherche/criteresRechercheCommission.model';
-import {Commission} from 'app/core/model/commission.model';
+import {Commission} from 'app/core/model/metier/commission.model';
 
 const url = SERVER_API_URL + 'api/commissions';
 

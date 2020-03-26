@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {TypeDeBiensService} from '../../../core/service/application/typedebiens.service';
+import {TypeDeBiensService} from '../../../core/service/metier/typedebiens.service';
 import {RefreshService} from '../../../core/service/refresh.service';
 import {ToastService} from '../../../core/service/toast.service';
 import {ConfigModalCommun} from '../../../core/configuration/config-modal-commun.class';
-import {Mode} from '../../../core/model/mode.enum';
+import {Mode} from '../../../core/model/metier/mode.enum';
 import {EditerTypeDeBienModalComponent} from '../editer-typedebien/editer-typedebien-modal.component';
-import {TypeDeBien} from '../../../core/model/typedebien.model';
-import {Negociateur} from 'app/core/model/negociateur.model';
+import {TypeDeBien} from '../../../core/model/metier/typedebien.model';
+import {Negociateur} from 'app/core/model/metier/negociateur.model';
 
 
 @Component({

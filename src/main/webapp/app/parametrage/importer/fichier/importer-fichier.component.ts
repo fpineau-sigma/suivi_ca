@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FichierService} from '../../../core/service/application/fichier.service';
+import {FichierService} from '../../../core/service/metier/fichier.service';
 import {ToastService} from '../../../core/service/toast.service';
 
 

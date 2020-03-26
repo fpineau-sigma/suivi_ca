@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Origine} from '../../../core/model/origine.model';
-import {Mode} from '../../../core/model/mode.enum';
+import {Origine} from '../../../core/model/metier/origine.model';
+import {Mode} from '../../../core/model/metier/mode.enum';
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 
 

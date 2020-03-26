@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Negociateur} from 'app/core/model/negociateur.model';
-import {Mode} from 'app/core/model/mode.enum';
+import {Negociateur} from 'app/core/model/metier/negociateur.model';
+import {Mode} from 'app/core/model/metier/mode.enum';
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 
 

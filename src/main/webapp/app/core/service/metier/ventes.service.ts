@@ -1,7 +1,7 @@
 import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Vente} from '../../model/vente.model';
+import {Vente} from '../../model/metier/vente.model';
 import {SERVER_API_URL} from 'app/app.constants';
 import {CriteresRechercheVente} from 'app/core/model/criteres.recherche/criteresRechercheVente.model';
 import {createRequestOption} from 'app/shared/util/request-util';

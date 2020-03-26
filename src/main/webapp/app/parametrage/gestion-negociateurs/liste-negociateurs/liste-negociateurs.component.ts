@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {NegociateursService} from 'app/core/service/application/negociateurs.service';
-import {Negociateur} from 'app/core/model/negociateur.model';
+import {NegociateursService} from 'app/core/service/metier/negociateurs.service';
+import {Negociateur} from 'app/core/model/metier/negociateur.model';
 import {ToastService} from 'app/core/service/toast.service';
 import {RefreshService} from 'app/core/service/refresh.service';
-import {Mode} from 'app/core/model/mode.enum';
+import {Mode} from 'app/core/model/metier/mode.enum';
 import {EditerNegociateurModalComponent} from 'app/parametrage/gestion-negociateurs/editer-negociateur/editer-negociateur-modal.component';
 import {ConfigModalCommun} from 'app/core/configuration/config-modal-commun.class';
 

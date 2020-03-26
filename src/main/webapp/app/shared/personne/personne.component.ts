@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Personne} from '../../core/model/personne.model';
-import {Mode} from '../../core/model/mode.enum';
+import {Personne} from '../../core/model/metier/personne.model';
+import {Mode} from '../../core/model/metier/mode.enum';
 import {Subscription} from 'rxjs';
 
 @Component({
