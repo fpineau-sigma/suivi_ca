@@ -1,12 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {Mode} from '../../../core/model/mode.enum';
-import {Vente} from '../../../core/model/vente.model';
-import {OriginesService} from '../../../core/service/application/origines.service';
+import {Mode} from '../../../core/model/metier/mode.enum';
+import {Vente} from '../../../core/model/metier/vente.model';
+import {OriginesService} from '../../../core/service/metier/origines.service';
 import {Subscription} from 'rxjs';
-import {Origine} from '../../../core/model/origine.model';
-import {TypeDeBiensService} from '../../../core/service/application/typedebiens.service';
-import {TypeDeBien} from '../../../core/model/typedebien.model';
+import {Origine} from '../../../core/model/metier/origine.model';
+import {TypeDeBiensService} from '../../../core/service/metier/typedebiens.service';
+import {TypeDeBien} from '../../../core/model/metier/typedebien.model';
 
 
 @Component({

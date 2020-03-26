@@ -1,9 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ChampVendeurAcquereur} from './acquereurs-vendeurs/editer-vente-acquereurs-vendeurs.component';
-import {Mode} from '../../core/model/mode.enum';
-import {Vente} from '../../core/model/vente.model';
-import {VentesService} from '../../core/service/application/ventes.service';
+import {Mode} from '../../core/model/metier/mode.enum';
+import {Vente} from '../../core/model/metier/vente.model';
+import {VentesService} from '../../core/service/metier/ventes.service';
 import {ChampCommission} from './commissions/editer-vente-commissions.component';
 import {Subscription} from 'rxjs';
 

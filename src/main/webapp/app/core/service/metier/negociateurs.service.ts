@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Negociateur} from '../../model/negociateur.model';
+import {Negociateur} from '../../model/metier/negociateur.model';
 import {SERVER_API_URL} from 'app/app.constants';
 
 

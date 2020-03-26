@@ -1,6 +1,6 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {OriginesService} from '../../core/service/application/origines.service';
+import {OriginesService} from '../../core/service/metier/origines.service';
 import {EditerOrigineModalComponent} from './editer-origine/editer-origine-modal.component';
 import {ListeOriginesComponent} from './liste-origines/liste-origines.component';
 import {gestionOriginesRoute} from './gestion-origines.route';

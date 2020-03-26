@@ -3,7 +3,7 @@ import {RouterModule} from '@angular/router';
 import {importerRoute} from './importer.route';
 import {CaClemenceSharedModule} from 'app/shared/shared.module';
 import {ImporterFichierComponent} from 'app/parametrage/importer/fichier/importer-fichier.component';
-import {FichierService} from 'app/core/service/application/fichier.service';
+import {FichierService} from 'app/core/service/metier/fichier.service';
 
 
 @NgModule({

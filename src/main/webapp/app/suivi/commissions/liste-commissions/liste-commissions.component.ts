@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {ColumnMode} from '@swimlane/ngx-datatable';
-import {CommissionsService} from '../../core/service/application/commissions.service';
+import {CommissionsService} from '../../../core/service/metier/commissions.service';
 import {Page} from 'app/core/model/pagination/page.model';
 import {Tri} from 'app/core/model/pagination/tri.model';
 import {CriteresRechercheCommission} from 'app/core/model/criteres.recherche/criteresRechercheCommission.model';
-import {Commission} from 'app/core/model/commission.model';
+import {Commission} from 'app/core/model/metier/commission.model';
 import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
 import {preparerTriPourServeur} from 'app/shared/util/utilitaire-datatable';
 import {map} from 'rxjs/operators';

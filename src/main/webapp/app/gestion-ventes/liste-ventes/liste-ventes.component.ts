@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
-import {Vente} from '../../core/model/vente.model';
+import {Vente} from '../../core/model/metier/vente.model';
 import {Observable, Subscription} from 'rxjs';
-import {VentesService} from '../../core/service/application/ventes.service';
+import {VentesService} from '../../core/service/metier/ventes.service';
 import {Router} from '@angular/router';
 import {ColumnMode} from '@swimlane/ngx-datatable';
-import {Mode} from '../../core/model/mode.enum';
+import {Mode} from '../../core/model/metier/mode.enum';
 import {Page} from 'app/core/model/pagination/page.model';
 import {Tri} from 'app/core/model/pagination/tri.model';
 import {CriteresRechercheVente} from 'app/core/model/criteres.recherche/criteresRechercheVente.model';

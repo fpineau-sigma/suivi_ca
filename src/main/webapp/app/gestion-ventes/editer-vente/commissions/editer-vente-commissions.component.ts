@@ -1,10 +1,10 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {NegociateursService} from '../../../core/service/application/negociateurs.service';
-import {Mode} from '../../../core/model/mode.enum';
-import {Vente} from '../../../core/model/vente.model';
-import {Commission} from '../../../core/model/commission.model';
-import {Negociateur} from '../../../core/model/negociateur.model';
+import {NegociateursService} from '../../../core/service/metier/negociateurs.service';
+import {Mode} from '../../../core/model/metier/mode.enum';
+import {Vente} from '../../../core/model/metier/vente.model';
+import {Commission} from '../../../core/model/metier/commission.model';
+import {Negociateur} from '../../../core/model/metier/negociateur.model';
 import {Subscription} from 'rxjs';
 import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';

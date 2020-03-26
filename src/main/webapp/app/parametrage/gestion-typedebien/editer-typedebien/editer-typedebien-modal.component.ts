@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Mode} from '../../../core/model/mode.enum';
-import {TypeDeBien} from '../../../core/model/typedebien.model';
+import {Mode} from '../../../core/model/metier/mode.enum';
+import {TypeDeBien} from '../../../core/model/metier/typedebien.model';
 import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 
 

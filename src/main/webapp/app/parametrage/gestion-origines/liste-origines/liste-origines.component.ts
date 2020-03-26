@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Origine} from '../../../core/model/origine.model';
+import {Origine} from '../../../core/model/metier/origine.model';
 import {Subscription} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {OriginesService} from '../../../core/service/application/origines.service';
+import {OriginesService} from '../../../core/service/metier/origines.service';
 import {RefreshService} from '../../../core/service/refresh.service';
 import {ToastService} from '../../../core/service/toast.service';
 import {ConfigModalCommun} from '../../../core/configuration/config-modal-commun.class';
-import {Mode} from '../../../core/model/mode.enum';
+import {Mode} from '../../../core/model/metier/mode.enum';
 import {EditerOrigineModalComponent} from '../editer-origine/editer-origine-modal.component';
-import {Negociateur} from 'app/core/model/negociateur.model';
+import {Negociateur} from 'app/core/model/metier/negociateur.model';
 
 
 @Component({

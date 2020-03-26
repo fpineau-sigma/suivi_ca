@@ -1,9 +1,9 @@
 import {Location} from '@angular/common';
 import {Component, Input} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {Vente} from '../../../core/model/vente.model';
-import {Mode} from '../../../core/model/mode.enum';
-import {VentesService} from '../../../core/service/application/ventes.service';
+import {Vente} from '../../../core/model/metier/vente.model';
+import {Mode} from '../../../core/model/metier/mode.enum';
+import {VentesService} from '../../../core/service/metier/ventes.service';
 import {ToastService} from '../../../core/service/toast.service';
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 

@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {Mode} from '../../../core/model/mode.enum';
-import {Vente} from '../../../core/model/vente.model';
-import {Personne} from '../../../core/model/personne.model';
+import {Mode} from '../../../core/model/metier/mode.enum';
+import {Vente} from '../../../core/model/metier/vente.model';
+import {Personne} from '../../../core/model/metier/personne.model';
 import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
 import {ColumnMode} from '@swimlane/ngx-datatable';
