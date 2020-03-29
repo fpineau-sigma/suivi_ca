@@ -1,5 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ControlContainer, NgForm} from '@angular/forms';
+import {
+  ControlContainer,
+  FormBuilder,
+  FormControlDirective,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import {Mode} from '../../../core/model/metier/mode.enum';
 import {Vente} from '../../../core/model/metier/vente.model';
 import {Personne} from '../../../core/model/metier/personne.model';
@@ -16,7 +22,7 @@ export enum ChampVendeurAcquereur {
 @Component({
   selector: 'jhi-editer-vente-acquereurs-vendeurs',
   templateUrl: './editer-vente-acquereurs-vendeurs.component.html',
-  viewProviders: [{provide: ControlContainer, useExisting: NgForm}]
+  viewProviders: [{provide: ControlContainer, useExisting: FormControlDirective}]
 })
 export class EditerVenteAcquereursVendeursComponent implements OnInit {
 
@@ -31,10 +37,16 @@ export class EditerVenteAcquereursVendeursComponent implements OnInit {
   private personneSelectionnee: Personne;
   public editionEnCours = false;
 
-  constructor(public form: NgForm) {
+  public venteAcquereursForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.venteAcquereursForm = this.formBuilder.group({
+      personneNom: ['', Validators.required],
+      personnePrenom: ['', Validators.required]
+    });
     if (this.champ === ChampVendeurAcquereur.ACQUEREUR) {
       this.personnes = this.vente.acquereurs;
     } else {
@@ -71,6 +83,9 @@ export class EditerVenteAcquereursVendeursComponent implements OnInit {
   }
 
   public ajouterPersonne(): void {
+    this.personneEnEdition.nom = this.venteAcquereursForm.get(['personneNom'])!.value;
+    this.personneEnEdition.prenom = this.venteAcquereursForm.get(['personnePrenom'])!.value;
+
     const index = this.personnes.indexOf(this.personneSelectionnee);
     if (index === -1) {
       this.personnes = [...this.personnes, this.personneEnEdition];

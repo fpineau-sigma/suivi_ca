@@ -1,4 +1,4 @@
-<form #form="ngForm" autocomplete="off" class="card-body" novalidate>
+<form [formGroup]="venteAcquereursForm" autocomplete="off" class="card-body" novalidate>
     <fieldset #fieldSetElement class="card w-100">
         <div class="card-body">
             <div class="row w-100 mx-0">
@@ -51,24 +51,24 @@
             <div *ngIf="editionEnCours" class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <label class="required" for="personne_nom"
+                        <label class="required" for="personneNom"
                                translate="gestion.personne.nom"></label>
-                        <input [(ngModel)]="personneEnEdition.nom"
+                        <input [ngModel]="personneEnEdition.nom"
                                class="form-control"
-                               id="personne_nom"
-                               name="personne_nom"
-                               required/>
+                               id="personneNom"
+                               name="personneNom"
+                               formControlName="personneNom"/>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <label class="required" for="personne_prenom"
+                        <label class="required" for="personnePrenom"
                                translate="gestion.personne.prenom"></label>
-                        <input [(ngModel)]="personneEnEdition.prenom"
+                        <input [ngModel]="personneEnEdition.prenom"
                                class="form-control"
-                               id="personne_prenom"
-                               name="personne_prenom"
-                               required/>
+                               id="personnePrenom"
+                               name="personnePrenom"
+                               formControlName="personnePrenom"/>
                     </div>
                 </div>
                 <div class="col-4 text-right mt-4">
@@ -77,6 +77,7 @@
                             translate='global.commun.bouton.annuler'></button>
                     <button id="validerAjoutPersonne" class="btn btn-primary"
                             (click)="ajouterPersonne()"
+                            [disabled]="!venteAcquereursForm.valid"
                             translate='global.commun.bouton.valider'></button>
                 </div>
             </div>

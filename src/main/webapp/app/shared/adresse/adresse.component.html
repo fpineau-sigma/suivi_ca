@@ -1,53 +1,53 @@
-<form #form="ngForm" autocomplete="off" class="card-body" novalidate>
+<form formGroupName="_adresse" autocomplete="off" class="card-body" novalidate>
     <fieldset #fieldSetElement class="card w-100">
         <div class="card-body">
             <!-- Ligne 1 : Adresse Numero -->
             <div class="row align-items-end">
                 <div class="col-3">
                     <div class="form-group">
-                        <label class="required" for="adresse_numero"
+                        <label class="required" for="adresseNumero"
                                translate="gestion.adresse.numero"></label>
-                        <input [(ngModel)]="adresseEditer.numeroVoie"
+                        <input [ngModel]="adresse.numeroVoie"
                                class="form-control"
-                               id="adresse_numero"
-                               name="adresse_numero"
-                               required/>
+                               id="adresseNumero"
+                               name="adresseNumero"
+                               formControlName="adresseNumero"/>
                     </div>
                 </div>
                 <!-- Ligne 1 : Adresse nomVoie -->
                 <div class="col-3">
                     <div class="form-group">
-                        <label class="required" for="adresse_nomVoie"
+                        <label class="required" for="adresseNomVoie"
                                translate="gestion.adresse.nom.voie"></label>
-                        <input [(ngModel)]="adresseEditer.nomVoie"
+                        <input [ngModel]="adresse.nomVoie"
                                class="form-control"
-                               id="adresse_nomVoie"
-                               name="adresse_nomVoie"
-                               required/>
+                               id="adresseNomVoie"
+                               name="adresseNomVoie"
+                               formControlName="adresseNomVoie"/>
                     </div>
                 </div>
                 <!-- Ligne 2 : Adresse code Postal -->
                 <div class="col-3">
                     <div class="form-group">
-                        <label class="required" for="adresse_codePostal"
+                        <label class="required" for="adresseCodePostal"
                                translate="gestion.adresse.code.postal"></label>
-                        <input [(ngModel)]="adresseEditer.codePostal"
+                        <input [ngModel]="adresse.codePostal"
                                class="form-control"
-                               id="adresse_codePostal"
-                               name="adresse_codePostal"
-                               required/>
+                               id="adresseCodePostal"
+                               name="adresseCodePostal"
+                               formControlName="adresseCodePostal"/>
                     </div>
                 </div>
                 <!-- Ligne 2 : Adresse Ville -->
                 <div class="col-3">
                     <div class="form-group">
-                        <label class="required" for="adresse_ville"
+                        <label class="required" for="adresseVille"
                                translate="gestion.adresse.ville"></label>
-                        <input [(ngModel)]="adresseEditer.ville"
+                        <input [ngModel]="adresse.ville"
                                class="form-control"
-                               id="adresse_ville"
-                               name="adresse_ville"
-                               required/>
+                               id="adresseVille"
+                               name="adresseVille"
+                               formControlName="adresseVille"/>
                     </div>
                 </div>
             </div>

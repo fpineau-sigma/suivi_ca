@@ -24,7 +24,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 export function getDatepickerConfig(): BsDatepickerConfig {
   return Object.assign(new BsDatepickerConfig(), {
     containerClass: 'theme-dark-blue',
-    adaptivePosition: true
+    adaptivePosition: true,
+    dateInputFormat: 'DD/MM/YYYY',
   });
 }
 

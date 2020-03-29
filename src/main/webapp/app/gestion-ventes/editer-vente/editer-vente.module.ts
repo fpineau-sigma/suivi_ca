@@ -7,6 +7,8 @@ import {EditerVenteActionComponent} from './action/editer-vente-action.component
 import {EditerVenteCommissionsComponent} from './commissions/editer-vente-commissions.component';
 import {EditerVenteHonorairesComponent} from './honoraires/editer-vente-honoraires.component';
 import {CaClemenceSharedModule} from 'app/shared/shared.module';
+import {BsDatepickerConfig} from 'ngx-bootstrap';
+import {getDatepickerConfig} from 'app/app.module';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import {CaClemenceSharedModule} from 'app/shared/shared.module';
     EditerVenteHonorairesComponent,
     EditerVenteAcquereursVendeursComponent,
     EditerVenteCommissionsComponent
-  ]
+  ],
+  providers: [{provide: BsDatepickerConfig, useFactory: getDatepickerConfig}]
 })
 
 export class EditerVenteModule {

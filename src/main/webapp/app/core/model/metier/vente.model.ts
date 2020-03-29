@@ -4,12 +4,27 @@ import {Personne} from './personne.model';
 import {Origine} from './origine.model';
 import {TypeDeBien} from './typedebien.model';
 
-
-export class Vente {
+export interface IVente {
   id?: number;
   dateCompromis?: Date;
   dateActeAuthentique?: Date;
-  typeBien?: TypeDeBien;
+  typeDeBien?: TypeDeBien;
+  numeroFacture?: string;
+  commissionsEntree?: Commission[];
+  commissionsSortie?: Commission[];
+  origine?: Origine;
+  honorairesTTC?: number;
+  honorairesHT?: number;
+  adresse?: Adresse;
+  vendeurs?: Personne[];
+  acquereurs?: Personne[];
+}
+
+export class Vente implements IVente {
+  id?: number;
+  dateCompromis?: Date;
+  dateActeAuthentique?: Date;
+  typeDeBien?: TypeDeBien;
   numeroFacture?: string;
   commissionsEntree?: Commission[] = [];
   commissionsSortie?: Commission[] = [];

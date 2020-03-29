@@ -10,8 +10,8 @@
                 <fa-icon icon="times" class="ml-2"></fa-icon>
             </button>
             <button (click)="modifierVente()"
-                    [ngClass]="!form.valid ? 'btn.disabled': 'btn-success'"
-                    [disabled]="!form.valid"
+                    [ngClass]="!venteForm.form.valid ? 'btn.disabled': 'btn-success'"
+                    [disabled]="!venteForm.form.valid"
                     *ngIf="mode === Mode.EDITION"
                     class="btn"
                     id="btnConfirmerModification"
@@ -21,8 +21,8 @@
             </button>
             <button (click)="enregistrerVente()"
                     *ngIf="mode === Mode.CREATION"
-                    [ngClass]="!form.valid ? 'btn.disabled': 'btn-success'"
-                    [disabled]="!form.valid"
+                    [ngClass]="!venteForm.form.valid ? 'btn.disabled': 'btn-success'"
+                    [disabled]="!venteForm.form.valid"
                     class="btn"
                     id="btnAjouterVente"
                     type="button">

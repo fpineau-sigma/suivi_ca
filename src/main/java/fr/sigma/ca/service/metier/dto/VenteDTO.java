@@ -19,7 +19,7 @@ public class VenteDTO extends DTO {
     private LocalDate dateActeAuthentique;
     private LocalDate dateCompromis;
     private String numeroFacture;
-    private TypeDeBienDTO typeBien;
+    private TypeDeBienDTO typeDeBien;
     private Collection<CommissionDTO> commissionsEntree;
     private Collection<CommissionDTO> commissionsSortie;
     private OrigineDTO origine;
@@ -35,7 +35,7 @@ public class VenteDTO extends DTO {
         LocalDate dateActeAuthentique,
         LocalDate dateCompromis,
         String numeroFacture,
-        TypeDeBienDTO typeBien,
+        TypeDeBienDTO typeDeBien,
         Collection<CommissionDTO> commissionsEntree,
         Collection<CommissionDTO> commissionsSortie,
         OrigineDTO origine,
@@ -49,7 +49,7 @@ public class VenteDTO extends DTO {
         this.dateActeAuthentique = dateActeAuthentique;
         this.dateCompromis = dateCompromis;
         this.numeroFacture = numeroFacture;
-        this.typeBien = typeBien;
+        this.typeDeBien = typeDeBien;
         this.commissionsEntree = commissionsEntree;
         this.commissionsSortie = commissionsSortie;
         this.origine = origine;
