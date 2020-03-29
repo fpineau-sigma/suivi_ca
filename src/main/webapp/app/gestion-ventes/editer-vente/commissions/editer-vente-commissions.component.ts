@@ -1,5 +1,11 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ControlContainer, NgForm} from '@angular/forms';
+import {
+  ControlContainer,
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators
+} from '@angular/forms';
 import {NegociateursService} from '../../../core/service/metier/negociateurs.service';
 import {Mode} from '../../../core/model/metier/mode.enum';
 import {Vente} from '../../../core/model/metier/vente.model';
@@ -20,7 +26,7 @@ export enum ChampCommission {
 @Component({
   selector: 'jhi-editer-vente-commissions',
   templateUrl: './editer-vente-commissions.component.html',
-  viewProviders: [{provide: ControlContainer, useExisting: NgForm}]
+  viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]
 })
 export class EditerVenteCommissionsComponent implements OnInit, OnDestroy {
 
@@ -39,11 +45,19 @@ export class EditerVenteCommissionsComponent implements OnInit, OnDestroy {
   private commissionSelectionnee: Commission;
   public editionEnCours = false;
 
-  constructor(public form: NgForm,
-              private  negociateursService: NegociateursService) {
+  public venteCommissionForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private  negociateursService: NegociateursService) {
   }
 
   ngOnInit(): void {
+    this.venteCommissionForm = this.formBuilder.group({
+      commissionNegociateur: ['', Validators.required],
+      commissionPourcentage: ['', [Validators.required, Validators.pattern("^[0-9]*?")]],
+      commissionMontantHt: ['', [Validators.required, Validators.pattern("[0-9]+(\\.[0-9][0-9]?)?")]]
+    });
     this.subscriptions.push(this.negociateursService.lister().subscribe((res: Negociateur[]) => {
       this.negociateurs = res;
     }));
@@ -91,6 +105,10 @@ export class EditerVenteCommissionsComponent implements OnInit, OnDestroy {
   }
 
   public ajouterCommission(): void {
+    this.commissionEnEdition.negociateur = this.venteCommissionForm.get(['commissionNegociateur'])!.value;
+    this.commissionEnEdition.pourcentage = this.venteCommissionForm.get(['commissionPourcentage'])!.value;
+    this.commissionEnEdition.montantHT = this.venteCommissionForm.get(['commissionMontantHt'])!.value;
+
     const index = this.commissions.indexOf(this.commissionSelectionnee);
     if (index === -1) {
       this.commissions = [...this.commissions, this.commissionEnEdition];

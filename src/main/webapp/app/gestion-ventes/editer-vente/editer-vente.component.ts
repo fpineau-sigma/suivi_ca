@@ -6,6 +6,7 @@ import {Vente} from '../../core/model/metier/vente.model';
 import {VentesService} from '../../core/service/metier/ventes.service';
 import {ChampCommission} from './commissions/editer-vente-commissions.component';
 import {Subscription} from 'rxjs';
+import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -17,14 +18,15 @@ export class EditerVenteComponent implements OnInit, OnDestroy {
   @Input() public vente: Vente;
   @Input() public mode: Mode;
 
-  public venteEditer: Vente;
   // Liste subscription
   private readonly subscriptions: Subscription[] = [];
 
   public id: number;
+  public venteForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private ventesService: VentesService) {
+    this.venteForm = new FormGroup({});
     this.subscriptions.push(this.route.params.subscribe((params) => {
       if (params.mode) {
         this.mode = Mode[Mode[params.mode]];
@@ -32,17 +34,15 @@ export class EditerVenteComponent implements OnInit, OnDestroy {
       if (params.id) {
         this.id = params.id;
         this.subscriptions.push(this.ventesService.lire(this.id).subscribe((vente: Vente) => {
-          this.venteEditer = vente;
+          this.vente = vente;
         }));
       } else {
-        this.venteEditer = new Vente();
+        this.vente = new Vente();
       }
     }));
   }
 
   public ngOnInit(): void {
-
-
   }
 
   ngOnDestroy(): void {

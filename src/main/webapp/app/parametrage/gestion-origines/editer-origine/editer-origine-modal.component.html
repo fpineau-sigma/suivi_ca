@@ -1,5 +1,5 @@
 <main class="container-fluid" role="main">
-    <form #form="ngForm" autocomplete="off" class="card-body" novalidate>
+    <form autocomplete="off" class="card-body" [formGroup]="registerForm" novalidate>
         <fieldset #fieldSetElement class="align-items-end">
             <div class="row align-items-start mb-2">
                 <div class="col-12">
@@ -7,7 +7,7 @@
                         translate="gestion.origine.creation.titre"></h5>
                     <h5
                         *ngIf="mode === ModeEnum.EDITION"> {{ 'gestion.origine.modification.titre' | translate }}
-                        &mdash; {{origineEditer.libelle}}</h5>
+                        &mdash; {{origine.libelle}}</h5>
                 </div>
             </div>
             <!-- Ligne 1 : Libellé -->
@@ -16,11 +16,11 @@
                     <div class="form-group">
                         <label class="required" for="origine_libelle"
                                translate="gestion.origine.libelle"></label>
-                        <input [(ngModel)]="origineEditer.libelle"
+                        <input [ngModel]="origine.libelle"
                                class="form-control"
+                               formControlName="libelle"
                                id="origine_libelle"
-                               name="origine_libelle"
-                               required/>
+                               name="origine_libelle"/>
                     </div>
                 </div>
             </div>
@@ -43,20 +43,20 @@
                         {{ "global.commun.bouton.fermer" | translate }}
                         <fa-icon icon="times" class="ml-2"></fa-icon>
                     </button>
-                    <button (click)="enregistrer.emit(origineEditer)"
+                    <button (click)="onEnregistrer()"
                             *ngIf="mode === ModeEnum.CREATION"
-                            [disabled]="!form.valid"
-                            [ngClass]="form.valid ? 'btn-success': 'btn.disabled'"
+                            [disabled]="!registerForm.valid"
+                            [ngClass]="registerForm.valid ? 'btn-success': 'btn.disabled'"
                             class="btn mt-5"
                             id="btnConfirmerCreation"
                             type="button">
                         {{ "global.commun.bouton.creer" | translate }}
                         <fa-icon [icon]="faCheck" class="ml-2"></fa-icon>
                     </button>
-                    <button (click)="modifier.emit(origineEditer)"
+                    <button (click)="onModifier()"
                             *ngIf="mode === ModeEnum.EDITION"
-                            [disabled]="!form.valid"
-                            [ngClass]="form.valid ? 'btn-success' : 'btn.disabled'"
+                            [disabled]="!registerForm.valid"
+                            [ngClass]="registerForm.valid ? 'btn-success' : 'btn.disabled'"
                             class="btn mt-5"
                             id="btnConfirmerModification"
                             type="button">

@@ -9,6 +9,11 @@ import {TranslateModule} from '@ngx-translate/core';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 
+import {defineLocale} from 'ngx-bootstrap/chronos';
+import {frLocale} from 'ngx-bootstrap/locale';
+
+defineLocale('fr', frLocale);
+
 @NgModule({
   exports: [
     FormsModule,

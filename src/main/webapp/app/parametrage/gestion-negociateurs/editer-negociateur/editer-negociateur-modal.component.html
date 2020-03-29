@@ -1,5 +1,5 @@
 <main class="container-fluid" role="main">
-    <form #form="ngForm" autocomplete="off" class="card-body" novalidate>
+    <form [formGroup]="registerForm" autocomplete="off" class="card-body" novalidate>
         <fieldset #fieldSetElement class="align-items-end">
             <div class="row align-items-start mb-2">
                 <div class="col-12">
@@ -7,7 +7,7 @@
                         translate="gestion.negociateur.creation.titre"></h5>
                     <h5
                         *ngIf="mode === ModeEnum.EDITION"> {{ 'gestion.negociateur.modification.titre' | translate }}
-                        &mdash; {{negociateurEditer.nomCourt}}</h5>
+                        &mdash; {{negociateur.nomCourt}}</h5>
                 </div>
             </div>
             <!-- Ligne 1 : Nom -->
@@ -16,11 +16,11 @@
                     <div class="form-group">
                         <label class="required" for="negociateur_nom"
                                translate="gestion.negociateur.nom"></label>
-                        <input [(ngModel)]="negociateurEditer.nom"
+                        <input [ngModel]="negociateur.nom"
                                class="form-control"
                                id="negociateur_nom"
                                name="negociateur_nom"
-                               required/>
+                               formControlName="nom"/>
                     </div>
                 </div>
                 <!-- Ligne 1 : Prénom -->
@@ -28,11 +28,11 @@
                     <div class="form-group">
                         <label class="required" for="negociateur_prenom"
                                translate="gestion.negociateur.prenom"></label>
-                        <input [(ngModel)]="negociateurEditer.prenom"
+                        <input [ngModel]="negociateur.prenom"
                                class="form-control"
                                id="negociateur_prenom"
                                name="negociateur_prenom"
-                               required/>
+                               formControlName="prenom"/>
                     </div>
                 </div>
             </div>
@@ -42,11 +42,11 @@
                     <div class="form-group">
                         <label class="required" for="negociateur_nomCourt"
                                translate="gestion.negociateur.nomCourt"></label>
-                        <input [(ngModel)]="negociateurEditer.nomCourt"
+                        <input [ngModel]="negociateur.nomCourt"
                                class="form-control"
                                id="negociateur_nomCourt"
                                name="negociateur_nomCourt"
-                               required/>
+                               formControlName="nomCourt"/>
                     </div>
                 </div>
                 <!-- Ligne 2 : Actif/Inactif -->
@@ -57,21 +57,22 @@
                         <div class="row">
                             <div class="col">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input [(ngModel)]="negociateurEditer.actif"
-                                           required
+                                    <input [ngModel]="negociateur.actif"
                                            [value]="true"
                                            class="custom-control-input" id="negociateur_actif_oui"
-                                           name="negociateur_actif"
+                                           name="actif"
+                                           formControlName="actif"
                                            type="radio"/>
                                     <label class="custom-control-label font-weight-normal"
                                            for="negociateur_actif_oui"
                                            translate="global.commun.champ.oui"></label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input [(ngModel)]="negociateurEditer.actif"
+                                    <input [ngModel]="negociateur.actif"
                                            [value]="false"
                                            class="custom-control-input" id="negociateur_actif_non"
-                                           name="negociateur_actif"
+                                           name="actif"
+                                           formControlName="actif"
                                            type="radio"/>
                                     <label class="custom-control-label font-weight-normal"
                                            for="negociateur_actif_non"
@@ -101,20 +102,20 @@
                         {{ "global.commun.bouton.fermer" | translate }}
                         <fa-icon icon="times" class="ml-2"></fa-icon>
                     </button>
-                    <button (click)="enregistrer.emit(negociateurEditer)"
+                    <button (click)="onEnregistrer()"
                             *ngIf="mode === ModeEnum.CREATION"
-                            [disabled]="!form.valid"
-                            [ngClass]="form.valid ? 'btn-success': 'btn.disabled'"
+                            [disabled]="!registerForm.valid"
+                            [ngClass]="registerForm.valid ? 'btn-success': 'btn.disabled'"
                             class="btn mt-5"
                             id="btnConfirmerCreation"
                             type="button">
                         {{ "global.commun.bouton.creer" | translate }}
                         <fa-icon [icon]="faCheck" class="ml-2"></fa-icon>
                     </button>
-                    <button (click)="modifier.emit(negociateurEditer)"
+                    <button (click)="onModifier()"
                             *ngIf="mode === ModeEnum.EDITION"
-                            [disabled]="!form.valid"
-                            [ngClass]="form.valid ? 'btn-success' : 'btn.disabled'"
+                            [disabled]="!registerForm.valid"
+                            [ngClass]="registerForm.valid ? 'btn-success' : 'btn.disabled'"
                             class="btn mt-5"
                             id="btnConfirmerModification"
                             type="button">

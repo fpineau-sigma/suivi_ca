@@ -194,6 +194,14 @@ header {
   font-size: .85rem;
 }
 
+/* Forms */
+.form-group {
+  label {
+    font-weight: 700;
+    font-size: inherit;
+  }
+}
+
 main {
   h1 {
     color: inherit;
@@ -205,15 +213,6 @@ main {
     font-size: 1.4rem;
     font-weight: 100;
   }
-
-  /* Forms */
-  .form-group {
-    label {
-      font-weight: 700;
-      font-size: inherit;
-    }
-  }
-
 
   .card {
     border-radius: 5px;
