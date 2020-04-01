@@ -1,18 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {
-  ControlContainer,
-  FormBuilder,
-  FormControlDirective,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import {Mode} from '../../../core/model/metier/mode.enum';
-import {Vente} from '../../../core/model/metier/vente.model';
-import {Personne} from '../../../core/model/metier/personne.model';
-import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
-import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
-import {ColumnMode} from '@swimlane/ngx-datatable';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { ControlContainer, FormBuilder, FormControlDirective, FormGroup, Validators } from '@angular/forms';
+import { Mode } from '../../../core/model/metier/mode.enum';
+import { Vente } from '../../../core/model/metier/vente.model';
+import { Personne } from '../../../core/model/metier/personne.model';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 export enum ChampVendeurAcquereur {
   ACQUEREUR,
@@ -22,10 +15,9 @@ export enum ChampVendeurAcquereur {
 @Component({
   selector: 'jhi-editer-vente-acquereurs-vendeurs',
   templateUrl: './editer-vente-acquereurs-vendeurs.component.html',
-  viewProviders: [{provide: ControlContainer, useExisting: FormControlDirective}]
+  viewProviders: [{ provide: ControlContainer, useExisting: FormControlDirective }]
 })
 export class EditerVenteAcquereursVendeursComponent implements OnInit {
-
   @Input() public mode: Mode;
   @Input() public vente: Vente;
   @Input() public champ: ChampVendeurAcquereur;
@@ -39,8 +31,7 @@ export class EditerVenteAcquereursVendeursComponent implements OnInit {
 
   public venteAcquereursForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.venteAcquereursForm = this.formBuilder.group({
@@ -107,4 +98,3 @@ export class EditerVenteAcquereursVendeursComponent implements OnInit {
     }
   }
 }
-

@@ -1,4 +1,4 @@
-import {Negociateur} from './negociateur.model';
+import { Negociateur } from './negociateur.model';
 
 export class Commission {
   public id?: number;

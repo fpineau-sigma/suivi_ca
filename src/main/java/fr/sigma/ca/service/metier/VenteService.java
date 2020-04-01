@@ -43,9 +43,11 @@ public class VenteService {
     }
 
     @Transactional
-    public Page<VenteDTO> lister(CriteresRechercheVenteDto criteresRechercheVenteDto,
+    public Page<VenteDTO> lister(Long exerciceId,
+        CriteresRechercheVenteDto criteresRechercheVenteDto,
         Pageable pageable) {
         BooleanBuilder predicate = new BooleanBuilder();
+        predicate.and(QVente.vente.exerciceId.eq(exerciceId));
         if (null != criteresRechercheVenteDto) {
             predicate.and(QVente.vente.commissionsEntree.any().negociateur
                 .nomCourt.eq(criteresRechercheVenteDto.getNegociateur().getNomCourt()));

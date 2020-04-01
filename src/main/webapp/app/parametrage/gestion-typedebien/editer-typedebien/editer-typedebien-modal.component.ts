@@ -1,16 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Mode} from '../../../core/model/metier/mode.enum';
-import {TypeDeBien} from '../../../core/model/metier/typedebien.model';
-import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Mode } from '../../../core/model/metier/mode.enum';
+import { TypeDeBien } from '../../../core/model/metier/typedebien.model';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'jhi-typedebien',
   templateUrl: './editer-typedebien-modal.component.html'
 })
 export class EditerTypeDeBienModalComponent implements OnInit {
-
   @Output() public enregistrer: EventEmitter<TypeDeBien> = new EventEmitter();
   @Output() public modifier: EventEmitter<TypeDeBien> = new EventEmitter();
   @Output() public annuler: EventEmitter<void> = new EventEmitter();
@@ -21,8 +19,7 @@ export class EditerTypeDeBienModalComponent implements OnInit {
   public faCheck = faCheck;
   public registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   public ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -51,7 +48,6 @@ export class EditerTypeDeBienModalComponent implements OnInit {
   private updateTypeDeBien(typeDeBien: TypeDeBien): void {
     typeDeBien.libelle = this.registerForm.get(['libelle'])!.value;
   }
-
 
   get ModeEnum(): typeof Mode {
     return Mode;

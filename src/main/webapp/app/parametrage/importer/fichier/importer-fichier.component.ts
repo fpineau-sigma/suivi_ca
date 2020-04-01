@@ -1,22 +1,16 @@
-import {Component} from '@angular/core';
-import {FichierService} from '../../../core/service/metier/fichier.service';
-import {ToastService} from '../../../core/service/toast.service';
-
+import { Component } from '@angular/core';
+import { FichierService } from '../../../core/service/metier/fichier.service';
+import { ToastService } from '../../../core/service/toast.service';
 
 @Component({
   selector: 'jhi-importer-fichier',
   templateUrl: './importer-fichier.component.html'
 })
 export class ImporterFichierComponent {
-
   public nomFichier: string;
   public fichier!: File;
 
-  constructor(
-    private fichierService: FichierService,
-    private toastService: ToastService
-  ) {
-  }
+  constructor(private fichierService: FichierService, private toastService: ToastService) {}
 
   /**
    * Fonction qui permet d'importer un fichier
@@ -40,5 +34,4 @@ export class ImporterFichierComponent {
       this.fichier = event.target.files[0];
     }
   }
-
 }

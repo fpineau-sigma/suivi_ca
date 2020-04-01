@@ -1,9 +1,10 @@
 package fr.sigma.ca.entite.metier;
 
-import fr.sigma.ca.integration.persistence.Entite;
+import fr.sigma.ca.integration.persistence.EntiteAgence;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,7 +22,11 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Vente extends Entite {
+public class Vente extends EntiteAgence {
+
+    @Basic
+    @Column(name = "exercice_id", nullable = false)
+    private Long exerciceId;
 
     @NotNull
     @Column(nullable = false)

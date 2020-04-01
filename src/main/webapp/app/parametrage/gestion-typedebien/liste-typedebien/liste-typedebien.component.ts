@@ -1,43 +1,42 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {TypeDeBiensService} from '../../../core/service/metier/typedebiens.service';
-import {RefreshService} from '../../../core/service/refresh.service';
-import {ToastService} from '../../../core/service/toast.service';
-import {ConfigModalCommun} from '../../../core/configuration/config-modal-commun.class';
-import {Mode} from '../../../core/model/metier/mode.enum';
-import {EditerTypeDeBienModalComponent} from '../editer-typedebien/editer-typedebien-modal.component';
-import {TypeDeBien} from '../../../core/model/metier/typedebien.model';
-import {Negociateur} from 'app/core/model/metier/negociateur.model';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { TypeDeBiensService } from '../../../core/service/metier/typedebiens.service';
+import { RefreshService } from '../../../core/service/refresh.service';
+import { ToastService } from '../../../core/service/toast.service';
+import { ConfigModalCommun } from '../../../core/configuration/config-modal-commun.class';
+import { Mode } from '../../../core/model/metier/mode.enum';
+import { EditerTypeDeBienModalComponent } from '../editer-typedebien/editer-typedebien-modal.component';
+import { TypeDeBien } from '../../../core/model/metier/typedebien.model';
+import { Negociateur } from 'app/core/model/metier/negociateur.model';
 
 @Component({
   selector: 'jhi-typedebiens',
   templateUrl: './liste-typedebien.component.html'
 })
 export class ListeTypeDeBienComponent implements OnInit, OnDestroy {
-
   public typeDeBiens: TypeDeBien[] = [];
   // Liste subscription
   private readonly subscriptions: Subscription[] = [];
   private modalActive: BsModalRef | undefined;
 
   constructor(
-    private  typeDeBiensService: TypeDeBiensService,
-    private  toastService: ToastService,
-    private  modalService: BsModalService,
-    private  refreshService: RefreshService
-  ) {
-  }
+    private typeDeBiensService: TypeDeBiensService,
+    private toastService: ToastService,
+    private modalService: BsModalService,
+    private refreshService: RefreshService
+  ) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(this.typeDeBiensService.lister().subscribe((res: TypeDeBien[]) => {
-      this.typeDeBiens = res;
-    }));
+    this.subscriptions.push(
+      this.typeDeBiensService.lister().subscribe((res: TypeDeBien[]) => {
+        this.typeDeBiens = res;
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
+    this.subscriptions.forEach(subscription => {
       if (subscription) {
         subscription.unsubscribe();
       }
@@ -46,13 +45,16 @@ export class ListeTypeDeBienComponent implements OnInit, OnDestroy {
 
   // Ouverture de la modal des négociateurs
   public ouvrirModalTypeDeBien(typeDeBien: TypeDeBien, mode: Mode): void {
-    this.modalActive = this.modalService.show(EditerTypeDeBienModalComponent, Object.assign(new ConfigModalCommun(), {
-      class: 'modal-dialog-centered modal-lg',
-      initialState: {
-        mode,
-        typeDeBien
-      }
-    }));
+    this.modalActive = this.modalService.show(
+      EditerTypeDeBienModalComponent,
+      Object.assign(new ConfigModalCommun(), {
+        class: 'modal-dialog-centered modal-lg',
+        initialState: {
+          mode,
+          typeDeBien
+        }
+      })
+    );
     this.subscriptions.push(
       (this.modalActive.content as EditerTypeDeBienModalComponent).fermer.subscribe(() => {
         this.fermerModal();

@@ -1,18 +1,11 @@
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-  HttpResponse
-} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 // tslint:disable:no-any
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AngularDateHttpInterceptor implements HttpInterceptor {
-
   public static estDateValide(value: string): boolean {
     if (value === null || value === undefined) {
       return false;
@@ -36,17 +29,17 @@ export class AngularDateHttpInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
     if (['PUT', 'POST', 'PATCH'].includes(req.method)) {
-      newReq = req.clone({body: this.ajoutTimeZoneDate(req.body)});
+      newReq = req.clone({ body: this.ajoutTimeZoneDate(req.body) });
     }
 
     return next.handle(newReq).pipe(
       tap((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            const body = event.body;
-            this.convertirEnDate(body);
-          }
+        if (event instanceof HttpResponse) {
+          const body = event.body;
+          this.convertirEnDate(body);
         }
-      ));
+      })
+    );
   }
 
   /**
@@ -66,16 +59,19 @@ export class AngularDateHttpInterceptor implements HttpInterceptor {
     const newBody = Object.assign(Array.isArray(body) ? [] : {}, body);
 
     // filtre seulements les dates ou les objets
-    Object.keys(newBody).filter(
-      // On filtre sur les champs Date ainsi que sur les objects qui peuvent contenir des dates
-      cle => newBody[cle] instanceof Date || newBody[cle] instanceof Object).forEach(cle => {
-      const valeur = newBody[cle];
-      if (valeur instanceof Date) {
-        newBody[cle] = AngularDateHttpInterceptor.ajoutDateTimeZoneOffset(valeur);
-      } else {
-        this.ajoutTimeZoneDate(valeur);
-      }
-    });
+    Object.keys(newBody)
+      .filter(
+        // On filtre sur les champs Date ainsi que sur les objects qui peuvent contenir des dates
+        cle => newBody[cle] instanceof Date || newBody[cle] instanceof Object
+      )
+      .forEach(cle => {
+        const valeur = newBody[cle];
+        if (valeur instanceof Date) {
+          newBody[cle] = AngularDateHttpInterceptor.ajoutDateTimeZoneOffset(valeur);
+        } else {
+          this.ajoutTimeZoneDate(valeur);
+        }
+      });
 
     return newBody;
   }
@@ -94,16 +90,15 @@ export class AngularDateHttpInterceptor implements HttpInterceptor {
     }
 
     // filtre seulements les dates ou les objets
-    Object.keys(body).filter(
-      cle => cle.startsWith('date')
-        && AngularDateHttpInterceptor.estDateValide(body[cle])
-        || typeof body[cle] === 'object').forEach(cle => {
-      const valeur = body[cle];
-      if (typeof valeur === 'string') {
-        body[cle] = new Date(valeur);
-      } else if (typeof valeur === 'object') {
-        this.convertirEnDate(valeur);
-      }
-    });
+    Object.keys(body)
+      .filter(cle => (cle.startsWith('date') && AngularDateHttpInterceptor.estDateValide(body[cle])) || typeof body[cle] === 'object')
+      .forEach(cle => {
+        const valeur = body[cle];
+        if (typeof valeur === 'string') {
+          body[cle] = new Date(valeur);
+        } else if (typeof valeur === 'object') {
+          this.convertirEnDate(valeur);
+        }
+      });
   }
 }

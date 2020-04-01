@@ -9,7 +9,45 @@
        aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
     </a>
-    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="agence" translate="global.menu.agence"
+                   class="nav-link"></label>
+            <div *ngIf="agences?.length === 1">
+                <span>{{agences[0].libelle}}</span>
+            </div>
+            <div *ngIf="agences?.length > 1">
+                <ng-select [(ngModel)]="agenceSelectionnee"
+                           id="agence"
+                           name="agence"
+                           [items]="agences"
+                           [clearable]="false"
+                           bindLabel="libelle"
+                           (change)="changeAgence()"
+                           class="ng-select-taille-min"
+                ></ng-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exercice" translate="global.menu.exercice" class="nav-link"></label>
+            <div *ngIf="exercices?.length === 1">
+                <span>{{exercices[0].libelle}}</span>
+            </div>
+            <div *ngIf="exercices?.length > 1">
+                <ng-select [(ngModel)]="exerciceSelectionne"
+                           id="exercice"
+                           name="exercice"
+                           [items]="exercices"
+                           [clearable]="false"
+                           bindLabel="libelle"
+                           (change)="changeExercice()"
+                           class="ng-select-taille-min"
+                ></ng-select>
+            </div>
+        </div>
+    </div>
+    <div class="navbar-collapse collapse" id="navbarResponsive"
+         [ngbCollapse]="isNavbarCollapsed"
          [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" routerLinkActive="active"
@@ -22,7 +60,8 @@
                 </a>
             </li>
             <!-- Parametrage -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer"
+                display="dynamic"
                 routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
                    id="entity-menu">
@@ -44,7 +83,8 @@
                     <li>
                         <a class="dropdown-item" routerLink="parametrage/origines"
                            routerLinkActive="active" (click)="collapseNavbar()">
-                            <span jhiTranslate="global.menu.parametrage.origines">Origines</span>
+                                <span
+                                    jhiTranslate="global.menu.parametrage.origines">Origines</span>
                         </a>
                     </li>
                     <li>
@@ -55,6 +95,22 @@
                                 jhiTranslate="global.menu.parametrage.typedebiens">Types de biens</span>
                         </a>
                     </li>
+                    <div class="dropdown-divider"></div>
+                    <li>
+                        <a class="dropdown-item" routerLink="parametrage/agences"
+                           routerLinkActive="active" (click)="collapseNavbar()">
+                            <span jhiTranslate="global.menu.parametrage.agences">Agences</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="parametrage/exercices"
+                           routerLinkActive="active"
+                           (click)="collapseNavbar()">
+                            <span
+                                jhiTranslate="global.menu.parametrage.exercices">Exercices</span>
+                        </a>
+                    </li>
+                    <div class="dropdown-divider"></div>
                     <li>
                         <a class="dropdown-item" routerLink="parametrage/importdonnees"
                            routerLinkActive="active" (click)="collapseNavbar()">
@@ -92,7 +148,8 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active"
+                        <a class="dropdown-item" routerLink="admin/health"
+                           routerLinkActive="active"
                            (click)="collapseNavbar()">
                             <fa-icon icon="heart" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.admin.health">Health</span>
@@ -107,21 +164,24 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="admin/audits" routerLinkActive="active"
+                        <a class="dropdown-item" routerLink="admin/audits"
+                           routerLinkActive="active"
                            (click)="collapseNavbar()">
                             <fa-icon icon="bell" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.admin.audits">Audits</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active"
+                        <a class="dropdown-item" routerLink="admin/logs"
+                           routerLinkActive="active"
                            (click)="collapseNavbar()">
                             <fa-icon icon="tasks" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.admin.logs">Logs</span>
                         </a>
                     </li>
                     <li *ngIf="swaggerEnabled">
-                        <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active"
+                        <a class="dropdown-item" routerLink="admin/docs"
+                           routerLinkActive="active"
                            (click)="collapseNavbar()">
                             <fa-icon icon="book" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.admin.apidocs">API</span>
@@ -146,7 +206,8 @@
                         <span jhiTranslate="global.menu.language">Language</span>
                     </span>
                 </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
+                <ul class="dropdown-menu" ngbDropdownMenu
+                    aria-labelledby="languagesnavBarDropdown">
                     <li *ngFor="let language of languages">
                         <a class="dropdown-item" [jhiActiveMenu]="language"
                            href="javascript:void(0);"

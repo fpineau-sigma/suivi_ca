@@ -1,4 +1,4 @@
-import {ModalOptions} from 'ngx-bootstrap';
+import { ModalOptions } from 'ngx-bootstrap';
 
 /**
  * Options par défaut pour désactiver la sortie de la modal en cliquant en dehors de la fenêtre et avec les touches du clavier

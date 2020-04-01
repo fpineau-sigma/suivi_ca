@@ -13,13 +13,13 @@ export enum Mois {
   DEC = 'Decembre'
 }
 
-export const getMoisByIndex = function (inputindex): string {
+export const getMoisByIndex = function(inputindex): string {
   const keys = Object.keys(Mois);
-  let result = "";
+  let result = '';
   keys.forEach((obj, index) => {
     if (inputindex === index) {
       result = Mois[obj];
     }
   });
   return result;
-}
+};

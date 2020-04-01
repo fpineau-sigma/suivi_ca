@@ -27,7 +27,7 @@ export const editerVenteRoute: Routes = [
       user: EditerVenteResolve
     },
     data: {
-      pageTitle: 'gestion.vente.modification.titre',
+      pageTitle: 'gestion.vente.modification.titre'
     },
     canActivate: []
   },

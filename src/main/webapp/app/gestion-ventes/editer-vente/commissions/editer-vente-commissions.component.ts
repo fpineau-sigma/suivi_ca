@@ -1,35 +1,26 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {
-  ControlContainer,
-  FormBuilder,
-  FormGroup,
-  FormGroupDirective,
-  Validators
-} from '@angular/forms';
-import {NegociateursService} from '../../../core/service/metier/negociateurs.service';
-import {Mode} from '../../../core/model/metier/mode.enum';
-import {Vente} from '../../../core/model/metier/vente.model';
-import {Commission} from '../../../core/model/metier/commission.model';
-import {Negociateur} from '../../../core/model/metier/negociateur.model';
-import {Subscription} from 'rxjs';
-import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
-import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
-import {ColumnMode} from '@swimlane/ngx-datatable';
-
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { NegociateursService } from '../../../core/service/metier/negociateurs.service';
+import { Mode } from '../../../core/model/metier/mode.enum';
+import { Vente } from '../../../core/model/metier/vente.model';
+import { Commission } from '../../../core/model/metier/commission.model';
+import { Negociateur } from '../../../core/model/metier/negociateur.model';
+import { Subscription } from 'rxjs';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 export enum ChampCommission {
   ENTREE,
   SORTIE
 }
 
-
 @Component({
   selector: 'jhi-editer-vente-commissions',
   templateUrl: './editer-vente-commissions.component.html',
-  viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class EditerVenteCommissionsComponent implements OnInit, OnDestroy {
-
   @Input() public mode: Mode;
   @Input() public vente: Vente;
   @Input() public champ: ChampCommission;
@@ -47,20 +38,19 @@ export class EditerVenteCommissionsComponent implements OnInit, OnDestroy {
 
   public venteCommissionForm: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private  negociateursService: NegociateursService) {
-  }
+  constructor(private formBuilder: FormBuilder, private negociateursService: NegociateursService) {}
 
   ngOnInit(): void {
     this.venteCommissionForm = this.formBuilder.group({
       commissionNegociateur: ['', Validators.required],
-      commissionPourcentage: ['', [Validators.required, Validators.pattern("^[0-9]*?")]],
-      commissionMontantHt: ['', [Validators.required, Validators.pattern("[0-9]+(\\.[0-9][0-9]?)?")]]
+      commissionPourcentage: ['', [Validators.required, Validators.pattern('^[0-9]*?')]],
+      commissionMontantHt: ['', [Validators.required, Validators.pattern('[0-9]+(\\.[0-9][0-9]?)?')]]
     });
-    this.subscriptions.push(this.negociateursService.lister().subscribe((res: Negociateur[]) => {
-      this.negociateurs = res;
-    }));
+    this.subscriptions.push(
+      this.negociateursService.lister().subscribe((res: Negociateur[]) => {
+        this.negociateurs = res;
+      })
+    );
     if (this.champ === ChampCommission.ENTREE) {
       this.commissions = this.vente.commissionsEntree;
     } else {
@@ -69,7 +59,7 @@ export class EditerVenteCommissionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
+    this.subscriptions.forEach(subscription => {
       if (subscription) {
         subscription.unsubscribe();
       }

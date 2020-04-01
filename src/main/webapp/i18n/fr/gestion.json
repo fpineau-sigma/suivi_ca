@@ -92,6 +92,36 @@
       "pourcentage": "Pourcentage",
       "montant.ht": "Montant HT",
       "ajout": "Ajouter une commission"
+    },
+    "exercice": {
+      "libelle": "Libellé",
+      "creation": {
+        "titre": "Ajout d'un nouvel exercice"
+      },
+      "modification": {
+        "titre": "Modification d'un exercice"
+      },
+      "action.success": "Enregistrement effectué avec succès"
+    },
+    "exercices": {
+      "titre": "Gestion des exercices",
+      "ajout": "Ajout d'un exercice",
+      "liste": "Liste des exercices"
+    },
+    "agence": {
+      "libelle": "Libellé",
+      "creation": {
+        "titre": "Ajout d'une nouvelle agence"
+      },
+      "modification": {
+        "titre": "Modification d'une agence"
+      },
+      "action.success": "Enregistrement effectué avec succès"
+    },
+    "agences": {
+      "titre": "Gestion des agences",
+      "ajout": "Ajout d'une agence",
+      "liste": "Liste des agences"
     }
   }
 }

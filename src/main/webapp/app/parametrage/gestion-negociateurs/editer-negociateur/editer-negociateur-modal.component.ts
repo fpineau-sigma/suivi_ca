@@ -1,16 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Negociateur} from 'app/core/model/metier/negociateur.model';
-import {Mode} from 'app/core/model/metier/mode.enum';
-import {faCheck} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Negociateur } from 'app/core/model/metier/negociateur.model';
+import { Mode } from 'app/core/model/metier/mode.enum';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'jhi-negociateur',
   templateUrl: './editer-negociateur-modal.component.html'
 })
 export class EditerNegociateurModalComponent implements OnInit {
-
   @Output() public enregistrer: EventEmitter<Negociateur> = new EventEmitter();
   @Output() public modifier: EventEmitter<Negociateur> = new EventEmitter();
   @Output() public annuler: EventEmitter<void> = new EventEmitter();
@@ -21,15 +19,14 @@ export class EditerNegociateurModalComponent implements OnInit {
   public faCheck = faCheck;
   public registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   public ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       nomCourt: ['', Validators.required],
       nom: [''],
       prenom: [''],
-      actif: ['', Validators.required],
+      actif: ['', Validators.required]
     });
   }
 

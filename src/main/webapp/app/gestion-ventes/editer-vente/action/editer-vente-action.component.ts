@@ -1,30 +1,29 @@
-import {Location} from '@angular/common';
-import {Component, Input} from '@angular/core';
-import {ControlContainer, FormControlDirective, FormGroupDirective} from '@angular/forms';
-import {Vente} from 'app/core/model/metier/vente.model';
-import {Mode} from 'app/core/model/metier/mode.enum';
-import {VentesService} from 'app/core/service/metier/ventes.service';
-import {ToastService} from 'app/core/service/toast.service';
-import {faCheck} from '@fortawesome/free-solid-svg-icons';
-
+import { Location } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { ControlContainer, FormControlDirective, FormGroupDirective } from '@angular/forms';
+import { Vente } from 'app/core/model/metier/vente.model';
+import { Mode } from 'app/core/model/metier/mode.enum';
+import { VentesService } from 'app/core/service/metier/ventes.service';
+import { ToastService } from 'app/core/service/toast.service';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'jhi-editer-vente-action',
   templateUrl: './editer-vente-action.component.html',
-  viewProviders: [{provide: ControlContainer, useExisting: FormControlDirective}]
+  viewProviders: [{ provide: ControlContainer, useExisting: FormControlDirective }]
 })
 export class EditerVenteActionComponent {
-
   public faCheck = faCheck;
 
   @Input() public mode: Mode;
   @Input() public vente: Vente;
 
-  constructor(private location: Location,
-              public venteForm: FormGroupDirective,
-              private ventesService: VentesService,
-              private toastService: ToastService) {
-  }
+  constructor(
+    private location: Location,
+    public venteForm: FormGroupDirective,
+    private ventesService: VentesService,
+    private toastService: ToastService
+  ) {}
 
   get Mode(): typeof Mode {
     return Mode;

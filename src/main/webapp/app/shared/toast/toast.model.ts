@@ -21,27 +21,18 @@ export const optionToastDefault: OptionToast = {
 };
 
 export class Toast {
-  constructor(public code?: ToastLevelEnum,
-              public libelle?: string,
-              public level?: string) {
-  }
+  constructor(public code?: ToastLevelEnum, public libelle?: string, public level?: string) {}
 }
 
 export class ToastApplicative extends Toast {
-  constructor(public id?: number,
-              public message?: string,
-              public options?: OptionToast) {
+  constructor(public id?: number, public message?: string, public options?: OptionToast) {
     super();
   }
 }
 
 export const toasts: Toast[] = [
-  new Toast(ToastLevelEnum.ERROR, 'global.ihm.toast.error',
-    ToastLevelEnum.ERROR.toLowerCase()),
-  new Toast(ToastLevelEnum.WARNING, 'global.ihm.toast.warning',
-    ToastLevelEnum.WARNING.toLowerCase()),
-  new Toast(ToastLevelEnum.INFO, 'global.ihm.toast.info',
-    ToastLevelEnum.INFO.toLowerCase()),
-  new Toast(ToastLevelEnum.SUCCESS, 'global.ihm.toast.success',
-    ToastLevelEnum.SUCCESS.toLowerCase())
+  new Toast(ToastLevelEnum.ERROR, 'global.ihm.toast.error', ToastLevelEnum.ERROR.toLowerCase()),
+  new Toast(ToastLevelEnum.WARNING, 'global.ihm.toast.warning', ToastLevelEnum.WARNING.toLowerCase()),
+  new Toast(ToastLevelEnum.INFO, 'global.ihm.toast.info', ToastLevelEnum.INFO.toLowerCase()),
+  new Toast(ToastLevelEnum.SUCCESS, 'global.ihm.toast.success', ToastLevelEnum.SUCCESS.toLowerCase())
 ];

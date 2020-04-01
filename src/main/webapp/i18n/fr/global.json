@@ -31,6 +31,8 @@
       }
     },
     "menu": {
+      "agence": "Agence",
+      "exercice": "Exercice",
       "home": "Accueil",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "parametrage": {
@@ -38,6 +40,8 @@
         "negociateurs": "Negociateurs",
         "origines": "Origines",
         "typedebiens": "Type de biens",
+        "agences": "Agences",
+        "exercices": "Exercices",
         "importer.donnees": "Import de donnees"
       },
       "entities": {
