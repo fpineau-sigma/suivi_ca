@@ -19,6 +19,8 @@
         relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20032020_1516_ajout_tables_vente_commission.xml"
         relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/29032020_1540_ajout_tables_agence_exercice.xml"
+        relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

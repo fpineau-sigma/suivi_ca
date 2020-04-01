@@ -1,6 +1,5 @@
-import {HttpParams} from '@angular/common/http';
-import {Tri} from 'app/core/model/pagination/tri.model';
-
+import { HttpParams } from '@angular/common/http';
+import { Tri } from 'app/core/model/pagination/tri.model';
 
 /**
  * Prépare le tri pour être compatible avec l'objet @Pageable de Spring

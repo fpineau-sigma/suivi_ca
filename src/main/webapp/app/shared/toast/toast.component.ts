@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import {Subscription, timer} from 'rxjs';
-import {ToastService} from '../../core/service/toast.service';
-import {DelaisParType, optionToastDefault, ToastApplicative, ToastLevelEnum} from './toast.model';
+import { Subscription, timer } from 'rxjs';
+import { ToastService } from '../../core/service/toast.service';
+import { DelaisParType, optionToastDefault, ToastApplicative, ToastLevelEnum } from './toast.model';
 
 @Component({
   selector: 'jhi-pms-toast',
@@ -14,19 +14,20 @@ export class ToastComponent implements OnInit, OnDestroy {
 
   private readonly subscriptions: Subscription[] = [];
 
-  constructor(private toastService: ToastService) {
-  }
+  constructor(private toastService: ToastService) {}
 
   public ngOnInit(): void {
-    this.subscriptions.push(this.toastService.subjectToast.subscribe((toast: ToastApplicative) => {
-      const options = Object.assign({}, optionToastDefault);
-      Object.assign(options, toast.options);
-      toast.options = options;
-      this.ajouterToast(toast);
-      if (DelaisParType[toast.code] > 0) {
-        this.subscriptions.push(timer(DelaisParType[toast.code]).subscribe(() => this.closeToast(toast)));
-      }
-    }));
+    this.subscriptions.push(
+      this.toastService.subjectToast.subscribe((toast: ToastApplicative) => {
+        const options = Object.assign({}, optionToastDefault);
+        Object.assign(options, toast.options);
+        toast.options = options;
+        this.ajouterToast(toast);
+        if (DelaisParType[toast.code] > 0) {
+          this.subscriptions.push(timer(DelaisParType[toast.code]).subscribe(() => this.closeToast(toast)));
+        }
+      })
+    );
   }
 
   ajouterToast(toast: ToastApplicative): void {

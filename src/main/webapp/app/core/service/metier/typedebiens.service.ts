@@ -1,17 +1,14 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {TypeDeBien} from '../../model/metier/typedebien.model';
-import {SERVER_API_URL} from 'app/app.constants';
-
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { TypeDeBien } from '../../model/metier/typedebien.model';
+import { SERVER_API_URL } from 'app/app.constants';
 
 const url = SERVER_API_URL + 'api/typedebiens';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class TypeDeBiensService {
-
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   lister(): Observable<any> {
     return this.http.get(`${url}`);

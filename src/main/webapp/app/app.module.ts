@@ -20,12 +20,13 @@ import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AngularDateHttpInterceptor} from 'app/core/interceptor/angular-date.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HeaderHttpInterceptor} from 'app/core/interceptor/header.interceptor';
 
 export function getDatepickerConfig(): BsDatepickerConfig {
   return Object.assign(new BsDatepickerConfig(), {
     containerClass: 'theme-dark-blue',
     adaptivePosition: true,
-    dateInputFormat: 'DD/MM/YYYY',
+    dateInputFormat: 'DD/MM/YYYY'
   });
 }
 
@@ -48,9 +49,14 @@ export function getDatepickerConfig(): BsDatepickerConfig {
     {provide: BsDatepickerConfig, useFactory: getDatepickerConfig},
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AngularDateHttpInterceptor,
+      useClass: HeaderHttpInterceptor,
       multi: true
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AngularDateHttpInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [MainComponent]
 })

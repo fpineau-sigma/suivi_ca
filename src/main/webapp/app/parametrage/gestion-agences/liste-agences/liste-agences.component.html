@@ -1,0 +1,21 @@
+<main class="container-fluid" role="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-2 text-right">
+                <button id="ajoutAgence" class="btn btn-primary" (click)="creerAgence()"
+                        translate='gestion.agences.ajout'></button>
+            </div>
+        </div>
+        <ul>
+            <li *ngFor="let agence of agences">
+                <a (click)="modifierAgence(agence)">
+                    {{ agence.libelle }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</main>
+
+
+
+

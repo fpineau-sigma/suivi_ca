@@ -5,7 +5,7 @@
             <div class="row align-items-end">
                 <div class="col-3">
                     <div class="form-group">
-                        <label class="required" for="venteDateVenteCompromis"
+                        <label for="venteDateVenteCompromis"
                                translate="gestion.vente.date.vente.compromis"></label>
                         <div class="input-group">
                             <input #dpDateActeCompromis="bsDatepicker"
@@ -45,7 +45,7 @@
                 <!-- Ligne 1 : Honoraires TTC -->
                 <div class="col-3">
                     <div class="form-group">
-                        <label class="required" for="venteHonorairesTTC"
+                        <label for="venteHonorairesTTC"
                                translate="gestion.vente.honorairesTTC"></label>
                         <input [ngModel]="vente.honorairesTTC"
                                class="form-control"
@@ -57,7 +57,7 @@
                 <!-- Ligne 1 : Honoraires HT -->
                 <div class="col-3">
                     <div class="form-group">
-                        <label class="required" for="venteHonorairesHT"
+                        <label for="venteHonorairesHT"
                                translate="gestion.vente.honorairesHT"></label>
                         <input [ngModel]="vente.honorairesHT"
                                class="form-control"
@@ -72,7 +72,7 @@
                 <!-- Ligne 2 : Date acte authentique -->
                 <div class="col-3">
                     <div class="form-group">
-                        <label for="venteDateActeAuthentique"
+                        <label class="required" for="venteDateActeAuthentique"
                                translate="gestion.vente.date.acte.authentique"></label>
                         <div class="input-group">
                             <input #dpDateActeAuthentique="bsDatepicker"

@@ -1,6 +1,6 @@
 package fr.sigma.ca.entite.metier;
 
-import fr.sigma.ca.integration.persistence.Entite;
+import fr.sigma.ca.integration.persistence.EntiteAgence;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Negociateur extends Entite {
+public class Negociateur extends EntiteAgence {
 
     private String nom;
     private String prenom;

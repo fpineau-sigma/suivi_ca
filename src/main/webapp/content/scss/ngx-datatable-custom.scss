@@ -11,10 +11,10 @@
   .datatable-header-cell {
     display: flex !important;
     align-items: center !important;
-    padding: .5rem .75rem !important;
+    padding: 0.5rem 0.75rem !important;
 
     .btn {
-      padding: 0 .5rem;
+      padding: 0 0.5rem;
 
       i {
         color: black;
@@ -24,25 +24,25 @@
 }
 
 .datatable-footer {
-  .datatable-footer-inner{
+  .datatable-footer-inner {
     background-color: white;
-    .page-count{
+    .page-count {
       background-color: white;
       color: #1483ff;
       font-weight: bold;
     }
-    .datatable-pager{
+    .datatable-pager {
       a:hover {
         background-color: #1483ff !important;
         color: white !important;
       }
-      .pager{
+      .pager {
         background-color: white;
         color: #1483ff;
-        .disabled{
+        .disabled {
           visibility: hidden;
         }
-        .pages.active{
+        .pages.active {
           a {
             background-color: #1483ff !important;
             color: white !important;
@@ -71,7 +71,6 @@
   white-space: pre-wrap !important;
 }
 
-
 /* chargement bootstrap */
 /** todo à voir si on garde */
 *.ngx-datatable.bootstrap .datatable-body .progress-linear {
@@ -97,7 +96,7 @@
 .ngx-datatable.bootstrap .datatable-body .progress-linear .container .bar {
   -webkit-animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
   animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
-  transition: transform .2s linear;
+  transition: transform 0.2s linear;
   background-color: #106cc8;
   position: absolute;
   left: 0;
@@ -123,7 +122,8 @@
 
 /** Border */
 .table-bordered {
-  .datatable-header-cell, .datatable-body-cell {
+  .datatable-header-cell,
+  .datatable-body-cell {
     border: 1px solid #00000014;
     border-collapse: collapse;
   }

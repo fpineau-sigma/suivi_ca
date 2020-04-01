@@ -16,6 +16,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 public class VenteDTO extends DTO {
 
+    private Long exerciceId;
     private LocalDate dateActeAuthentique;
     private LocalDate dateCompromis;
     private String numeroFacture;
@@ -32,6 +33,7 @@ public class VenteDTO extends DTO {
     @Builder
     public VenteDTO(
         Long id,
+        Long exerciceId,
         LocalDate dateActeAuthentique,
         LocalDate dateCompromis,
         String numeroFacture,
@@ -46,6 +48,7 @@ public class VenteDTO extends DTO {
         Collection<PersonneDTO> acquereurs
     ) {
         super(id);
+        this.exerciceId = exerciceId;
         this.dateActeAuthentique = dateActeAuthentique;
         this.dateCompromis = dateCompromis;
         this.numeroFacture = numeroFacture;

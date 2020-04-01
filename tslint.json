@@ -15,6 +15,7 @@
       "jhi",
       "kebab-case"
     ],
+    "no-unnecessary-type-assertion": false,
     "no-inputs-metadata-property": true,
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": true,

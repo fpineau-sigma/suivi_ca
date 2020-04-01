@@ -1,21 +1,19 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {NegociateursService} from 'app/core/service/metier/negociateurs.service';
-import {Negociateur} from 'app/core/model/metier/negociateur.model';
-import {ToastService} from 'app/core/service/toast.service';
-import {RefreshService} from 'app/core/service/refresh.service';
-import {Mode} from 'app/core/model/metier/mode.enum';
-import {EditerNegociateurModalComponent} from 'app/parametrage/gestion-negociateurs/editer-negociateur/editer-negociateur-modal.component';
-import {ConfigModalCommun} from 'app/core/configuration/config-modal-commun.class';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { NegociateursService } from 'app/core/service/metier/negociateurs.service';
+import { Negociateur } from 'app/core/model/metier/negociateur.model';
+import { ToastService } from 'app/core/service/toast.service';
+import { RefreshService } from 'app/core/service/refresh.service';
+import { Mode } from 'app/core/model/metier/mode.enum';
+import { EditerNegociateurModalComponent } from 'app/parametrage/gestion-negociateurs/editer-negociateur/editer-negociateur-modal.component';
+import { ConfigModalCommun } from 'app/core/configuration/config-modal-commun.class';
 
 @Component({
   selector: 'jhi-negociateurs',
   templateUrl: './liste-negociateurs.component.html'
 })
 export class ListeNegociateursComponent implements OnInit, OnDestroy {
-
   public negociateurs: Negociateur[] = [];
   // Liste subscription
   private readonly subscriptions: Subscription[] = [];
@@ -26,17 +24,18 @@ export class ListeNegociateursComponent implements OnInit, OnDestroy {
     private toastService: ToastService,
     private modalService: BsModalService,
     private refreshService: RefreshService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(this.negociateursService.lister().subscribe((res: Negociateur[]) => {
-      this.negociateurs = res;
-    }));
+    this.subscriptions.push(
+      this.negociateursService.lister().subscribe((res: Negociateur[]) => {
+        this.negociateurs = res;
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
+    this.subscriptions.forEach(subscription => {
       if (subscription) {
         subscription.unsubscribe();
       }
@@ -45,13 +44,16 @@ export class ListeNegociateursComponent implements OnInit, OnDestroy {
 
   // Ouverture de la modal des négociateurs
   public ouvrirModalNegociateur(negociateur: Negociateur, mode: Mode): void {
-    this.modalActive = this.modalService.show(EditerNegociateurModalComponent, Object.assign(new ConfigModalCommun(), {
-      class: 'modal-dialog-centered modal-lg',
-      initialState: {
-        mode,
-        negociateur
-      }
-    }));
+    this.modalActive = this.modalService.show(
+      EditerNegociateurModalComponent,
+      Object.assign(new ConfigModalCommun(), {
+        class: 'modal-dialog-centered modal-lg',
+        initialState: {
+          mode,
+          negociateur
+        }
+      })
+    );
     this.subscriptions.push(
       (this.modalActive.content as EditerNegociateurModalComponent).fermer.subscribe(() => {
         this.fermerModal();

@@ -1,12 +1,11 @@
-import {Route} from '@angular/router';
-import {ListeVentesComponent} from './liste-ventes.component';
-
+import { Route } from '@angular/router';
+import { ListeVentesComponent } from './liste-ventes.component';
 
 export const listeVentesRoute: Route = {
   path: '',
   component: ListeVentesComponent,
   data: {
-    pageTitle: 'gestion.ventes.liste',
+    pageTitle: 'gestion.ventes.liste'
   },
   canActivate: []
 };

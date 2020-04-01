@@ -1,0 +1,21 @@
+<main class="container-fluid" role="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-2 text-right">
+                <button id="ajoutExercice" class="btn btn-primary" (click)="creerExercice()"
+                        translate='gestion.exercices.ajout'></button>
+            </div>
+        </div>
+        <ul>
+            <li *ngFor="let exercice of exercices">
+                <a (click)="modifierExercice(exercice)">
+                    {{ exercice.libelle }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</main>
+
+
+
+

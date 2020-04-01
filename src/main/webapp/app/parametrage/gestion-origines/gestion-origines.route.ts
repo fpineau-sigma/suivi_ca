@@ -1,5 +1,5 @@
-import {Routes} from '@angular/router';
-import {listeOriginesRoute} from './liste-origines/liste-origines.route';
+import { Routes } from '@angular/router';
+import { listeOriginesRoute } from './liste-origines/liste-origines.route';
 
 const GESTION_ORIGINES_ROUTES = [listeOriginesRoute];
 
