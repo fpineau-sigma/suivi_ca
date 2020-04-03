@@ -7,6 +7,8 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -67,4 +69,7 @@ public class Vente extends EntiteAgence {
     @NotNull
     @Column(nullable = false)
     private Collection<Personne> acquereurs;
+
+    @Enumerated(EnumType.STRING)
+    private VenteStatut statut;
 }
