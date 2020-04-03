@@ -5,7 +5,8 @@ import fr.sigma.ca.integration.persistence.MapperGenerique;
 import fr.sigma.ca.service.metier.dto.NegociateurDTO;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+    uses = {ObjectifMapper.class})
 public interface NegociateurMapper extends MapperGenerique<NegociateurDTO, Negociateur> {
 
 }

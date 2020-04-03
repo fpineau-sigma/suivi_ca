@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="20200401_2317" author="fpi">
+        <!-- Création de la table Objectif -->
+        <createTable tableName="objectif">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="agence_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_objectif_agence"
+                    references="agence(id)"/>
+            </column>
+            <column name="exercice_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_objectif_exercice"
+                    references="exercice(id)"/>
+            </column>
+            <column name="montant" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="realise" type="decimal(10,2)">
+            </column>
+        </createTable>
+        <!-- Création de la table vente_acquereurs -->
+        <createTable tableName="negociateur_objectifs">
+            <column name="negociateur_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_negociateur_objectifs_negociateur"
+                    references="negociateur(id)"/>
+            </column>
+            <column name="objectifs_id" type="bigint">
+                <constraints nullable="false"
+                    foreignKeyName="fk_negociateur_objectifs_objectif"
+                    references="objectif(id)"/>
+            </column>
+        </createTable>
+        <!-- Ajout de la colonne statut vente -->
+        <addColumn tableName="vente">
+            <column name="statut" type="varchar(26)">
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,5 +1,6 @@
 package fr.sigma.ca.service.metier.dto;
 
+import fr.sigma.ca.entite.metier.VenteStatut;
 import fr.sigma.ca.integration.persistence.DTO;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class VenteDTO extends DTO {
     private AdresseDTO adresse;
     private Collection<PersonneDTO> vendeurs;
     private Collection<PersonneDTO> acquereurs;
+    private VenteStatut statut;
 
     @Builder
     public VenteDTO(
@@ -45,7 +47,8 @@ public class VenteDTO extends DTO {
         BigDecimal honorairesHT,
         AdresseDTO adresse,
         Collection<PersonneDTO> vendeurs,
-        Collection<PersonneDTO> acquereurs
+        Collection<PersonneDTO> acquereurs,
+        VenteStatut statut
     ) {
         super(id);
         this.exerciceId = exerciceId;
@@ -61,5 +64,6 @@ public class VenteDTO extends DTO {
         this.adresse = adresse;
         this.vendeurs = vendeurs;
         this.acquereurs = acquereurs;
+        this.statut = statut;
     }
 }

@@ -63,6 +63,7 @@
       "prenom": "Prénom",
       "nomCourt": "Nom court",
       "actif": "Actif / Inactif",
+      "objectif": "Objectif (en euros)",
       "creation": {
         "titre": "Ajout d'un nouveau négociateur"
       },

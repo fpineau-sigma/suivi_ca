@@ -14,7 +14,7 @@
             <div class="row align-items-end">
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="required" for="negociateur_nom"
+                        <label for="negociateur_nom"
                                translate="gestion.negociateur.nom"></label>
                         <input [ngModel]="negociateur.nom"
                                class="form-control"
@@ -26,7 +26,7 @@
                 <!-- Ligne 1 : Prénom -->
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="required" for="negociateur_prenom"
+                        <label for="negociateur_prenom"
                                translate="gestion.negociateur.prenom"></label>
                         <input [ngModel]="negociateur.prenom"
                                class="form-control"
@@ -49,8 +49,22 @@
                                formControlName="nomCourt"/>
                     </div>
                 </div>
-                <!-- Ligne 2 : Actif/Inactif -->
+                <!-- Ligne 2 : Objectif -->
                 <div class="col-6">
+                    <div class="form-group">
+                        <label for="negociateur_objectif"
+                               translate="gestion.negociateur.objectif"></label>
+                        <input [ngModel]="objectifEnCours.montant"
+                               class="form-control"
+                               id="negociateur_objectif"
+                               name="negociateur_objectif"
+                               formControlName="objectif"/>
+                    </div>
+                </div>
+            </div>
+            <!-- Ligne 3 : Actif / Inactif -->
+            <div class="row align-items-end">
+                <div class="col-4">
                     <div class="form-group">
                         <label class="required" for="negociateur_actif_oui"
                                translate="gestion.negociateur.actif"></label>
@@ -82,13 +96,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Ligne 4 : Annuler / Valider -->
-            <div class="row align-items-end">
-                <div class="col-12 text-right">
+                <!-- Ligne 3 : Annuler / Valider -->
+                <div class="col-8 text-right">
                     <button (click)="annuler.emit()"
                             *ngIf="mode === ModeEnum.CREATION || mode === ModeEnum.EDITION"
-                            class="btn btn-danger mt-5 mr-2"
+                            class="btn btn-danger mt-2 mr-2"
                             id="btnAnnulerCreation"
                             type="button">
                         {{ "global.commun.bouton.annuler" | translate }}
@@ -96,7 +108,7 @@
                     </button>
                     <button (click)="fermer.emit()"
                             *ngIf="mode === ModeEnum.CONSULTATION"
-                            class="btn btn-danger mt-5 mr-2"
+                            class="btn btn-danger mt-2 mr-2"
                             id="btnFermerConsultation"
                             type="button">
                         {{ "global.commun.bouton.fermer" | translate }}
@@ -106,7 +118,7 @@
                             *ngIf="mode === ModeEnum.CREATION"
                             [disabled]="!registerForm.valid"
                             [ngClass]="registerForm.valid ? 'btn-success': 'btn.disabled'"
-                            class="btn mt-5"
+                            class="btn mt-2"
                             id="btnConfirmerCreation"
                             type="button">
                         {{ "global.commun.bouton.creer" | translate }}
@@ -116,7 +128,7 @@
                             *ngIf="mode === ModeEnum.EDITION"
                             [disabled]="!registerForm.valid"
                             [ngClass]="registerForm.valid ? 'btn-success' : 'btn.disabled'"
-                            class="btn mt-5"
+                            class="btn mt-2"
                             id="btnConfirmerModification"
                             type="button">
                         {{ "global.commun.bouton.enregistrer.modification" | translate }}
