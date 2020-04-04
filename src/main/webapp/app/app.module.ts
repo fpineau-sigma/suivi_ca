@@ -21,6 +21,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AngularDateHttpInterceptor} from 'app/core/interceptor/angular-date.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HeaderHttpInterceptor} from 'app/core/interceptor/header.interceptor';
+import {SuiviCaNegociateursModule} from 'app/suivi/ca-negociateurs/ca-negociateurs.module';
 
 export function getDatepickerConfig(): BsDatepickerConfig {
   return Object.assign(new BsDatepickerConfig(), {
@@ -40,6 +41,7 @@ export function getDatepickerConfig(): BsDatepickerConfig {
     ParametrageModule,
     GestionVentesModule,
     SuiviCommissionsModule,
+    SuiviCaNegociateursModule,
     BsDatepickerModule.forRoot(),
     // jhipster-needle-angular-add-module JHipster will add new module here
     CaClemenceAppRoutingModule

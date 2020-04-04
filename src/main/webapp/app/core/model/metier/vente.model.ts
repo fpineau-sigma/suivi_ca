@@ -1,8 +1,8 @@
-import { Commission } from './commission.model';
-import { Adresse } from './adresse.model';
-import { Personne } from './personne.model';
-import { Origine } from './origine.model';
-import { TypeDeBien } from './typedebien.model';
+import {Commission} from './commission.model';
+import {Adresse} from './adresse.model';
+import {Personne} from './personne.model';
+import {Origine} from './origine.model';
+import {TypeDeBien} from './typedebien.model';
 
 export interface IVente {
   id?: number;
@@ -35,3 +35,4 @@ export class Vente implements IVente {
   vendeurs?: Personne[] = [];
   acquereurs?: Personne[] = [];
 }
+

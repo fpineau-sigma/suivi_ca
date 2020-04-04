@@ -1,0 +1,119 @@
+<div>
+    <div class="row w-100 mx-0">
+        <ngx-datatable
+            [columnMode]="ColumnMode.flex"
+            headerHeight="auto"
+            footerHeight="auto"
+            [loadingIndicator]="estChargementEnCours"
+            [messages]="{
+                   emptyMessage: 'global.commun.composant.datatable.vide' | translate ,
+                   totalMessage: 'global.commun.composant.datatable.total' | translate
+                   }"
+            [rowHeight]="'auto'"
+            [rows]="page.content"
+            [externalPaging]="true"
+            [count]="page.totalElements"
+            [offset]="page.number"
+            [limit]="page.size"
+            (page)="changerPage($event)"
+            #datatableComponent
+            class="bootstrap table-bordered col-12 mx-0 px-0 mb-3 w-100 ">
+
+            <!-- Honoraires HT -->
+            <ngx-datatable-column [flexGrow]="5"
+                                  [name]="'suivi.ca.negociateur.honoraires.ht' | translate"
+                                  class="pr-0">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ afficherHonoraires(row) }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <!-- Vendeurs  -->
+            <ngx-datatable-column [flexGrow]="5"
+                                  [name]="'suivi.ca.negociateur.vendeurs' | translate"
+                                  class="pr-0">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ afficherVendeurs(row) }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <!-- Acquereurs  -->
+            <ngx-datatable-column [flexGrow]="5"
+                                  [name]="'suivi.ca.negociateur.acquereurs' | translate"
+                                  class="pr-0">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ afficherAcquereurs(row) }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <!-- Adresse  -->
+            <ngx-datatable-column [flexGrow]="5"
+                                  [name]="'suivi.ca.negociateur.adresse' | translate"
+                                  class="pr-0">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ afficherAdresse(row) }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <!-- Mandat  -->
+            <ngx-datatable-column [flexGrow]="5"
+                                  [name]="'suivi.ca.negociateur.mandat' | translate"
+                                  class="pr-0">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ afficherNegociateursEntree(row) }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <!-- Sortie  -->
+            <ngx-datatable-column [flexGrow]="5"
+                                  [name]="'suivi.ca.negociateur.sortie' | translate"
+                                  class="pr-0">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ afficherNegociateursSortie(row) }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <!-- origine -->
+            <ngx-datatable-column [flexGrow]="5"
+                                  [name]="'suivi.ca.negociateur.origine' | translate"
+                                  class="pr-0">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.origine.libelle }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <!-- statut -->
+            <ngx-datatable-column [flexGrow]="5"
+                                  [name]="'suivi.ca.negociateur.statut' | translate"
+                                  class="pr-0">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.statut }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-footer>
+                <ng-template
+                    ngx-datatable-footer-template
+                    let-rowCount="rowCount"
+                    let-pageSize="pageSize"
+                    let-selectedCount="selectedCount"
+                    let-curPage="curPage"
+                    let-offset="offset"
+                    let-isVisible="isVisible">
+                    <datatable-pager
+                        pagerLeftArrowIcon="datatable-icon-left"
+                        pagerRightArrowIcon="datatable-icon-right"
+                        pagerPreviousIcon="datatable-icon-prev"
+                        pagerNextIcon="datatable-icon-skip"
+                        [page]="curPage"
+                        [size]="pageSize"
+                        [count]="rowCount"
+                        [hidden]="!((rowCount / pageSize) > 1)"
+                        (change)="datatableComponent.onFooterPage($event)">
+                    </datatable-pager>
+                </ng-template>
+            </ngx-datatable-footer>
+        </ngx-datatable>
+    </div>
+</div>
+

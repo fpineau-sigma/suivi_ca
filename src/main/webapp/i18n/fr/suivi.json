@@ -3,6 +3,23 @@
     "commissions": {
       "titre": "Suivi des commissions",
       "liste": "Liste des commissions"
+    },
+    "ca": {
+      "negociateurs": {
+        "titre": "Suivi du CA par négociateur"
+      },
+      "negociateur": {
+        "honoraires": {
+          "ht": "Honoraires HT"
+        },
+        "vendeurs": "Vendeurs",
+        "acquereurs": "Acquereurs",
+        "adresse": "Adresse",
+        "mandat": "Mandat",
+        "sortie": "Sortie",
+        "origine": "Origine",
+        "statut": "Statut"
+      }
     }
   }
 }
