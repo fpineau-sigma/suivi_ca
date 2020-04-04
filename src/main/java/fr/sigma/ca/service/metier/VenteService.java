@@ -37,8 +37,10 @@ public class VenteService {
         adresseService.creer(vente.getAdresse());
         vente.setAcquereurs(mettreAJourPersonnes(vente.getAcquereurs()));
         vente.setVendeurs(mettreAJourPersonnes(vente.getVendeurs()));
-        vente.setCommissionsEntree(mettreAJourCommissions(vente.getCommissionsEntree()));
-        vente.setCommissionsSortie(mettreAJourCommissions(vente.getCommissionsSortie()));
+        vente.setCommissionsEntree(
+            mettreAJourCommissions(vente.getCommissionsEntree(), vente.getExerciceId()));
+        vente.setCommissionsSortie(
+            mettreAJourCommissions(vente.getCommissionsSortie(), vente.getExerciceId()));
         return mapper.toDto(repository.save(vente));
     }
 
@@ -50,7 +52,9 @@ public class VenteService {
         predicate.and(QVente.vente.exerciceId.eq(exerciceId));
         if (null != criteresRechercheVenteDto) {
             predicate.and(QVente.vente.commissionsEntree.any().negociateur
-                .nomCourt.eq(criteresRechercheVenteDto.getNegociateur().getNomCourt()));
+                .nomCourt.eq(criteresRechercheVenteDto.getNegociateur().getNomCourt())
+                .or(QVente.vente.commissionsSortie.any().negociateur
+                    .nomCourt.eq(criteresRechercheVenteDto.getNegociateur().getNomCourt())));
         }
         return repository.findAll(predicate, pageable).map(mapper::toDto);
     }
@@ -69,8 +73,10 @@ public class VenteService {
         adresseService.mettreAJour(vente.getAdresse());
         vente.setAcquereurs(mettreAJourPersonnes(vente.getAcquereurs()));
         vente.setVendeurs(mettreAJourPersonnes(vente.getVendeurs()));
-        vente.setCommissionsEntree(mettreAJourCommissions(vente.getCommissionsEntree()));
-        vente.setCommissionsSortie(mettreAJourCommissions(vente.getCommissionsSortie()));
+        vente.setCommissionsEntree(
+            mettreAJourCommissions(vente.getCommissionsEntree(), vente.getExerciceId()));
+        vente.setCommissionsSortie(
+            mettreAJourCommissions(vente.getCommissionsSortie(), vente.getExerciceId()));
         ObjetUtilitaire.merge(venteBdd, vente, Vente.class);
         return mapper.toDto(repository.save(venteBdd));
     }
@@ -85,10 +91,11 @@ public class VenteService {
     }
 
     @Transactional
-    public Collection<Commission> mettreAJourCommissions(Collection<Commission> commissions) {
+    public Collection<Commission> mettreAJourCommissions(Collection<Commission> commissions,
+        Long exerciceId) {
         Collection<Commission> commissionsAjour = new ArrayList<>();
         commissions.forEach(commission -> {
-            commissionsAjour.add(commissionService.mettreAJour(commission));
+            commissionsAjour.add(commissionService.mettreAJour(commission, exerciceId));
         });
         return commissionsAjour;
     }

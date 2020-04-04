@@ -95,31 +95,31 @@ export class TableauVentesNegociateurComponent implements OnInit, OnDestroy {
 
   // Fonctions d'affichages des données dans le tableau
   public afficherVendeurs(row: Vente): string {
-    let toString = "";
-    row.vendeurs.forEach(vendeur => toString += vendeur.nom + " " + vendeur.prenom + "/");
-    return toString.slice(0, -1);
+    const vendeurs = [];
+    row.vendeurs.forEach(vendeur => vendeurs.push([vendeur.nom, vendeur.prenom].filter(Boolean).join(" ")));
+    return vendeurs.filter(Boolean).join('/');
   }
 
   public afficherAcquereurs(row: Vente): string {
-    let toString = "";
-    row.acquereurs.forEach(acquereur => toString += acquereur.nom + " " + acquereur.prenom + "/");
-    return toString.slice(0, -1);
+    const acquereurs = [];
+    row.acquereurs.forEach(acquereur => acquereurs.push([acquereur.nom, acquereur.prenom].filter(Boolean).join(" ")));
+    return acquereurs.filter(Boolean).join('/');
   }
 
   public afficherAdresse(row: Vente): string {
-    return row.adresse == null ? "" : row.adresse.numeroVoie + " " + row.adresse.nomVoie + " " + row.adresse.codePostal + " " + row.adresse.ville;
+    return row.adresse == null ? "" : [row.adresse.numeroVoie, row.adresse.nomVoie, row.adresse.codePostal, row.adresse.ville].filter(Boolean).join(" ");
   }
 
   public afficherNegociateursEntree(row: Vente): string {
-    let toString = "";
-    row.commissionsEntree.forEach(com => toString += com.negociateur.nomCourt + " ");
-    return toString.slice(0, -1);
+    const negociateurs = [];
+    row.commissionsEntree.forEach(com => negociateurs.push(com.negociateur.nomCourt));
+    return negociateurs.filter(Boolean).join(' ');
   }
 
   public afficherNegociateursSortie(row: Vente): string {
-    let toString = "";
-    row.commissionsSortie.forEach(com => toString += com.negociateur.nomCourt + " ");
-    return toString.slice(0, -1);
+    const negociateurs = [];
+    row.commissionsSortie.forEach(com => negociateurs.push(com.negociateur.nomCourt));
+    return negociateurs.filter(Boolean).join(' ');
   }
 
   public afficherHonoraires(row: Vente): string {
