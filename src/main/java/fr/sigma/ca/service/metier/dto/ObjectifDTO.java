@@ -17,6 +17,7 @@ public class ObjectifDTO extends DTO {
     private Long exerciceId;
     private BigDecimal montant;
     private BigDecimal realise;
+    private BigDecimal restant;
 
     @Builder
     public ObjectifDTO(Long id, Long exerciceId, BigDecimal montant, BigDecimal realise) {
@@ -24,5 +25,6 @@ public class ObjectifDTO extends DTO {
         this.exerciceId = exerciceId;
         this.montant = montant;
         this.realise = realise;
+        this.restant = montant != null ? montant.subtract(realise) : BigDecimal.ZERO;
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="20200404_2121" author="fpi">
+        <!-- Ajout de la colonne restant objectif -->
+        <addColumn tableName="objectif">
+            <column name="restant" type="decimal(10,2)">
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

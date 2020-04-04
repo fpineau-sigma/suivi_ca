@@ -22,6 +22,7 @@ public class CommissionService {
 
     private final CommissionRepository repository;
     private final CommissionMapper mapper;
+    private final NegociateurService negociateurService;
 
     @Transactional
     public Commission creer(Commission commission) {
@@ -42,8 +43,9 @@ public class CommissionService {
     }
 
     @Transactional
-    public Commission mettreAJour(Commission commission) {
+    public Commission mettreAJour(Commission commission, Long exerciceId) {
         ValidationAssistant.valider(commission);
+        negociateurService.miseAjourObjectifRealise(commission, exerciceId);
         if (null == commission.getId()) {
             return repository.save(commission);
         } else {

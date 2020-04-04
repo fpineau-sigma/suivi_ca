@@ -1,5 +1,6 @@
 package fr.sigma.ca.service.metier;
 
+import fr.sigma.ca.entite.metier.Commission;
 import fr.sigma.ca.entite.metier.Negociateur;
 import fr.sigma.ca.entite.metier.Objectif;
 import fr.sigma.ca.integration.exception.BusinessException;
@@ -43,6 +44,19 @@ public class NegociateurService {
     }
 
     @Transactional
+    public Negociateur miseAjourObjectifRealise(Commission commission, Long exerciceId) {
+        Negociateur negociateurBdd = this.repository.findById(commission.getNegociateur().getId())
+            .orElseThrow(() -> new BusinessException(""));
+        negociateurBdd.getObjectifs().stream()
+            .filter(objectifDTO -> objectifDTO.getExerciceId().equals(exerciceId))
+            .findFirst().ifPresent(objectifDTOExercice -> {
+            objectifDTOExercice.setRealise(objectifDTOExercice.getRealise()
+                .add(commission.getMontantHT()));
+        });
+        return repository.save(negociateurBdd);
+    }
+
+    @Transactional
     public List<Negociateur> lister() {
         return repository.findAll();
     }
@@ -51,7 +65,7 @@ public class NegociateurService {
     public Collection<Objectif> mettreAJourObjectifs(Collection<Objectif> objectifs) {
         Collection<Objectif> objectifsAjour = new ArrayList<>();
         objectifs.forEach(objectif -> {
-            objectifsAjour.add(objectifService.creer(objectif));
+            objectifsAjour.add(objectifService.mettreAJour(objectif));
         });
         return objectifsAjour;
     }

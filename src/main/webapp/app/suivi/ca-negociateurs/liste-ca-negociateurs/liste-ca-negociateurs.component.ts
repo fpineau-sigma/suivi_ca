@@ -36,6 +36,7 @@ export class ListeCaNegociateursComponent implements OnInit, OnDestroy {
 
   public afficherObjectif(negociateur: Negociateur): string {
     const objectiEnCours = negociateur.objectifs.find(value => value.exerciceId === this.exerciceId);
-    return objectiEnCours == null ? "" : "Objectif annuel = " + objectiEnCours.montant + " € " + " montant réalisé = " + objectiEnCours.realise + " €";
+    return objectiEnCours == null ? "" : "Objectif annuel : " + objectiEnCours.montant + "€ | Montant réalisé : " +
+      objectiEnCours.realise + "€ | Montant restant : " + objectiEnCours.restant + "€";
   }
 }

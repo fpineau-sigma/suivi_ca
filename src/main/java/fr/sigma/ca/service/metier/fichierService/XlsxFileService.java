@@ -9,6 +9,7 @@ import fr.sigma.ca.service.metier.VenteService;
 import fr.sigma.ca.service.metier.dto.AdresseDTO;
 import fr.sigma.ca.service.metier.dto.CommissionDTO;
 import fr.sigma.ca.service.metier.dto.NegociateurDTO;
+import fr.sigma.ca.service.metier.dto.ObjectifDTO;
 import fr.sigma.ca.service.metier.dto.OrigineDTO;
 import fr.sigma.ca.service.metier.dto.PersonneDTO;
 import fr.sigma.ca.service.metier.dto.VenteDTO;
@@ -32,15 +33,15 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 
-@Component
+@Service
 @Slf4j
 @RequiredArgsConstructor
-public class XlsxFile {
+public class XlsxFileService {
 
     private final PersonneService personneService;
     private final NegociateurService negociateurService;
@@ -64,7 +65,7 @@ public class XlsxFile {
      * @return
      */
 
-    public String lecture_fichier(MultipartFile fichier) {
+    public String lecture_fichier(MultipartFile fichier, Long exerciceId) {
 
         List<String> messages = new ArrayList<>();
 
@@ -88,7 +89,8 @@ public class XlsxFile {
             // Parcours de l'ensemble des lignes
             for (int rowNum = 1; rowNum <= ws.getLastRowNum(); rowNum++) {
                 final XSSFRow row = ws.getRow(rowNum);
-                VenteDTO venteDTO = VenteDTO.builder().vendeurs(new ArrayList<>())
+                VenteDTO venteDTO = VenteDTO.builder().exerciceId(exerciceId)
+                    .vendeurs(new ArrayList<>())
                     .acquereurs(new ArrayList<>()).build();
                 ArrayList<CommissionDTO> commissionsEntree = new ArrayList<>();
                 ArrayList<CommissionDTO> commissionsSortie = new ArrayList<>();
@@ -135,12 +137,14 @@ public class XlsxFile {
                         case (EnumTypeColonne.NEGOS_ENTREE):
                             value = row.getCell(colNum).getStringCellValue().trim();
                             commissionsEntree
-                                .addAll(enregistrerCommissions(value, negociateursDTOs));
+                                .addAll(
+                                    enregistrerCommissions(value, negociateursDTOs, exerciceId));
                             break;
                         case (EnumTypeColonne.NEGOS_SORTIE):
                             value = row.getCell(colNum).getStringCellValue().trim();
                             commissionsSortie
-                                .addAll(enregistrerCommissions(value, negociateursDTOs));
+                                .addAll(
+                                    enregistrerCommissions(value, negociateursDTOs, exerciceId));
                             break;
                         case (EnumTypeColonne.ORIGINE):
                             if (!StringUtils
@@ -197,7 +201,7 @@ public class XlsxFile {
      * @return
      */
     private List<CommissionDTO> enregistrerCommissions(String value,
-        Collection<NegociateurDTO> negociateursDTOs) {
+        Collection<NegociateurDTO> negociateursDTOs, Long exerciceId) {
         List<CommissionDTO> commissionDTOS = new ArrayList<>();
         Arrays.asList(value.split("-")).stream().forEach(val -> {
             if (!StringUtils.isEmpty(val)) {
@@ -207,7 +211,8 @@ public class XlsxFile {
                     pourcentage = new BigDecimal(val.substring(3, 5));
                     val = val.substring(0, 3);
                 }
-                NegociateurDTO negociateurDTO = enregistrerNegociateur(negociateursDTOs, val);
+                NegociateurDTO negociateurDTO = enregistrerNegociateur(negociateursDTOs, val,
+                    exerciceId);
                 CommissionDTO commissionDTO = CommissionDTO.builder().negociateur(negociateurDTO)
                     .pourcentage(pourcentage).build();
                 commissionDTOS.add(commissionDTO);
@@ -218,7 +223,8 @@ public class XlsxFile {
         commissionDTOS.forEach(x -> {
             if (x.getPourcentage().compareTo(new BigDecimal(50)) == 0) {
                 x.setPourcentage(
-                    x.getPourcentage().divide(BigDecimal.valueOf(size), BigDecimal.ROUND_UP));
+                    x.getPourcentage()
+                        .divide(BigDecimal.valueOf(size), BigDecimal.ROUND_UP));
             }
         });
         return commissionDTOS;
@@ -292,14 +298,20 @@ public class XlsxFile {
      * @param nomCourt
      */
     private NegociateurDTO enregistrerNegociateur(Collection<NegociateurDTO> negociateursDTO,
-        String nomCourt) {
+        String nomCourt, Long exerciceId) {
         Optional<NegociateurDTO> negociateurBDD = negociateursDTO.stream()
             .filter(negociateurDTO -> negociateurDTO.getNomCourt().equals(nomCourt)).findFirst();
         if (negociateurBDD.isPresent()) {
             return negociateurBDD.get();
         } else {
+            List<ObjectifDTO> objectifsDTO = new ArrayList<>();
+            ObjectifDTO objectifDTO = ObjectifDTO.builder().exerciceId(exerciceId)
+                .montant(BigDecimal.ZERO)
+                .realise(BigDecimal.ZERO).build();
+            objectifsDTO.add(objectifDTO);
             NegociateurDTO nouveauNego = NegociateurDTO.builder().nomCourt(nomCourt)
-                .actif(Boolean.TRUE).build();
+                .actif(Boolean.TRUE).objectifs(objectifsDTO)
+                .build();
             nouveauNego = negociateurMapper
                 .toDto(negociateurService.creer(negociateurMapper.toEntity(nouveauNego)));
             negociateursDTO.add(nouveauNego);

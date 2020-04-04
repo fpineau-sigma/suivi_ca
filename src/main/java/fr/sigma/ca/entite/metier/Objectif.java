@@ -27,4 +27,6 @@ public class Objectif extends EntiteAgence {
     private BigDecimal montant;
 
     private BigDecimal realise;
+
+    private BigDecimal restant;
 }

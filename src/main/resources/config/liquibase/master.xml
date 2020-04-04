@@ -23,7 +23,8 @@
         relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200401_2317_ajout_table_objectif.xml"
         relativeToChangelogFile="false"/>
-
+    <include file="config/liquibase/changelog/20200404_2121_ajout_colonne_restant_objectif.xml"
+        relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

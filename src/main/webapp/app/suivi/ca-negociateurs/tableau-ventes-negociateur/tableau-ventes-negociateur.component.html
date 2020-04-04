@@ -24,7 +24,7 @@
                                   [name]="'suivi.ca.negociateur.honoraires.ht' | translate"
                                   class="pr-0">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ afficherHonoraires(row) }}
+                    {{ afficherHonoraires(row) |  number:'1.2-2' }} €
                 </ng-template>
             </ngx-datatable-column>
 
@@ -47,7 +47,7 @@
             </ngx-datatable-column>
 
             <!-- Adresse  -->
-            <ngx-datatable-column [flexGrow]="5"
+            <ngx-datatable-column [flexGrow]="10"
                                   [name]="'suivi.ca.negociateur.adresse' | translate"
                                   class="pr-0">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -56,7 +56,7 @@
             </ngx-datatable-column>
 
             <!-- Mandat  -->
-            <ngx-datatable-column [flexGrow]="5"
+            <ngx-datatable-column [flexGrow]="3"
                                   [name]="'suivi.ca.negociateur.mandat' | translate"
                                   class="pr-0">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -65,7 +65,7 @@
             </ngx-datatable-column>
 
             <!-- Sortie  -->
-            <ngx-datatable-column [flexGrow]="5"
+            <ngx-datatable-column [flexGrow]="3"
                                   [name]="'suivi.ca.negociateur.sortie' | translate"
                                   class="pr-0">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -74,7 +74,7 @@
             </ngx-datatable-column>
 
             <!-- origine -->
-            <ngx-datatable-column [flexGrow]="5"
+            <ngx-datatable-column [flexGrow]="3"
                                   [name]="'suivi.ca.negociateur.origine' | translate"
                                   class="pr-0">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -83,7 +83,7 @@
             </ngx-datatable-column>
 
             <!-- statut -->
-            <ngx-datatable-column [flexGrow]="5"
+            <ngx-datatable-column [flexGrow]="3"
                                   [name]="'suivi.ca.negociateur.statut' | translate"
                                   class="pr-0">
                 <ng-template let-row="row" ngx-datatable-cell-template>

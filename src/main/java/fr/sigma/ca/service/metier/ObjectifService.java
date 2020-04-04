@@ -35,6 +35,8 @@ public class ObjectifService {
             Objectif objectifBdd = repository.findById(objectif.getId())
                 .orElseThrow(() -> new BusinessException(""));
             ObjetUtilitaire.merge(objectifBdd, objectif, Objectif.class);
+            // Mise à jour du montant restant
+            objectifBdd.setRestant(objectifBdd.getMontant().subtract(objectifBdd.getRealise()));
             return repository.save(objectifBdd);
         }
     }
