@@ -2,6 +2,7 @@ package fr.sigma.ca.service.metier.dto;
 
 import fr.sigma.ca.entite.metier.TypeOrigine;
 import fr.sigma.ca.integration.persistence.DTO;
+import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,15 +13,15 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
-public class OrigineDTO extends DTO {
+public class MontantTypeOrigineDTO extends DTO {
 
-    private String libelle;
+    private BigDecimal montant;
     private TypeOrigine typeOrigine;
 
     @Builder
-    public OrigineDTO(Long id, String libelle, TypeOrigine typeOrigine) {
+    public MontantTypeOrigineDTO(Long id, BigDecimal montant, TypeOrigine typeOrigine) {
         super(id);
-        this.libelle = libelle;
+        this.montant = montant;
         this.typeOrigine = typeOrigine;
     }
 }

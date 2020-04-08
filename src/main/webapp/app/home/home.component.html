@@ -1,27 +1,31 @@
-<div class="container">
-    <div class="row">
-        <div class="col-3">
-        </div>
-        <div class="col-3">
-            <div class="wrap">
-                <a class="nav-link" routerLink="/ventes"></a>
-                <div class="text-wrap vcenter">
-                    <span class="tuile">Ventes</span>
-                </div>
+<div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-3">
+        <div class="wrap">
+            <a class="nav-link" routerLink="/ventes"></a>
+            <div class="text-wrap vcenter">
+                <span class="tuile">Ventes</span>
             </div>
-        </div>
-        <div class="col-3">
-            <div class="wrap">
-                <a class="nav-link" routerLink="/ca-negociateurs"></a>
-                <div class="text-wrap vcenter">
-                    <span class="tuile">CA par négociateur</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
         </div>
     </div>
-    <div class="row">
-        <jhi-graph-list-ventes></jhi-graph-list-ventes>
+    <div class="col-3">
+        <div class="wrap">
+            <a class="nav-link" routerLink="/ca-negociateurs"></a>
+            <div class="text-wrap vcenter">
+                <span class="tuile">CA par négociateur</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
     </div>
 </div>
+<div class="row">
+    <div class="col-6">
+        <jhi-graph-list-ventes></jhi-graph-list-ventes>
+    </div>
+    <div class="col-6">
+        <jhi-tableau-liste-objectifs></jhi-tableau-liste-objectifs>
+    </div>
+</div>
+

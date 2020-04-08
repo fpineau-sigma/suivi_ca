@@ -1,8 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Origine } from '../../../core/model/metier/origine.model';
-import { Mode } from '../../../core/model/metier/mode.enum';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Origine} from '../../../core/model/metier/origine.model';
+import {Mode} from '../../../core/model/metier/mode.enum';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TypeOrigine} from 'app/core/model/metier/type.origine.enum';
+
+interface EnumItem<E> {
+  id: E;
+  name: keyof E;
+}
 
 @Component({
   selector: 'jhi-origine',
@@ -19,11 +25,14 @@ export class EditerOrigineModalComponent implements OnInit {
   public faCheck = faCheck;
   public registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   public ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      libelle: ['', Validators.required]
+      libelle: ['', Validators.required],
+      typeOrigine: ['']
     });
   }
 
@@ -47,9 +56,15 @@ export class EditerOrigineModalComponent implements OnInit {
 
   private updateOrigine(origine: Origine): void {
     origine.libelle = this.registerForm.get(['libelle'])!.value;
+    origine.typeOrigine = this.registerForm.get(['typeOrigine'])!.value;
   }
 
   get ModeEnum(): typeof Mode {
     return Mode;
   }
+
+  get TypeOrigines(): typeof TypeOrigine {
+    return TypeOrigine;
+  }
+
 }

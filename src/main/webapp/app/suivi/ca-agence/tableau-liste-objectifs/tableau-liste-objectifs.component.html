@@ -1,0 +1,65 @@
+<div class="w-100">
+    <ngx-datatable
+        [columnMode]="ColumnMode.force"
+        headerHeight="auto"
+        footerHeight="auto"
+        [messages]="{
+                   emptyMessage: 'global.commun.composant.datatable.vide' | translate ,
+                   totalMessage: 'global.commun.composant.datatable.total' | translate
+                   }"
+        [rowHeight]="'auto'"
+        [rows]="objectifs"
+        class="bootstrap table-bordered">
+
+        <!-- Negociateur -->
+        <ngx-datatable-column
+            [name]="'suivi.ca.agence.negociateur' | translate"
+            [width]="150"
+            class="pr-0">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.negociateur?.nomCourt }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- Montant -->
+        <ngx-datatable-column
+            [name]="'suivi.ca.agence.montant' | translate"
+            [width]="100"
+            class="pr-0">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.montant |  number:'1.2-2' }} €
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- Realise  -->
+        <ngx-datatable-column
+            [name]="'suivi.ca.agence.realise' | translate"
+            [width]="100"
+            class="pr-0">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.realise |  number:'1.2-2' }} €
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- Restant  -->
+        <ngx-datatable-column
+            [name]="'suivi.ca.agence.restant' | translate"
+            [width]="100"
+            class="pr-0">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.restant |  number:'1.2-2' }} €
+            </ng-template>
+        </ngx-datatable-column>
+
+
+        <ngx-datatable-column *ngFor="let typeOrigine of TypeOrigines |keyvalue"
+                              name={{typeOrigine.value}}
+                              [width]="100"
+                              class="pr-0">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ afficherMontantTypeOrigine(row, typeOrigine.key) |  number:'1.2-2' }} €
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+</div>

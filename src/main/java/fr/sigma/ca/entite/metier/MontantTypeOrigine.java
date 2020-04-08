@@ -5,29 +5,35 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Commission extends EntiteAgence {
+@ToString(exclude = "objectif")
+public class MontantTypeOrigine extends EntiteAgence {
 
     @Basic
     @Column(name = "exercice_id", nullable = false)
     private Long exerciceId;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "negociateur_id", nullable = false)
+    private BigDecimal montant;
+
     @NotNull
-    private Negociateur negociateur;
+    @Column(nullable = false, unique = true)
+    @Enumerated(EnumType.STRING)
+    private TypeOrigine typeOrigine;
 
-    private BigDecimal pourcentage;
-
-    private BigDecimal montantHT;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "objectif_id")
+    private Objectif objectif;
 }
