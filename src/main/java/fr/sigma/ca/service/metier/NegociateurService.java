@@ -1,6 +1,5 @@
 package fr.sigma.ca.service.metier;
 
-import fr.sigma.ca.entite.metier.Commission;
 import fr.sigma.ca.entite.metier.Negociateur;
 import fr.sigma.ca.entite.metier.Objectif;
 import fr.sigma.ca.integration.exception.BusinessException;
@@ -25,10 +24,13 @@ public class NegociateurService {
     @Transactional
     public Negociateur creer(Negociateur negociateur) {
         ValidationAssistant.valider(negociateur);
+        Negociateur negociateurBDD = repository.save(negociateur);
+        // Obligatoire car idchild non setté lors du premier save : https://github.com/jhipster/generator-jhipster/issues/9639
         if (!CollectionUtils.isEmpty(negociateur.getObjectifs())) {
-            negociateur.setObjectifs(mettreAJourObjectifs(negociateur.getObjectifs()));
+            negociateur
+                .setObjectifs(mettreAJourObjectifs(negociateurBDD, negociateur.getObjectifs()));
         }
-        return repository.save(negociateur);
+        return negociateurBDD;
     }
 
     @Transactional
@@ -37,24 +39,12 @@ public class NegociateurService {
         Negociateur negociateurBdd = repository.findById(negociateur.getId())
             .orElseThrow(() -> new BusinessException(""));
         if (!CollectionUtils.isEmpty(negociateur.getObjectifs())) {
-            negociateur.setObjectifs(mettreAJourObjectifs(negociateur.getObjectifs()));
+            negociateur.setObjectifs(mettreAJourObjectifs(negociateur, negociateur.getObjectifs()));
         }
         ObjetUtilitaire.merge(negociateurBdd, negociateur, Negociateur.class);
         return repository.save(negociateurBdd);
     }
 
-    @Transactional
-    public Negociateur miseAjourObjectifRealise(Commission commission, Long exerciceId) {
-        Negociateur negociateurBdd = this.repository.findById(commission.getNegociateur().getId())
-            .orElseThrow(() -> new BusinessException(""));
-        negociateurBdd.getObjectifs().stream()
-            .filter(objectifDTO -> objectifDTO.getExerciceId().equals(exerciceId))
-            .findFirst().ifPresent(objectifDTOExercice -> {
-            objectifDTOExercice.setRealise(objectifDTOExercice.getRealise()
-                .add(commission.getMontantHT()));
-        });
-        return repository.save(negociateurBdd);
-    }
 
     @Transactional
     public List<Negociateur> lister() {
@@ -62,9 +52,11 @@ public class NegociateurService {
     }
 
     @Transactional
-    public Collection<Objectif> mettreAJourObjectifs(Collection<Objectif> objectifs) {
+    public Collection<Objectif> mettreAJourObjectifs(Negociateur negociateur,
+        Collection<Objectif> objectifs) {
         Collection<Objectif> objectifsAjour = new ArrayList<>();
         objectifs.forEach(objectif -> {
+            objectif.setNegociateur(negociateur);
             objectifsAjour.add(objectifService.mettreAJour(objectif));
         });
         return objectifsAjour;

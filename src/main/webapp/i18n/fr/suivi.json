@@ -19,6 +19,15 @@
         "sortie": "Sortie",
         "origine": "Origine",
         "statut": "Statut"
+      },
+      "agence": {
+        "montant": "Objectif",
+        "realise": "Realisé",
+        "restant": "Restant",
+        "montantGestion": "Gestion",
+        "montantCopro": "Copro",
+        "montantDiffus": "Diffus",
+        "negociateur": "Négociateur"
       }
     }
   }

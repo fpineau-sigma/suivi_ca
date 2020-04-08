@@ -45,6 +45,7 @@
     },
     "origine": {
       "libelle": "Libellé",
+      "type.origine": "Type origine",
       "creation": {
         "titre": "Ajout d'une nouvelle origine"
       },

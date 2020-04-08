@@ -35,7 +35,7 @@ export class EditerNegociateurModalComponent implements OnInit {
       nom: [''],
       prenom: [''],
       actif: ['', Validators.required],
-      objectif: ['', Validators.pattern('[0-9]+(\\.[0-9][0-9]?)?')]
+      objectif: ['', [Validators.required, Validators.pattern('[0-9]+(\\.[0-9][0-9]?)?')]]
     });
   }
 

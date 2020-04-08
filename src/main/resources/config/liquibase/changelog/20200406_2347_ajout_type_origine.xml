@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="20200406_2347" author="fpi">
+        <!-- Ajout de la colonne typeOrigine dans la table origine -->
+        <addColumn tableName="origine">
+            <column name="type_origine" type="varchar(54)">
+            </column>
+        </addColumn>
+
+        <!-- Ajout de la table MontantTypeOrigine -->
+        <createTable tableName="montant_type_origine">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type_origine" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="montant" type="decimal(10,2)">
+            </column>
+            <column name="exercice_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_montant_type_origine_exercice"
+                    references="exercice(id)"/>
+            </column>
+            <column name="agence_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_montant_type_origine_agence"
+                    references="agence(id)"/>
+            </column>
+            <column name="objectif_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_montant_type_origine_objectif"
+                    references="objectif(id)"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>

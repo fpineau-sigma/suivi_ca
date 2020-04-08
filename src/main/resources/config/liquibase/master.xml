@@ -25,6 +25,16 @@
         relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200404_2121_ajout_colonne_restant_objectif.xml"
         relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200405_2219_ajout_colonnes_montants_objectif.xml"
+        relativeToChangelogFile="false"/>
+    <include
+        file="config/liquibase/changelog/20200406_1343_reformat_one_to_many_negociateur_objectif.xml"
+        relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200406_2347_ajout_type_origine.xml"
+        relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200408_2244_ajout_exercice_agence_commission.xml"
+        relativeToChangelogFile="false"/>
+
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

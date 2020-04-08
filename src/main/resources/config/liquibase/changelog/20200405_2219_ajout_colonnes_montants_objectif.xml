@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="20200405_2219" author="fpi">
+        <!-- Ajout de la colonne nombreVentes objectif -->
+        <addColumn tableName="objectif">
+            <column name="nombre_ventes" type="int">
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

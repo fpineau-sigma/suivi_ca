@@ -1,16 +1,17 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
-import { LoginService } from 'app/core/login/login.service';
+import {LoginService} from 'app/core/login/login.service';
+import {RefreshService} from 'app/core/service/refresh.service';
 
 @Component({
   selector: 'jhi-login-modal',
   templateUrl: './login.component.html'
 })
 export class LoginModalComponent implements AfterViewInit {
-  @ViewChild('username', { static: false })
+  @ViewChild('username', {static: false})
   username?: ElementRef;
 
   authenticationError = false;
@@ -21,7 +22,12 @@ export class LoginModalComponent implements AfterViewInit {
     rememberMe: [false]
   });
 
-  constructor(private loginService: LoginService, private router: Router, public activeModal: NgbActiveModal, private fb: FormBuilder) {}
+  constructor(private loginService: LoginService,
+              private router: Router,
+              public activeModal: NgbActiveModal,
+              private fb: FormBuilder,
+              private refreshService: RefreshService) {
+  }
 
   ngAfterViewInit(): void {
     if (this.username) {
@@ -40,25 +46,26 @@ export class LoginModalComponent implements AfterViewInit {
 
   login(): void {
     this.loginService
-      .login({
-        username: this.loginForm.get('username')!.value,
-        password: this.loginForm.get('password')!.value,
-        rememberMe: this.loginForm.get('rememberMe')!.value
-      })
-      .subscribe(
-        () => {
-          this.authenticationError = false;
-          this.activeModal.close();
-          if (
-            this.router.url === '/account/register' ||
-            this.router.url.startsWith('/account/activate') ||
-            this.router.url.startsWith('/account/reset/')
-          ) {
-            this.router.navigate(['']);
-          }
-        },
-        () => (this.authenticationError = true)
-      );
+    .login({
+      username: this.loginForm.get('username')!.value,
+      password: this.loginForm.get('password')!.value,
+      rememberMe: this.loginForm.get('rememberMe')!.value
+    })
+    .subscribe(
+      () => {
+        this.authenticationError = false;
+        this.activeModal.close();
+        if (
+          this.router.url === '/account/register' ||
+          this.router.url.startsWith('/account/activate') ||
+          this.router.url.startsWith('/account/reset/')
+        ) {
+          this.router.navigate(['/']);
+          this.refreshService.refresh();
+        }
+      },
+      () => (this.authenticationError = true)
+    );
   }
 
   register(): void {

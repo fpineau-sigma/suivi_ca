@@ -5,9 +5,9 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,7 +27,8 @@ public class Negociateur extends EntiteAgence {
     @Column(nullable = false, unique = true)
     private String nomCourt;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "negociateur")
+    @EqualsAndHashCode.Exclude
     private Collection<Objectif> objectifs;
 
     private Boolean actif;

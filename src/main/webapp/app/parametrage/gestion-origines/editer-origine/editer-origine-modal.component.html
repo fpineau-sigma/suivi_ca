@@ -1,4 +1,4 @@
-<main class="container-fluid" role="main">
+<main class="container-fluid" role="main" xmlns="http://www.w3.org/1999/html">
     <form autocomplete="off" class="card-body" [formGroup]="registerForm" novalidate>
         <fieldset #fieldSetElement class="align-items-end">
             <div class="row align-items-start mb-2">
@@ -24,7 +24,30 @@
                     </div>
                 </div>
             </div>
-            <!-- Ligne 2 : Annuler / Valider -->
+            <!-- Ligne 2 : Choix Type Origine -->
+            <div class="row align-items-end">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="required"
+                               translate="gestion.origine.type.origine"></label>
+                        <div class="row">
+                            <div class="col">
+                                <div *ngFor="let item of TypeOrigines | keyvalue"
+                                     class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" [id]="item.key"
+                                           [value]="item.key"
+                                           [ngModel]="origine.typeOrigine"
+                                           formControlName="typeOrigine"
+                                           class="custom-control-input">
+                                    <label class="custom-control-label font-weight-normal"
+                                           [for]="item.key">{{ item.value }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ligne 3 : Annuler / Valider -->
             <div class="row align-items-end">
                 <div class="col-12 text-right">
                     <button (click)="annuler.emit()"
