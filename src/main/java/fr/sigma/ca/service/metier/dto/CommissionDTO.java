@@ -14,14 +14,17 @@ import lombok.Setter;
 @Setter
 public class CommissionDTO extends DTO {
 
+    private Long exerciceId;
     private NegociateurDTO negociateur;
     private BigDecimal pourcentage;
     private BigDecimal montantHT;
 
     @Builder
-    public CommissionDTO(Long id, NegociateurDTO negociateur, BigDecimal pourcentage,
+    public CommissionDTO(Long id, Long exerciceId, NegociateurDTO negociateur,
+        BigDecimal pourcentage,
         BigDecimal montantHT) {
         super(id);
+        this.exerciceId = exerciceId;
         this.negociateur = negociateur;
         this.pourcentage = pourcentage;
         this.montantHT = montantHT;
