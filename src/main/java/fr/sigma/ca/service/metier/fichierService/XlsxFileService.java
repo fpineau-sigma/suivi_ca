@@ -1,5 +1,6 @@
 package fr.sigma.ca.service.metier.fichierService;
 
+import fr.sigma.ca.entite.metier.TypeOrigine;
 import fr.sigma.ca.service.metier.AdresseService;
 import fr.sigma.ca.service.metier.CommissionService;
 import fr.sigma.ca.service.metier.NegociateurService;
@@ -149,7 +150,10 @@ public class XlsxFileService {
                         case (EnumTypeColonne.ORIGINE):
                             if (!StringUtils
                                 .isEmpty(value = row.getCell(colNum).getStringCellValue().trim())) {
-                                venteDTO.setOrigine(enregistrerOrigine(originesDTO, value));
+                                String typeOrigine = row.getCell(EnumTypeColonne.TYPE_ORIGINE)
+                                    .getStringCellValue().trim();
+                                venteDTO.setOrigine(
+                                    enregistrerOrigine(originesDTO, value, typeOrigine));
                             }
                             break;
                         case (EnumTypeColonne.DATE):
@@ -214,7 +218,7 @@ public class XlsxFileService {
                 NegociateurDTO negociateurDTO = enregistrerNegociateur(negociateursDTOs, val,
                     exerciceId);
                 CommissionDTO commissionDTO = CommissionDTO.builder().negociateur(negociateurDTO)
-                    .pourcentage(pourcentage).build();
+                    .pourcentage(pourcentage).exerciceId(exerciceId).build();
                 commissionDTOS.add(commissionDTO);
             }
         });
@@ -305,9 +309,7 @@ public class XlsxFileService {
             return negociateurBDD.get();
         } else {
             List<ObjectifDTO> objectifsDTO = new ArrayList<>();
-            ObjectifDTO objectifDTO = ObjectifDTO.builder().exerciceId(exerciceId)
-                .montant(BigDecimal.ZERO)
-                .realise(BigDecimal.ZERO).build();
+            ObjectifDTO objectifDTO = ObjectifDTO.builder().exerciceId(exerciceId).build();
             objectifsDTO.add(objectifDTO);
             NegociateurDTO nouveauNego = NegociateurDTO.builder().nomCourt(nomCourt)
                 .actif(Boolean.TRUE).objectifs(objectifsDTO)
@@ -326,13 +328,15 @@ public class XlsxFileService {
      * @param libelle
      */
     private OrigineDTO enregistrerOrigine(Collection<OrigineDTO> originesDTO,
-        String libelle) {
+        String libelle, String typeOrigine) {
         Optional<OrigineDTO> origineBDD = originesDTO.stream()
             .filter(origineDTO -> origineDTO.getLibelle().equals(libelle)).findFirst();
         if (origineBDD.isPresent()) {
             return origineBDD.get();
         } else {
-            OrigineDTO nouvealOrigine = OrigineDTO.builder().libelle(libelle).build();
+            TypeOrigine type = TypeOrigine.valueOf(typeOrigine);
+            OrigineDTO nouvealOrigine = OrigineDTO.builder().libelle(libelle)
+                .typeOrigine(type).build();
             nouvealOrigine = origineService.creer(origineMapper.toEntity(nouvealOrigine));
             originesDTO.add(nouvealOrigine);
             return nouvealOrigine;
