@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Agence } from '../../../core/model/metier/agence.model';
-import { Mode } from '../../../core/model/metier/mode.enum';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Agence} from '../../../core/model/metier/agence.model';
+import {Mode} from '../../../core/model/metier/mode.enum';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {uniqueStringValidator} from 'app/shared/validators/unique.validator';
 
 @Component({
   selector: 'jhi-agence',
@@ -14,16 +15,18 @@ export class EditerAgenceModalComponent implements OnInit {
   @Output() public annuler: EventEmitter<void> = new EventEmitter();
   @Output() public fermer: EventEmitter<Agence> = new EventEmitter();
   @Input() public agence!: Agence;
+  @Input() public agences!: Agence[];
   @Input() public mode!: Mode;
 
   public faCheck = faCheck;
   public registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   public ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      libelle: ['', Validators.required]
+      libelle: ['', [Validators.required, uniqueStringValidator(this.agences)]]
     });
   }
 

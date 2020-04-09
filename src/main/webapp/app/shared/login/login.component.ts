@@ -4,7 +4,6 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 
 import {LoginService} from 'app/core/login/login.service';
-import {RefreshService} from 'app/core/service/refresh.service';
 
 @Component({
   selector: 'jhi-login-modal',
@@ -25,8 +24,7 @@ export class LoginModalComponent implements AfterViewInit {
   constructor(private loginService: LoginService,
               private router: Router,
               public activeModal: NgbActiveModal,
-              private fb: FormBuilder,
-              private refreshService: RefreshService) {
+              private fb: FormBuilder) {
   }
 
   ngAfterViewInit(): void {
@@ -61,7 +59,6 @@ export class LoginModalComponent implements AfterViewInit {
           this.router.url.startsWith('/account/reset/')
         ) {
           this.router.navigate(['/']);
-          this.refreshService.refresh();
         }
       },
       () => (this.authenticationError = true)

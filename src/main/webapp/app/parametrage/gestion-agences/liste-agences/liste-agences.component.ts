@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Agence } from '../../../core/model/metier/agence.model';
-import { Subscription } from 'rxjs';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { AgencesService } from '../../../core/service/metier/agences.service';
-import { RefreshService } from '../../../core/service/refresh.service';
-import { ToastService } from '../../../core/service/toast.service';
-import { ConfigModalCommun } from '../../../core/configuration/config-modal-commun.class';
-import { Mode } from '../../../core/model/metier/mode.enum';
-import { EditerAgenceModalComponent } from '../editer-agence/editer-agence-modal.component';
-import { Negociateur } from 'app/core/model/metier/negociateur.model';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Agence} from 'app/core/model/metier/agence.model';
+import {Subscription} from 'rxjs';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {AgencesService} from 'app/core/service/metier/agences.service';
+import {RefreshService} from 'app/core/service/refresh.service';
+import {ToastService} from 'app/core/service/toast.service';
+import {ConfigModalCommun} from 'app/core/configuration/config-modal-commun.class';
+import {Mode} from 'app/core/model/metier/mode.enum';
+import {EditerAgenceModalComponent} from '../editer-agence/editer-agence-modal.component';
+import {Negociateur} from 'app/core/model/metier/negociateur.model';
 
 @Component({
   selector: 'jhi-agences',
@@ -25,7 +25,8 @@ export class ListeAgencesComponent implements OnInit, OnDestroy {
     private toastService: ToastService,
     private modalService: BsModalService,
     private refreshService: RefreshService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -44,13 +45,14 @@ export class ListeAgencesComponent implements OnInit, OnDestroy {
   }
 
   // Ouverture de la modal des négociateurs
-  public ouvrirModalAgence(agence: Agence, mode: Mode): void {
+  public ouvrirModalAgence(agence: Agence, agences: Agence[], mode: Mode): void {
     this.modalActive = this.modalService.show(
       EditerAgenceModalComponent,
       Object.assign(new ConfigModalCommun(), {
         class: 'modal-dialog-centered modal-lg',
         initialState: {
           mode,
+          agences,
           agence
         }
       })
@@ -89,10 +91,10 @@ export class ListeAgencesComponent implements OnInit, OnDestroy {
 
   public creerAgence(): void {
     const agence = new Agence();
-    this.ouvrirModalAgence(agence, Mode.CREATION);
+    this.ouvrirModalAgence(agence, this.agences, Mode.CREATION);
   }
 
   public modifierAgence(agence: Agence): void {
-    this.ouvrirModalAgence(agence, Mode.EDITION);
+    this.ouvrirModalAgence(agence, this.agences, Mode.EDITION);
   }
 }
