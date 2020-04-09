@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Exercice } from 'app/core/model/metier/exercice.model';
-import { Subscription } from 'rxjs';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { ExercicesService } from 'app/core/service/metier/exercices.service';
-import { RefreshService } from 'app/core/service/refresh.service';
-import { ToastService } from 'app/core/service/toast.service';
-import { ConfigModalCommun } from 'app/core/configuration/config-modal-commun.class';
-import { Mode } from 'app/core/model/metier/mode.enum';
-import { EditerExerciceModalComponent } from '../editer-exercice/editer-exercice-modal.component';
-import { Negociateur } from 'app/core/model/metier/negociateur.model';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Exercice} from 'app/core/model/metier/exercice.model';
+import {Subscription} from 'rxjs';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {ExercicesService} from 'app/core/service/metier/exercices.service';
+import {RefreshService} from 'app/core/service/refresh.service';
+import {ToastService} from 'app/core/service/toast.service';
+import {ConfigModalCommun} from 'app/core/configuration/config-modal-commun.class';
+import {Mode} from 'app/core/model/metier/mode.enum';
+import {EditerExerciceModalComponent} from '../editer-exercice/editer-exercice-modal.component';
+import {Negociateur} from 'app/core/model/metier/negociateur.model';
 
 @Component({
   selector: 'jhi-exercices',
@@ -25,7 +25,8 @@ export class ListeExercicesComponent implements OnInit, OnDestroy {
     private toastService: ToastService,
     private modalService: BsModalService,
     private refreshService: RefreshService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -44,13 +45,14 @@ export class ListeExercicesComponent implements OnInit, OnDestroy {
   }
 
   // Ouverture de la modal des négociateurs
-  public ouvrirModalExercice(exercice: Exercice, mode: Mode): void {
+  public ouvrirModalExercice(exercice: Exercice, exercices: Exercice[], mode: Mode): void {
     this.modalActive = this.modalService.show(
       EditerExerciceModalComponent,
       Object.assign(new ConfigModalCommun(), {
         class: 'modal-dialog-centered modal-lg',
         initialState: {
           mode,
+          exercices,
           exercice
         }
       })
@@ -89,10 +91,10 @@ export class ListeExercicesComponent implements OnInit, OnDestroy {
 
   public creerExercice(): void {
     const exercice = new Exercice();
-    this.ouvrirModalExercice(exercice, Mode.CREATION);
+    this.ouvrirModalExercice(exercice, this.exercices, Mode.CREATION);
   }
 
   public modifierExercice(exercice: Exercice): void {
-    this.ouvrirModalExercice(exercice, Mode.EDITION);
+    this.ouvrirModalExercice(exercice, this.exercices, Mode.EDITION);
   }
 }

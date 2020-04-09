@@ -14,7 +14,7 @@
             <label for="agence" translate="global.menu.agence"
                    class="nav-link"></label>
             <div *ngIf="agences?.length === 1">
-                <span>{{agences[0].libelle}}</span>
+                <span class="nav-link">{{agences[0].libelle}}</span>
             </div>
             <div *ngIf="agences?.length > 1">
                 <ng-select [(ngModel)]="agenceSelectionnee"
@@ -31,7 +31,7 @@
         <div class="form-group">
             <label for="exercice" translate="global.menu.exercice" class="nav-link"></label>
             <div *ngIf="exercices?.length === 1">
-                <span>{{exercices[0].libelle}}</span>
+                <span class="nav-link">{{exercices[0].libelle}}</span>
             </div>
             <div *ngIf="exercices?.length > 1">
                 <ng-select [(ngModel)]="exerciceSelectionne"
@@ -75,13 +75,16 @@
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="parametrage-menu">
                     <li>
                         <a class="dropdown-item" routerLink="parametrage/negociateurs"
-                           routerLinkActive="active" (click)="collapseNavbar()">
+                           routerLinkActive="active"
+                           [class.disabled]="exercices?.length === 0 ? true : null"
+                           (click)="collapseNavbar()">
                             <span
                                 jhiTranslate="global.menu.parametrage.negociateurs">Negociateurs</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="parametrage/origines"
+                           [class.disabled]="exercices?.length === 0 ? true : null"
                            routerLinkActive="active" (click)="collapseNavbar()">
                                 <span
                                     jhiTranslate="global.menu.parametrage.origines">Origines</span>
@@ -89,8 +92,8 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="parametrage/typedebiens"
-                           routerLinkActive="active"
-                           (click)="collapseNavbar()">
+                           [class.disabled]="exercices?.length === 0 ? true : null"
+                           routerLinkActive="active" (click)="collapseNavbar()">
                             <span
                                 jhiTranslate="global.menu.parametrage.typedebiens">Types de biens</span>
                         </a>
@@ -104,8 +107,8 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="parametrage/exercices"
-                           routerLinkActive="active"
-                           (click)="collapseNavbar()">
+                           [class.disabled]="agences?.length === 0 ? true : null"
+                           routerLinkActive="active" (click)="collapseNavbar()">
                             <span
                                 jhiTranslate="global.menu.parametrage.exercices">Exercices</span>
                         </a>
@@ -113,6 +116,7 @@
                     <div class="dropdown-divider"></div>
                     <li>
                         <a class="dropdown-item" routerLink="parametrage/importdonnees"
+                           [class.disabled]="exercices?.length === 0 ? true : null"
                            routerLinkActive="active" (click)="collapseNavbar()">
                             <span jhiTranslate="global.menu.parametrage.importer.donnees">Import de données</span>
                         </a>

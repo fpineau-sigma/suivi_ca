@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Exercice } from 'app/core/model/metier/exercice.model';
-import { Mode } from 'app/core/model/metier/mode.enum';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Exercice} from 'app/core/model/metier/exercice.model';
+import {Mode} from 'app/core/model/metier/mode.enum';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {uniqueStringValidator} from 'app/shared/validators/unique.validator';
 
 @Component({
   selector: 'jhi-exercice',
@@ -14,16 +15,18 @@ export class EditerExerciceModalComponent implements OnInit {
   @Output() public annuler: EventEmitter<void> = new EventEmitter();
   @Output() public fermer: EventEmitter<Exercice> = new EventEmitter();
   @Input() public exercice!: Exercice;
+  @Input() public exercices!: Exercice[];
   @Input() public mode!: Mode;
 
   public faCheck = faCheck;
   public registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   public ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      libelle: ['', Validators.required]
+      libelle: ['', [Validators.required, uniqueStringValidator(this.exercices)]]
     });
   }
 
