@@ -1,6 +1,5 @@
 package fr.sigma.ca.service.metier.dto;
 
-import fr.sigma.ca.entite.metier.TypeOrigine;
 import fr.sigma.ca.integration.persistence.DTO;
 import java.math.BigDecimal;
 import lombok.Builder;
@@ -13,21 +12,24 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
-public class MontantTypeOrigineDTO extends DTO {
+public class ObjectifDTOLeger extends DTO {
 
     private Long exerciceId;
-    private ObjectifDTOLeger objectif;
     private BigDecimal montant;
-    private TypeOrigine typeOrigine;
+    private BigDecimal realise;
+    private BigDecimal restant;
+    private Integer nombreVentes;
 
     @Builder
-    public MontantTypeOrigineDTO(Long id, ObjectifDTOLeger objectif, Long exerciceId,
-        BigDecimal montant,
-        TypeOrigine typeOrigine) {
+    public ObjectifDTOLeger(Long id, Long exerciceId,
+        BigDecimal montant, BigDecimal restant,
+        BigDecimal realise,
+        Integer nombreVentes) {
         super(id);
         this.exerciceId = exerciceId;
-        this.objectif = objectif;
         this.montant = montant;
-        this.typeOrigine = typeOrigine;
+        this.realise = realise;
+        this.restant = restant;
+        this.nombreVentes = nombreVentes;
     }
 }
